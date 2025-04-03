@@ -1,0 +1,718 @@
+body {
+  font-family: var(--fuenteParrafos);
+  margin: 0;
+  padding: 0;
+  display: grid; /* Usamos grid en lugar de flex */
+  grid-template-rows: auto 1fr; /* Navbar ocupa la primera fila, el resto del contenido la segunda */
+  justify-items: center; /* Centra horizontalmente los elementos */
+  align-items: start; /* Alinea los elementos en la parte superior */
+  min-height: 100vh;
+  color: var(--blanco);
+  position: relative; 
+  background: none; 
+}
+
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/assets/images/Logo FUNDER 2021.png') no-repeat center center fixed;
+    background-size: 400px; 
+    opacity: 0.15;
+    z-index: -1; 
+    background: linear-gradient(180deg, #e7e7e7, #c9ffc9);
+}
+
+.content {
+    position: relative; 
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.94);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 900px;
+    width: 100%;
+    margin: 20px;
+    overflow-y: auto;
+}
+
+.header h1 {
+    font-family: var(--fuenteTitulos);
+    font-size: 24px;
+    text-align: center;
+    color: var(--secundarioVerde);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--secundarioVerde);
+    padding-bottom: 10px;
+}
+
+/* Form */
+form {
+    width: 100%;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-spacing: 0;
+    margin-bottom: 20px;
+}
+/* Centrar el contenido de las celdas de la tabla */
+table td {
+  text-align: center; /* Centrar horizontalmente */
+  vertical-align: middle; /* Centrar verticalmente */
+  font-size: 1.4rem;
+}
+
+/* Opcional: Ajustar el tamaño del checkbox */
+input[type="checkbox"] {
+  transform: scale(1.2); /* Cambia el tamaño del checkbox si es necesario */
+  margin: 5px; /* Espaciado opcional */
+}
+
+th {
+    background: var(--primarioAzul);
+    color: var(--blanco);
+    text-align: left;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px 5px 0 0;
+}
+th:nth-child(odd) {
+    background: var(--primarioAzul); 
+}
+
+th:nth-child(even) {
+    background: var(--secundarioVerde); 
+}
+
+td {
+    padding: 10px;
+    vertical-align: top;
+    color: var(--negro);
+    border-bottom: 1px solid var(--negro);
+}
+
+tr:nth-child(even) td {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background: #f9f9f9;
+    color: #333;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primarioAzul);
+    box-shadow: 0 0 5px rgba(30, 144, 255, 0.5);
+}
+
+/* Checkboxes */
+input[type="checkbox"] {
+    margin-right: 8px;
+    transform: scale(1.2);
+    accent-color: var(--primarioAzul);
+}
+
+td input[type="checkbox"] + label {
+    display: inline;
+    font-size: 14px;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--blanco);
+    background: var(--primarioAzul);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 20px;
+}
+
+button[type="submit"]:hover {
+    background: #156dc1;
+}
+.containerDownload {
+  flex-direction:row;
+  justify-items: end;
+}
+
+.download-btn {
+  font-size: 1rem; 
+  font-weight: bold; 
+  color: white; 
+  background-color: #29A632; 
+  border: none; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.2s ease; 
+  z-index: 1000; 
+  width: 100px; 
+  height: 40px; 
+  padding: 20px; 
+  
+}
+
+.download-btn:hover {
+  background-color: #218838; 
+  transform: scale(1.05); 
+}
+
+.separator {
+  width: 100%;
+  height: 2px;
+  background-color: #29A632;
+  margin: 10px 0;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);  /* Sombra para darle más visibilidad */
+  margin-bottom: 40px;
+}
+
+
+/* Estilo para
+a todos los menús desplegables */
+select {
+  padding: 10px;
+
+  font-size: 1.2rem;
+
+  border-radius: 8px;
+  border: 1px solid #444; 
+
+  cursor: pointer;
+}
+
+
+select:focus {
+
+  outline: none;
+  background-color: #e6f7ff;
+
+}
+
+
+select option {
+  font-size: 1.2rem;
+
+  padding: 10px;
+}
+
+/* Responsivo: Ajustar tamaño y posición en pantallas pequeñas */
+@media (max-width: 768px) {
+  .download-btn {
+      padding: 10px 15px; 
+      font-size: 0.9rem; 
+      right: 10px;
+      top: 80px; 
+      position: absolute;
+  }
+}
+
+@media (max-width: 768px) {
+    .content {
+        padding: 20px;
+    }
+
+    table,
+    th,
+    td {
+        display: block;
+        width: 100%;
+    }
+
+    td {
+        margin-bottom: 10px;
+    }
+
+    th {
+        border-radius: 5px;
+    }
+}
+
+/* Barra lateral principal */
+.sidebar {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: linear-gradient(180deg, #176FA6, #2c3e50); /* Degradado de azul a verde */
+  padding: 20px 10px;
+  border-right: 1px solid #34495e;
+  width: 70px;
+  overflow: hidden;
+  transition: width 0.3s ease, background-color 0.3s ease;
+  z-index: 1050;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  
+}
+
+.sidebar:hover {
+  width: 250px;
+  background-color: #34495e;
+}
+
+/* Logo */
+.sidebar a.navbar-brand img {
+  width: 50px;
+  transition: width 0.3s ease, transform 0.3s ease;
+}
+
+.sidebar:hover a.navbar-brand img {
+  display: flex;
+  width: 120px;
+  transform: scale(1.1);
+  justify-self: center;
+}
+
+/* Lista de navegación en la barra lateral */
+.sidebar ul.nav {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar:hover ul.nav {
+  opacity: 1;
+}
+
+.nav-item {
+  margin: 15px 0;
+
+}
+.nav-item-superior {
+  display: flex;
+  align-items: center; /* Centra los elementos verticalmente */
+  justify-content: flex-start; /* Alinea a la izquierda */
+  text-align: center;
+  padding: 10px 15px; /* Añadí algo más de espacio para que no esté pegado al borde */
+  font-size: 15px;
+  height: 100px; /* Ajuste de altura de la barra */
+  line-height: 60px; /* Alineación vertical dentro del contenedor */
+}
+
+#sede_funder_display, #userName {
+  margin: 0 10px; /* Añadí margen horizontal para separación */
+  padding: 0; /* Eliminamos rellenos innecesarios */
+  display: inline-block;
+  font-weight: bold;
+  height: 65px;
+  line-height: 60px; /* Alineación vertical dentro del contenedor */
+}
+
+#sede_funder_display {
+  color: #333; /* Color de la sede */
+  flex-grow: 1; /* Permite que el campo de sede ocupe el espacio disponible */
+}
+
+#userName {
+  color: #555; /* Color del nombre del usuario */
+  font-style: italic; /* Hacemos que el nombre del usuario se vea en cursiva */
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  color: #ecf0f1;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  
+}
+
+.nav-link i {
+  font-size: 1.5rem;
+  margin-right: 15px;
+  color: #bdc3c7;
+  transition: color 0.3s ease, transform 0.3s ease;
+  
+}
+
+.nav-link:hover {
+  background-color: #29A632;
+  color: #ffffff;
+  transform: translateX(5px);
+  
+}
+
+.nav-link:hover i {
+  color: #ffffff;
+  transform: rotate(15deg);
+  
+}
+
+/* Botones desplegables en la barra lateral */
+
+
+
+.dropdown-btn {
+  cursor: pointer;
+  padding: 10px 15px;
+  font-size: 1.8rem; /* tamaño del texto*/
+  border: none;
+  background: none;
+  color: #ecf0f1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+ 
+}
+
+.dropdown-btn i {
+  font-size: 1.8rem;
+  transition: transform 0.3s ease;
+}
+
+.dropdown-btn:hover {
+  background-color: #29A632;
+}
+
+.dropdown-container {
+  display: none;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.dropdown-container a {
+  font-size: 1.4rem; /*texto interno*/
+  color: #bdc3c7;
+  text-decoration: none;
+  padding: 8px 15px;
+  display: block;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-container a:hover {
+  background-color: #29A632;
+  color: white;
+}
+
+.dropdown-container.show {
+  display: block;
+}
+
+/* Contenido principal */
+.content {
+  margin-left: 70px;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar:hover + .content {
+  margin-left: 250px;
+}
+
+/* Navbar principal */
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(20deg, #dee1de, #a8b0b8);
+  padding: 5px 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  height: 50px;
+  backdrop-filter: blur(8px);
+  transition: background-color 0.3s
+ease, box-shadow 0.3s ease;
+  position: fixed; /* Mantener el navbar siempre visible */
+  top: 0;
+  left: 0;
+  width: 100%; /* Ocupar todo el ancho */
+  z-index: 1000; /* Por encima de otros elementos */
+}
+
+.navbar:hover {
+  background-color: rgba(44, 62, 80, 0.9);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Logo en el navbar */
+.navbar-brand {
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: none;
+  margin-right: 10px;
+  transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+  color: #29A632;
+}
+
+/* Íconos dentro del navbar */
+.navbar i {
+  color: #2c3e50;
+  font-size: 2rem;  /* tamaño del icono*/
+  transition: color 0.3s ease, transform 0.2s ease;
+  vertical-align: middle;
+}
+
+.navbar i:hover {
+  color: #29A632;
+  transform: scale(1.1);
+}
+
+/* Enlaces del navbar */
+.navbar-nav .nav-link {
+  color: #2c3e50;
+  font-size: 1rem;
+  padding: 5px 10px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: #29A632;
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+/* Botón del menú responsive */
+.navbar-toggler {
+  border: none;
+  background-color: rgba(241, 234, 234, 0.2);
+  border-radius: 8px;
+  padding: 5px;
+  
+}
+
+.navbar-toggler:hover {
+  background-color: #29A632;
+}
+
+/* Menú desplegable */
+
+.dropdown {
+  position: relative; /* Necesario para posicionar correctamente el menú desplegable */
+}
+.dropdown-menu {
+  position: absolute; /* Posicionar el menú respecto al contenedor padre */
+  right: 0; /* Alinear al borde derecho */
+  left: auto; /* Desactivar alineación izquierda */
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(248, 246, 246, 0.2);
+  font-size: 0.85rem;
+  backdrop-filter: blur(6px);
+}
+
+
+/* Elementos del menú desplegable */
+.dropdown-item {
+  color: #2c3e50;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #29A632;
+  color: #ffffff;
+}
+
+
+/* Íconos adicionales */
+.nav-item.dropdown {
+  display: flex;
+  align-items: center;
+}
+
+.nav-item.dropdown .nav-link i {
+  font-size: 2rem;  /*tamaño del icono*/
+  
+}
+/* Responsividad general para dispositivos pequeños */
+@media (max-width: 768px) {
+  /* Ajustar barra lateral */
+  .sidebar {
+    width: 50px; /* Barra lateral más compacta */
+  }
+
+  .sidebar:hover {
+    width: 200px; /* Expandir menos en pantallas pequeñas */
+  }
+
+  /* Ocultar texto en los enlaces de la barra lateral cuando está colapsada */
+  .sidebar ul.nav .nav-link span {
+    display: none;
+  }
+
+  .sidebar:hover ul.nav .nav-link span {
+    display: inline;
+  }
+
+  /* Contenido principal */
+  .content {
+    margin-left: 50px;
+  }
+
+  .sidebar:hover + .content {
+    margin-left: 200px;
+  }
+
+  /* Ajustar tamaño de los íconos en la barra lateral */
+  .nav-link i {
+    font-size: 1.2rem; /* Íconos más pequeños */
+  }
+
+  /* Navbar en pantallas pequeñas */
+  .navbar {
+    padding: 10px 15px;
+  }
+
+  .navbar-brand {
+    font-size: 1rem; /* Logo más pequeño */
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 0.9rem; /* Enlaces más pequeños */
+    padding: 5px; /* Menor espacio */
+  }
+}
+
+/* Responsividad para dispositivos extra pequeños */
+@media (max-width: 480px) {
+  /* Ajustar barra lateral aún más compacta */
+  .sidebar {
+    width: 40px;
+  }
+
+  .sidebar:hover {
+    width: 150px;
+  }
+
+  /* Ajustar íconos y fuentes */
+  .nav-link i {
+    font-size: 1rem;
+    margin-right: 10px; /* Menor espacio */
+  }
+
+  .nav-link {
+    font-size: 0.8rem; /* Texto más pequeño */
+  }
+
+  /* Ajustar navbar */
+  .navbar {
+    flex-wrap: wrap; /* Permitir que los elementos del navbar se apilen */
+    padding: 5px 10px;
+  }
+
+  .navbar-brand {
+    font-size: 0.9rem;
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 0.8rem;
+    padding: 5px;
+  }
+
+  /* Ajustar botones desplegables */
+  .dropdown-btn {
+    font-size: 0.9rem;
+  }
+
+  .dropdown-btn i {
+    font-size: 1rem;
+  }
+}
+
+
+
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items:
+center;
+  position: relative;
+  margin-bottom: 2rem;
+  padding: 0 20px;
+}
+
+.progress-steps .step {
+  text-align: center;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.progress-steps .circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #fff;
+  margin: 0 auto;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.progress-steps .circle:hover {
+  transform: scale(1.1);
+}
+
+.progress-steps .label {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.progress-steps .step.active .circle {
+  background-color: #007bff;
+}
+
+.progress-steps .step.completed .circle {
+  background-color: #28a745;
+}
+
+.progress-steps .line {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #e0e0e0;
+  z-index: 0;
+  transition: width 0.3s ease;
+}

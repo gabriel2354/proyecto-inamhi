@@ -1,0 +1,385 @@
+/* Estilo base del body */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Fijo al fondo */
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('/assets/images/Logo\ FUNDER\ 2021.png') no-repeat center center fixed;
+  z-index: -1; 
+  background-position: 65% center; /* Mueve la imagen hacia la izquierda */
+  opacity: 0.4;
+
+}
+
+/* Barra lateral principal */
+.sidebar {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: linear-gradient(180deg, #176FA6, #2c3e50); /* Degradado de azul a verde */
+  padding: 20px 10px;
+  border-right: 1px solid #34495e;
+  width: 70px;
+  overflow: hidden;
+  transition: width 0.3s ease, background-color 0.3s ease;
+  z-index: 1050;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #34495e;
+}
+
+/* Logo */
+.sidebar a.navbar-brand img {
+  width: 50px;
+  transition: width 0.3s ease, transform 0.3s ease;
+}
+
+.sidebar a.navbar-brand img {
+  display: flex;
+  width: 120px;
+  transform: scale(1.1);
+  justify-self: center;
+}
+
+/* Lista de navegación en la barra lateral */
+.sidebar ul.nav {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar ul.nav {
+  opacity: 1;
+}
+
+.nav-item {
+  margin: 15px 0;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  color: #ecf0f1;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  
+}
+
+.nav-link i {
+  font-size: 1.5rem;
+  margin-right: 15px;
+  color: #bdc3c7;
+  transition: color 0.3s ease, transform 0.3s ease;
+  
+}
+
+.nav-link:hover {
+  background-color: #29A632;
+  color: #ffffff;
+  transform: translateX(5px);
+  
+}
+
+.nav-link:hover i {
+  color: #ffffff;
+  transform: rotate(15deg);
+  
+}
+
+/* Botones desplegables en la barra lateral */
+
+
+
+.dropdown-btn {
+  cursor: pointer;
+  padding: 10px 15px;
+  font-size: 1.1rem;
+  border: none;
+  background: none;
+  color: #ecf0f1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+ 
+}
+
+.dropdown-btn i {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.dropdown-btn:hover {
+  background-color: #29A632;
+}
+
+.dropdown-container {
+  display: none;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.dropdown-container a {
+  font-size: 1rem;
+  color: #bdc3c7;
+  text-decoration: none;
+  padding: 8px 15px;
+  display: block;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-container a:hover {
+  background-color: #29A632;
+  color: white;
+}
+
+.dropdown-container.show {
+  display: block;
+}
+
+/* Contenido principal */
+.content {
+  margin-left: 70px;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar:hover + .content {
+  margin-left: 250px;
+}
+
+/* Navbar principal */
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(20deg, #dee1de, #a8b0b8);
+  padding: 5px 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  height: 50px;
+  backdrop-filter: blur(8px);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar:hover {
+  background-color: rgba(44, 62, 80, 0.9);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Logo en el navbar */
+.navbar-brand {
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: none;
+  margin-right: 10px;
+  transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+  color: #29A632;
+}
+
+/* Íconos dentro del navbar */
+.navbar i {
+  color: #2c3e50;
+  font-size: 1.4rem;
+  transition: color 0.3s ease, transform 0.2s ease;
+  vertical-align: middle;
+}
+
+.navbar i:hover {
+  color: #29A632;
+  transform: scale(1.1);
+}
+
+/* Enlaces del navbar */
+.navbar-nav .nav-link {
+  color: #2c3e50;
+  font-size: 1rem;
+  padding: 5px 10px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: #29A632;
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.nav-item-superior {
+  display: flex;
+  align-items: center; /* Centra los elementos verticalmente */
+  justify-content: flex-start; /* Alinea a la izquierda */
+  text-align: center;
+  padding: 10px 15px; /* Añadí algo más de espacio para que no esté pegado al borde */
+  font-size: 15px;
+  height: 100px; /* Ajuste de altura de la barra */
+  line-height: 60px; /* Alineación vertical dentro del contenedor */
+}
+
+#sede_funder_display, #userName {
+  margin: 0 10px; /* Añadí margen horizontal para separación */
+  padding: 0; /* Eliminamos rellenos innecesarios */
+  display: inline-block;
+  font-weight: bold;
+  line-height: 60px; /* Alineación vertical dentro del contenedor */
+}
+
+#sede_funder_display {
+  color: #333; /* Color de la sede */
+  flex-grow: 1; /* Permite que el campo de sede ocupe el espacio disponible */
+}
+
+#userName {
+  color: #555; /* Color del nombre del usuario */
+  font-style: italic; /* Hacemos que el nombre del usuario se vea en cursiva */
+}
+
+
+
+/* Menú desplegable */
+
+.dropdown {
+  position: relative; /* Necesario para posicionar correctamente el menú desplegable */
+}
+.dropdown-menu {
+  position: absolute; /* Posicionar el menú respecto al contenedor padre */
+  right: 0; /* Alinear al borde derecho */
+  left: auto; /* Desactivar alineación izquierda */
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(248, 246, 246, 0.2);
+  font-size: 0.85rem;
+  backdrop-filter: blur(6px);
+}
+
+
+/* Elementos del menú desplegable */
+.dropdown-item {
+  color: #2c3e50;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #29A632;
+  color: #ffffff;
+}
+
+
+/* Íconos adicionales */
+.nav-item.dropdown {
+  display: flex;
+  align-items: center;
+}
+
+.nav-item.dropdown .nav-link i {
+  font-size: 1.4rem;
+  
+}
+/* Ajuste para el Navbar en dispositivos pequeños */
+@media (max-width: 768px) {
+  .navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Permitir que los elementos se apilen */
+    padding: 10px;
+    height: auto; /* Ajustar la altura automáticamente */
+    background: linear-gradient(20deg, #dee1de, #a8b0b8);
+  }
+
+  .navbar-brand {
+    font-size: 1rem; /* Reducir el tamaño del logo */
+    margin: 0 auto; /* Centrar el logo */
+  }
+
+  .navbar-nav {
+    display: flex;
+    flex-direction: column; /* Apilar los elementos del navbar */
+    align-items: center; /* Centrar los elementos */
+    width: 100%;
+  }
+
+  .navbar-nav .nav-link {
+    width: 100%; /* Ocupa todo el ancho */
+    text-align: center; /* Centrar el texto */
+    padding: 10px; /* Espaciado interno */
+    font-size: 0.9rem; /* Ajustar el tamaño de fuente */
+  }
+
+  .navbar-toggler {
+    position: relative;
+    left: auto;
+    right: auto;
+    margin: 10px auto; /* Centrar el botón */
+    z-index: 1100;
+    border-radius: 5px;
+    padding: 5px 15px;
+    font-size: 1rem;
+    text-align: center;
+  }
+}
+
+/* Ajuste para dispositivos extra pequeños */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 5px;
+  }
+
+  .navbar-brand {
+    font-size: 0.9rem;
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 0.8rem;
+    padding: 5px;
+  }
+
+  .navbar-toggler {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+}
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+  #staticImage {
+    width: 100%; /* Mantener el ancho completo */
+    height: 100%; /* Mantener la altura completa */
+    object-fit: cover; /* Asegura que la imagen cubra todo el área */
+  }
+}
+
+@media (max-width: 480px) {
+  #staticImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Igual configuración para pantallas más pequeñas */
+  }
+}
