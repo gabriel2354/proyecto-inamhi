@@ -15,15 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
     idColaboradorField.value = idColaborador;
   }
 
-  // Obtener la sede del colaborador logueado desde el localStorage
-  const sedeFunder = localStorage.getItem("sedeFunder");
-
-  if (sedeFunder) {
-    document.getElementById("sede_funder_display").innerText = sedeFunder; // Muestra la sede en el campo correspondiente
-  } else {
-    console.warn("⚠️ No se encontró sedeFunder en localStorage.");
-  }
-
   // Extraer el nombre del usuario del almacenamiento
   const userName = localStorage.getItem("userName") || "Usuario";
   const userNameElement = document.getElementById("userName");

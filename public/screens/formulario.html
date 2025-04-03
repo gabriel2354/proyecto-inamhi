@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/formulario.css">
+    <title>Acceso Personal</title>
+</head>
+<body>
+    <div class="container">
+        <img src="https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/032011/inamhi.png?itok=mgBPuDN3" alt="INAMHI Logo" class="logo">
+        <div class="header">ACCIÓN DE PERSONAL</div>
+        <table>
+            <tr>
+                <td colspan="2"><b>Nro.</b> AP-RH-213-2024</td>
+            </tr>
+            <tr>
+                <td colspan="2"><b>FECHA DE ELABORACIÓN</b><br>13 de septiembre de 2024</td>
+            </tr>
+            <tr>
+                <td><b>APELLIDOS</b><br>VEGA MALDONADO</td>
+                <td><b>NOMBRES</b><br>MAYRA ALEJANDRA</td>
+            </tr>
+            <tr>
+                <th>DOCUMENTO DE IDENTIFICACIÓN</th>
+                <th>NRO. DE IDENTIFICACIÓN</th>
+            </tr>
+            <tr>
+                <td>CÉDULA</td>
+                <td>1723704464</td>
+            </tr>
+            <tr>
+                <th>DESDE (dd-mm-aaaa)</th>
+                <th>HASTA (dd-mm-aaaa)</th>
+            </tr>
+            <tr>
+                <td>15 de septiembre de 2024</td>
+                <td></td>
+            </tr>
+        </table>
+        <br>
+        <hr>
+        <form [formGroup]="accionPersonalForm" (ngSubmit)="enviarFormulario()">
+            <div>
+              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('ingreso')" value="ingreso"> INGRESO</label>
+              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('reingreso')" value="reingreso"> REINGRESO</label>
+              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('restitucion')" value="restitucion"> RESTITUCIÓN</label>
+              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('reintegro')" value="reintegro"> REINTEGRO</label>
+              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('ascenso')" value="ascenso"> ASCENSO</label>
+              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('traslado')" value="traslado"> TRASLADO</label>
+            </div>
+          
+            <div>
+              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('traspaso')" value="traspaso"> TRASPASO</label>
+              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('cambioAdministrativo')" value="cambioAdministrativo"> CAMBIO ADMINISTRATIVO</label>
+              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('intercambioVoluntario')" value="intercambioVoluntario"> INTERCAMBIO VOLUNTARIO</label>
+              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('licencia')" value="licencia"> LICENCIA</label>
+              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('comisionServicios')" value="comisionServicios"> COMISIÓN DE SERVICIOS</label>
+              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('sanciones')" value="sanciones"> SANCIONES</label>
+            </div>
+          
+            <div>
+              <label>¿PRESENTÓ LA DECLARACIÓN JURADA?</label>
+              <label><input type="radio" formControlName="declaracionJurada" value="si"> Sí</label>
+              <label><input type="radio" formControlName="declaracionJurada" value="noAplica"> No Aplica</label>
+            </div>
+          
+            <button type="submit">Guardar</button>
+          </form>
+
+          <br>
+          <hr>
+          <div class="motivacion">
+            <table>
+                <tr>
+                    <th><h1>MOTIVACION</h1></th>
+                </tr>
+            </table>
+            <section>
+                <table>
+                    <tr>
+                        <td>
+                            La Mgs. Mercy Ivonne Freire Sanchez,  Directora de Administración de Talento Humano , en uso de la delegación conferida, mediante Resolución Nro.  DEJ-2023-010, de 19 de abril de 2023, conforme al art. 3, literal c):
+
+                            RESUELVE: De conformidad con lo dispuesto en el artículo 47 literal a) de la Ley Orgánica del Servicio Público (LOSEP) y en concordancia con el artículo 102 de su Reglamento General, se resuelve ACEPTAR la renuncia irrevocable de la  servidora VEGA MALDONADO MAYRA ALEJANDRA al nombramiento provisional como Servidor Público 1 de la Dirección Adminisrtrativa Financiera. Debiendo reintegrarse a su partida de origen, de conformidad a la situación propuesta.
+                            
+                            REFERENCIA: 1) Renuncia irrevocable con memorando Nro. INAMHI-DAF-2024-0939-M
+                        </td>
+                    </tr>
+                </table>
+            </section>
+
+          </div>
+          
+</body>
+</html>

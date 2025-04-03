@@ -12,7 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Auth guard (si se utiliza para proteger rutas) -->
-    <script src="../js/authGuard.js"></script>
+    <!--<script src="../js/authGuard.js"></script>-->
 </head>
 
 <body>
@@ -63,7 +63,7 @@
     <!-- Barra lateral -->
     <div class="sidebar" id="sidebar">
         <a class="navbar-brand" href="index.html">
-            <img src="/assets/images/Logo FUNDER 2021.png" alt="Logo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnTHeYitG_YOsjGoklgHDUutF_o7o05s61vg&s" alt="Logo">
         </a>
         <ul class="nav flex-column mt-4">
             <li class="nav-item">
@@ -71,51 +71,35 @@
                     <i class="bi bi-gear-fill"></i> Gestión
                 </button>
                 <div class="dropdown-container">
-                    <a class="nav-link" href="fichaTecnica.html">Ficha Técnica</a>
-                    <a class="nav-link" href="fichaDiagnostico.html">Ficha Diagnóstico</a>
+                    <a class="nav-link" href="">Acceso Personal </a>
                 </div>
             </li>
             <li class="nav-item">
                 <button class="dropdown-btn">
-                    <i class="bi bi-person-badge-fill"></i> Manager
+                    <i class="bi bi-person-badge-fill"></i> Administrador 
                 </button>
                 <div class="dropdown-container">
                     <a class="nav-link" href="roles.html">Roles</a>
                     <a class="nav-link" href="Usuarios.html">Usuarios</a>
                 </div>
             </li>
-            <li class="nav-item">
-                <button class="dropdown-btn">
-                    <i class="bi bi-bar-chart-line-fill"></i> Analityca
-                </button>
-                <div class="dropdown-container">
-                    <a id="downloadBtn1" class="nav-link" href="#" onclick="downloadFile()">Descargar CSV Ficha
-                        Tecnica</a>
-                    <a id="downloadBtn2" class="nav-link" href="#" onclick="downloadFile()">Descargar CSV Ficha
-                        Diagnostico</a>
-                    <a id="downloadBtn3" class="nav-link" href="#" onclick="downloadFile()">Descargar CSV Comercial</a>
-                    <a id="downloadBtn4" class="nav-link" href="#" onclick="downloadFile()">Descargar CSV Gestión
-                        Financiera</a>
-                    <a id="downloadBtn5" class="nav-link" href="#" onclick="downloadFile()">Descargar CSV Gestión
-                        Organizacional</a>
-                    <a id="downloadBtn6" class="nav-link" href="#" onclick="downloadFile()">Descargar CSV Gestión
-                        Productiva</a>
-                </div>
-            </li>
+           
 
             <!-- Contenido principal -->
-            <div class="content" id="content">
-                <div class="container mt-4 text-center">
-                    <p class="parrafo"></p>
-                </div>
+          </div>
+          <h2 class="titulo">Instituto Nacional de Meteorología a e Hidrología </h2>
+      
+          <p class="texto">
+              "A través de la ciencia, transformamos la incertidumbre del clima en acciones concretas para el bienestar de todos."
+          </p>
+          <div class="imagen2">
+            <img src="/assets/images/Trabajadores.jpeg" alt="trabajadores">
+         </div>
             </div>
             <input type="hidden" id="idColaborador" name="idColaborador">
             <!-- Bootstrap JS -->
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-            <!-- Archivo JS principal para la página (home.js) -->
-
-          
-           
+            <!-- Archivo JS principal para la página (home.js) --> 
             <script src="/public/js/dashboard.js"></script>
                
             <script src="/public/js/home.js"></script>
