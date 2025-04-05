@@ -1,0 +1,30 @@
+<form id="pdfForm" enctype="multipart/form-data">
+  <input type="file" name="pdf" accept="application/pdf" required>
+  <input type="text" name="nombre" placeholder="Nombre" required>
+  <input type="text" name="cedula" placeholder="Cédula" required>
+  <button type="submit">Subir y Editar PDF</button>
+</form>
+
+<script>
+document.getElementById('pdfForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+
+  try {
+    const res = await fetch('http://localhost:3000/subir-pdf/pdf', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!res.ok) throw new Error();
+
+    const blob = await res.blob();
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'pdf-editado.pdf';
+    link.click();
+  } catch (err) {
+    alert('❌ Error al procesar PDF. Verifica el servidor y la ruta.');
+  }
+});
+</script>
