@@ -528,3 +528,11 @@ document.addEventListener("DOMContentLoaded", () => {
       idColaboradorField.value = idColaborador;
   }
 });
+// Mostrar/ocultar los dropdowns de la barra lateral
+document.querySelectorAll('.dropdown-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('active');
+    const dropdown = btn.nextElementSibling;
+    dropdown.classList.toggle('hidden'); // Tailwind "hidden"
+  });
+});
