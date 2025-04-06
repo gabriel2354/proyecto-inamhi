@@ -129,3 +129,71 @@ function editarEmpleado(cedula) {
     .then(data => abrirFormulario('editar', data))
     .catch(() => alert('No se pudo cargar el empleado'));
 }
+// Toggle barra lateral
+document.querySelectorAll('.dropdown-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('active');
+    const dropdown = btn.nextElementSibling;
+    dropdown.classList.toggle('hidden');
+  });
+});
+
+// Dropdown usuario
+const userDropdownBtn = document.getElementById("userDropdownBtn");
+const userDropdownMenu = document.getElementById("userDropdownMenu");
+
+userDropdownBtn?.addEventListener("click", () => {
+  userDropdownMenu.classList.toggle("hidden");
+});
+
+window.addEventListener("click", (e) => {
+  if (!userDropdownBtn.contains(e.target) && !userDropdownMenu.contains(e.target)) {
+    userDropdownMenu.classList.add("hidden");
+  }
+});
+document.addEventListener("DOMContentLoaded", () => {
+  // Obtener el id del colaborador logueado desde el localStorage
+  const idColaborador = localStorage.getItem("idColaborador");
+
+  if (!idColaborador) {
+    console.warn("⚠️ No se encontró idColaborador en localStorage. Asegúrate de estar logueado.");
+    return;
+  }
+
+  console.log("✅ idColaborador del usuario logueado:", idColaborador);
+
+  // Asignar el idColaborador a un campo oculto si existe en el formulario
+  const idColaboradorField = document.getElementById("idColaborador");
+  if (idColaboradorField) {
+    idColaboradorField.value = idColaborador;
+  }
+
+  // Extraer el nombre del usuario del almacenamiento
+  const userName = localStorage.getItem("userName") || "Usuario";
+  const userNameElement = document.getElementById("userName");
+  if (userNameElement) {
+    userNameElement.textContent = userName;
+  }
+
+  // Configurar los botones dropdown del menú lateral
+  const dropdownBtns = document.querySelectorAll('.dropdown-btn');
+  dropdownBtns.forEach((btn) => {
+    btn.addEventListener('click', function () {
+      const container = this.nextElementSibling;
+      if (container) {
+        container.classList.toggle('show');
+      }
+    });
+  });
+// Acción de cerrar sesión
+const logoutBtn = document.getElementById("cerrarSesionBtn");
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.href = "index.html";
+  });
+}
+  
+});
+

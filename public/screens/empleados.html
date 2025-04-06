@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
+  <script src="../js/authGuard.js"></script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gestión de Empleados</title>
@@ -47,76 +50,67 @@
         <span id="userName">Usuario</span>
         <button onclick="location.href='home.html'"><i class="bi bi-house-door-fill"></i></button>
         <button><i class="bi bi-wifi"></i></button>
-        <div class="dropdown-user">
-          <button id="userDropdownBtn"><i class="bi bi-person-circle"></i></button>
-          <ul id="userDropdownMenu" class="hidden">
-            <li><a id="logoutLink" class="text-red-600" href="#">Cerrar Sesión</a></li>
-          </ul>
+        <div class="dropdown-user relative">
+          <button id="userDropdownBtn" type="button">
+            <i class="bi bi-person-circle text-xl"></i>
+          </button>
+          
         </div>
+        <di>
+          <!-- Ícono de cerrar sesión que limpia el localStorage y redirige -->
+          <button id="cerrarSesionBtn" title="Cerrar Sesión">
+            <i class="bi bi-box-arrow-right text-xl text-red-600 hover:text-red-800 transition duration-200"></i>
+          </button>
+        </di>
       </div>
     </nav>
 
-    <!-- Sección de tabla -->
-    <div class="bg-white p-6 rounded-xl shadow">
-      <h1 class="text-2xl font-bold mb-4 text-gray-800">Gestión de Empleados</h1>
-      <div class="flex items-center gap-4 mb-6">
-        <input type="text" id="buscarCedula" placeholder="Buscar por número de identificación"
-          class="input-busqueda">
-        <button onclick="buscarEmpleado()" class="btn-buscar">Buscar</button>
-        <button id="btnAgregarEmpleado" class="btn-agregar">+ Agregar</button>
-      </div>
 
-      <table class="w-full border text-sm">
-        <thead class="bg-gray-200">
-          <tr>
-            <th class="p-2 border">#</th>
-            <th class="p-2 border">Nombres</th>
-            <th class="p-2 border">Número Identificación</th>
-            <th class="p-2 border">Régimen Laboral</th>
-            <th class="p-2 border">Nivel Ocupacional</th>
-            <th class="p-2 border">Denominación Puesto</th>
-            <th class="p-2 border">Unidad Orgánica</th>
-            <th class="p-2 border">Escala Ocupacional</th>
-            <th class="p-2 border">Grado</th>
-            <th class="p-2 border">Estructura Programática</th>
-            <th class="p-2 border">Cantón</th>
-            <th class="p-2 border">RMU Puesto</th>
-            <th class="p-2 border">Estado Puesto</th>
-            <th class="p-2 border">Acciones</th>
-          </tr>
-        </thead>
-        <tbody id="tabla-empleados">
-          <!-- Aquí van los datos JS -->
-        </tbody>
-      </table>
-    </div>
+
+    <!-- Sección de tabla -->
+<div class="bg-white p-6 rounded-xl shadow">
+  <h1 class="text-2xl font-bold mb-4 text-gray-800">Gestión de Empleados</h1>
+  <div class="flex items-center gap-4 mb-6">
+    <input type="text" id="buscarCedula" placeholder="Buscar por número de identificación"
+      class="input-busqueda">
+    <button onclick="buscarEmpleado()" class="btn-buscar">Buscar</button>
+    <button id="btnAgregarEmpleado" class="btn-agregar">+ Agregar</button>
   </div>
+
+  <!-- NUEVO contenedor para scroll -->
+  <div class="overflow-x-auto w-full">
+    <table class="w-full border text-sm min-w-[1200px]">
+      <thead class="bg-gray-200">
+        <tr>
+          <th class="p-2 border">#</th>
+          <th class="p-2 border">Nombres</th>
+          <th class="p-2 border">Número Identificación</th>
+          <th class="p-2 border">Régimen Laboral</th>
+          <th class="p-2 border">Nivel Ocupacional</th>
+          <th class="p-2 border">Denominación Puesto</th>
+          <th class="p-2 border">Unidad Orgánica</th>
+          <th class="p-2 border">Escala Ocupacional</th>
+          <th class="p-2 border">Grado</th>
+          <th class="p-2 border">Estructura Programática</th>
+          <th class="p-2 border">Cantón</th>
+          <th class="p-2 border">RMU Puesto</th>
+          <th class="p-2 border">Estado Puesto</th>
+          <th class="p-2 border">Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-empleados">
+        <!-- JS llenará aquí -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
 
   <!-- Scripts -->
   <script src="../js/empleandosF.js"></script>
   <script>
-    // Toggle barra lateral
-    document.querySelectorAll('.dropdown-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        btn.classList.toggle('active');
-        const dropdown = btn.nextElementSibling;
-        dropdown.classList.toggle('hidden');
-      });
-    });
-
-    // Dropdown usuario
-    const userDropdownBtn = document.getElementById("userDropdownBtn");
-    const userDropdownMenu = document.getElementById("userDropdownMenu");
-
-    userDropdownBtn?.addEventListener("click", () => {
-      userDropdownMenu.classList.toggle("hidden");
-    });
-
-    window.addEventListener("click", (e) => {
-      if (!userDropdownBtn.contains(e.target) && !userDropdownMenu.contains(e.target)) {
-        userDropdownMenu.classList.add("hidden");
-      }
-    });
+    
+    
   </script>
 </body>
 </html>
