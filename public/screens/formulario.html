@@ -1,96 +1,477 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/formulario.css">
-    <title>Acceso Personal</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+    <title>Acción de Personal</title>
+    
 </head>
 <body>
-    <div class="container">
-        <img src="https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/032011/inamhi.png?itok=mgBPuDN3" alt="INAMHI Logo" class="logo">
-        <div class="header">ACCIÓN DE PERSONAL</div>
-        <table>
-            <tr>
-                <td colspan="2"><b>Nro.</b> AP-RH-213-2024</td>
-            </tr>
-            <tr>
-                <td colspan="2"><b>FECHA DE ELABORACIÓN</b><br>13 de septiembre de 2024</td>
-            </tr>
-            <tr>
-                <td><b>APELLIDOS</b><br>VEGA MALDONADO</td>
-                <td><b>NOMBRES</b><br>MAYRA ALEJANDRA</td>
-            </tr>
-            <tr>
-                <th>DOCUMENTO DE IDENTIFICACIÓN</th>
-                <th>NRO. DE IDENTIFICACIÓN</th>
-            </tr>
-            <tr>
-                <td>CÉDULA</td>
-                <td>1723704464</td>
-            </tr>
-            <tr>
-                <th>DESDE (dd-mm-aaaa)</th>
-                <th>HASTA (dd-mm-aaaa)</th>
-            </tr>
-            <tr>
-                <td>15 de septiembre de 2024</td>
-                <td></td>
-            </tr>
-        </table>
-        <br>
-        <hr>
-        <form [formGroup]="accionPersonalForm" (ngSubmit)="enviarFormulario()">
-            <div>
-              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('ingreso')" value="ingreso"> INGRESO</label>
-              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('reingreso')" value="reingreso"> REINGRESO</label>
-              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('restitucion')" value="restitucion"> RESTITUCIÓN</label>
-              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('reintegro')" value="reintegro"> REINTEGRO</label>
-              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('ascenso')" value="ascenso"> ASCENSO</label>
-              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('traslado')" value="traslado"> TRASLADO</label>
-            </div>
-          
-            <div>
-              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('traspaso')" value="traspaso"> TRASPASO</label>
-              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('cambioAdministrativo')" value="cambioAdministrativo"> CAMBIO ADMINISTRATIVO</label>
-              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('intercambioVoluntario')" value="intercambioVoluntario"> INTERCAMBIO VOLUNTARIO</label>
-              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('licencia')" value="licencia"> LICENCIA</label>
-              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('comisionServicios')" value="comisionServicios"> COMISIÓN DE SERVICIOS</label>
-              <label><input type="radio" formControlName="tipoAccion" (change)="seleccionarAccion('sanciones')" value="sanciones"> SANCIONES</label>
-            </div>
-          
-            <div>
-              <label>¿PRESENTÓ LA DECLARACIÓN JURADA?</label>
-              <label><input type="radio" formControlName="declaracionJurada" value="si"> Sí</label>
-              <label><input type="radio" formControlName="declaracionJurada" value="noAplica"> No Aplica</label>
-            </div>
-          
-            <button type="submit">Guardar</button>
-          </form>
-
-          <br>
-          <hr>
-          <div class="motivacion">
-            <table>
-                <tr>
-                    <th><h1>MOTIVACION</h1></th>
-                </tr>
-            </table>
-            <section>
-                <table>
-                    <tr>
-                        <td>
-                            La Mgs. Mercy Ivonne Freire Sanchez,  Directora de Administración de Talento Humano , en uso de la delegación conferida, mediante Resolución Nro.  DEJ-2023-010, de 19 de abril de 2023, conforme al art. 3, literal c):
-
-                            RESUELVE: De conformidad con lo dispuesto en el artículo 47 literal a) de la Ley Orgánica del Servicio Público (LOSEP) y en concordancia con el artículo 102 de su Reglamento General, se resuelve ACEPTAR la renuncia irrevocable de la  servidora VEGA MALDONADO MAYRA ALEJANDRA al nombramiento provisional como Servidor Público 1 de la Dirección Adminisrtrativa Financiera. Debiendo reintegrarse a su partida de origen, de conformidad a la situación propuesta.
-                            
-                            REFERENCIA: 1) Renuncia irrevocable con memorando Nro. INAMHI-DAF-2024-0939-M
-                        </td>
-                    </tr>
-                </table>
-            </section>
-
+    <div class="card mb-4 shadow-sm" style="max-width: 100%;">
+        <div class="row g-0">
+          <!-- Columna del logo -->
+          <div class="col-md-4 d-flex align-items-center justify-content-center bg-light p-3">
+            <img src="https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/032011/inamhi.png?itok=mgBPuDN3" 
+                 class="img-fluid rounded-start" 
+                 alt="Logo INAMHI"
+                 style="max-height: 180px;" />
           </div>
-          
+      
+          <!-- Columna del formulario -->
+          <div class="col-md-8">
+            <div class="card-body">
+              <h4 class="card-title text-primary text-center mb-4">ACCIÓN DE PERSONAL</h4>
+              
+              <table class="table table-bordered align-middle">
+                <tbody>
+                  <tr>
+                    <th scope="row">Nro.</th>
+                    <td>AP-RH-213-2024</td>
+                    <th scope="row">FECHA DE ELABORACIÓN</th>
+                    <td>13/09/2024</td>
+                  </tr>
+                  <tr>
+                    <th>NOMBRES</th>
+                    <td colspan="3"><input type="text" class="form-control" placeholder="Ingrese nombres completos" /></td>
+                  </tr>
+                  <tr>
+                    <th>APELLIDOS</th>
+                    <td colspan="3"><input type="text" class="form-control" placeholder="Ingrese apellidos completos" /></td>
+                  </tr>
+                  <tr>
+                    <th>DOCUMENTO DE IDENTIFICACIÓN</th>
+                    <td colspan="3">
+                      <select class="form-select">
+                        <option value="cedula">CÉDULA</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>NRO. DE IDENTIFICACIÓN</th>
+                    <td colspan="3"><input type="text" class="form-control" placeholder="Ej: 1234567890" /></td>
+                  </tr>
+                  <tr>
+                    <th>DESDE</th>
+                    <td><input type="date" class="form-control" /></td>
+                    <th>HASTA</th>
+                    <td><input type="date" class="form-control" /></td>
+                  </tr>
+                </tbody>
+              </table>
+      
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container my-5">
+        <!-- Tarjeta principal -->
+        <div class="card">
+          <div class="card-body text-center">
+            <h5 class="card-title text-primary">Tipo de Acción</h5>
+            <h6 class="card-subtitle mb-4 text-body-secondary">Elija una opción:</h6>
+            
+            <!-- Tarjetas de opciones -->
+            <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-4 justify-content-center">
+              <!-- Cada tarjeta se repite en esta estructura -->
+              <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                  <div class="card-body text-center p-2">
+                    <label class="w-100 cursor-pointer">
+                      <input type="radio" name="tipoAccion" value="ingreso">
+                      <div><strong>INGRESO</strong></div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="col"><div class="card h-100 shadow-sm border-0"><div class="card-body text-center p-2"><label><input type="radio" name="tipoAccion" value="reingreso"><div><strong>TRASPASO</strong></div></label></div></div></div>
+              <div class="col"><div class="card h-100 shadow-sm border-0"><div class="card-body text-center p-2"><label><input type="radio" name="tipoAccion" value="restitucion"><div><strong>INCREMENTO RMU</strong></div></label></div></div></div>
+              <div class="col"><div class="card h-100 shadow-sm border-0"><div class="card-body text-center p-2"><label><input type="radio" name="tipoAccion" value="reintegro"><div><strong>REINTEGRO</strong></div></label></div></div></div>
+              <div class="col"><div class="card h-100 shadow-sm border-0"><div class="card-body text-center p-2"><label><input type="radio" name="tipoAccion" value="ascenso"><div><strong>CAMBIO ADMINISTRATIVO</strong></div></label></div></div></div>
+              <div class="col"><div class="card h-100 shadow-sm border-0"><div class="card-body text-center p-2"><label><input type="radio" name="tipoAccion" value="subrogacion"><div><strong>SUBROGACIÓN</strong></div></label></div></div></div>
+              <div class="col"><div class="card h-100 shadow-sm border-0"><div class="card-body text-center p-2"><label><input type="radio" name="tipoAccion" value="restitucion2"><div><strong>RESTITUCIÓN</strong></div></label></div></div></div>
+              <div class="col"><div class="card h-100 shadow-sm border-0"><div class="card-body text-center p-2"><label><input type="radio" name="tipoAccion" value="licencia"><div><strong>LICENCIA</strong></div></label></div></div></div>
+              <div class="col"><div class="card h-100 shadow-sm border-0"><div class="card-body text-center p-2"><label><input type="radio" name="tipoAccion" value="cesacion"><div><strong>CESACIÓN DE FUNCIONES</strong></div></label></div></div></div>
+              <div class="col"><div class="card h-100 shadow-sm border-0"><div class="card-body text-center p-2"><label><input type="radio" name="tipoAccion" value="comisionServicios"><div><strong>COMISIÓN DE SERVICIOS</strong></div></label></div></div></div>
+              <div class="col"><div class="card h-100 shadow-sm border-0"><div class="card-body text-center p-2"><label><input type="radio" name="tipoAccion" value="destitucion"><div><strong>DESTITUCIÓN</strong></div></label></div></div></div>
+              <div class="col"><div class="card h-100 shadow-sm border-0"><div class="card-body text-center p-2"><label><input type="radio" name="tipoAccion" value="traslado2"><div><strong>TRASLADO</strong></div></label></div></div></div>
+              <div class="col"><div class="card h-100 shadow-sm border-0"><div class="card-body text-center p-2"><label><input type="radio" name="tipoAccion" value="sanciones"><div><strong>SANCIONES</strong></div></label></div></div></div>
+              <div class="col"><div class="card h-100 shadow-sm border-0"><div class="card-body text-center p-2"><label><input type="radio" name="tipoAccion" value="intercambio"><div><strong>INTERCAMBIO VOLUNTARIO</strong></div></label></div></div></div>
+              <div class="col"><div class="card h-100 shadow-sm border-0"><div class="card-body text-center p-2"><label><input type="radio" name="tipoAccion" value="encargo"><div><strong>ENCARGO</strong></div></label></div></div></div>
+              <div class="col"><div class="card h-100 shadow-sm border-0"><div class="card-body text-center p-2"><label><input type="radio" name="tipoAccion" value="acenso"><div><strong>ACENSO</strong></div></label></div></div></div>
+              <div class="col"><div class="card h-100 shadow-sm border-0"><div class="card-body text-center p-2"><label><input type="radio" name="tipoAccion" value="vacaciones"><div><strong>VACACIONES</strong></div></label></div></div></div>
+              <div class="col"><div class="card h-100 shadow-sm border-0"><div class="card-body text-center p-2"><label><input type="radio" name="tipoAccion" value="revision"><div><strong>REVISIÓN CLASI. PUESTO</strong></div></label></div></div></div>
+              <div class="col"><div class="card h-100 shadow-sm border-0"><div class="card-body text-center p-2"><label><input type="radio" name="tipoAccion" value="otro"><div><strong>OTRO (DETALLAR)</strong></div></label></div></div></div>
+            </div>
+          </div>
+        </div>
+<div class="container mt-4">
+    <!-- Tarjeta Motivación -->
+  <!-- Sección Motivación editable -->
+<div class="card mt-5">
+    <div class="card-header">
+      <strong>Motivación:</strong>
+    </div>
+    <div class="card-body">
+      <label for="motivacion" class="form-label">Ingrese la motivación de la acción:</label>
+      <textarea id="motivacion" name="motivacion" class="form-control w-100" rows="10" placeholder="Escriba aquí la motivación...">
+  
+      </textarea>
+    </div>
+  </div>
+  <div class="container d-flex">
+    <!-- Tabla para la Situación Actual -->
+    <table class="table table-bordered w-400 p-4 m-2" style="max-width: 500%; height: auto;">
+        <thead>
+            <tr>
+                <th colspan="2" class="text-center" style="font-family: 'Times New Roman', Times, serif;">
+                    <h3>SITUACIÓN ACTUAL</h3>
+                    <p class="text-center"><em>Información sobre el puesto actual</em></p>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>PROCESO INSTITUCIONAL:</strong></td>
+                <td><input type="text" value="SUSTANTIVO" class="form-control" style="height: 40px;" /></td>
+            </tr>
+            <tr>
+                <td><strong>NIVEL DE GESTIÓN:</strong></td>
+                <td><input type="text" value="DIRECCIÓN EJECUTIVA" class="form-control" style="height: 40px;" /></td>
+            </tr>
+            <tr>
+                <td><strong>UNIDAD ADMINISTRATIVA:</strong></td>
+                <td><input type="text" value="DIRECCIÓN ADMINISTRATIVA FINANCIERA" class="form-control" style="height: 40px;" /></td>
+            </tr>
+            <tr>
+                <td><strong>LUGAR DE TRABAJO:</strong></td>
+                <td><input type="text" value="QUITO" class="form-control" style="height: 40px;" /></td>
+            </tr>
+            <tr>
+                <td><strong>DENOMINACIÓN DEL PUESTO:</strong></td>
+                <td><input type="text" value="ASISTENTE DE CONTABILIDAD" class="form-control" style="height: 40px;" /></td>
+            </tr>
+            <tr>
+                <td><strong>GRUPO OCUPACIONAL:</strong></td>
+                <td><input type="text" value="SERVIDOR PÚBLICO 1" class="form-control" style="height: 40px;" /></td>
+            </tr>
+            <tr>
+                <td><strong>GRADO:</strong></td>
+                <td><input type="number" value="7" class="form-control" style="height: 40px;" /></td>
+            </tr>
+            <tr>
+                <td><strong>REMUNERACIÓN MENSUAL:</strong></td>
+                <td><input type="number" value="817,00" class="form-control" style="height: 40px;" /></td>
+            </tr>
+            <tr>
+                <td><strong>PARTIDA INDIVIDUAL:</strong></td>
+                <td><input type="text" value="202442200000000010000000100051170000100000000 - 200" class="form-control" style="height: 40px;" /></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Tabla para la Situación Propuesta -->
+    <table class="table table-bordered w-100 p-4 m-2" style="max-width: 200%; height:auto;">
+        <thead>
+            <tr>
+                <th colspan="2" class="text-center" style="font-family: 'Times New Roman', Times, serif;">
+                    <h3>SITUACIÓN PROPUESTA</h3>
+                    <p class="text-center"><em>Información sobre el puesto propuesto</em></p>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>PROCESO INSTITUCIONAL:</strong></td>
+                <td><input type="text" value="SUSTANTIVO" class="form-control" style="height: 40px;" /></td>
+            </tr>
+            <tr>
+                <td><strong>NIVEL DE GESTIÓN:</strong></td>
+                <td><input type="text" value="DIRECCIÓN EJECUTIVA" class="form-control" style="height: 40px;" /></td>
+            </tr>
+            <tr>
+                <td><strong>UNIDAD ADMINISTRATIVA:</strong></td>
+                <td><input type="text" value="DIRECCIÓN ADMINISTRATIVA FINANCIERA" class="form-control" style="height: 40px;" /></td>
+            </tr>
+            <tr>
+                <td><strong>LUGAR DE TRABAJO:</strong></td>
+                <td><input type="text" value="QUITO" class="form-control" style="height: 40px;" /></td>
+            </tr>
+            <tr>
+                <td><strong>DENOMINACIÓN DEL PUESTO:</strong></td>
+                <td><input type="text" value="SECRETARIO/A" class="form-control" style="height: 40px;" /></td>
+            </tr>
+            <tr>
+                <td><strong>GRUPO OCUPACIONAL:</strong></td>
+                <td><input type="text" value="SERVIDOR PÚBLICO DE APOYO 3" class="form-control" style="height: 40px;" /></td>
+            </tr>
+            <tr>
+                <td><strong>GRADO:</strong></td>
+                <td><input type="number" value="5" class="form-control" style="height: 40px;" /></td>
+            </tr>
+            <tr>
+                <td><strong>REMUNERACIÓN MENSUAL:</strong></td>
+                <td><input type="number" value="675,00" class="form-control" style="height: 40px;" /></td>
+            </tr>
+            <tr>
+                <td><strong>PARTIDA INDIVIDUAL:</strong></td>
+                <td><input type="text" value="202442200000000010000000100051170000100000000 - 15" class="form-control" style="height: 40px;" /></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+    <div class="container mt-5">
+        <div class="titulo">
+            POSESIÓN DEL PUESTO
+        </div>
+    
+        <div class="formulario mt-3">
+            <form>
+                <div class="form-group">
+                    <label>YO,</label>
+                    <input type="text" class="form-control" placeholder="Nombre Completo">
+                    <small>JURO LEALTAD AL ESTADO ECUATORIANO.</small>
+                </div>
+    
+                <div class="form-row espaciado">
+                    <div class="col">
+                        <label>LUGAR:</label>
+                        <input type="text" class="form-control" placeholder="Lugar">
+                    </div>
+                    <div class="col">
+                        <label>FECHA:</label>
+                        <input type="date" class="form-control">
+                    </div>
+                </div>
+    
+                <div class="form-group espaciado">
+                    <small><strong>** (EN CASO DE GANADOR DE CONCURSO DE MÉRITOS Y OPOSICIÓN)</strong></small>
+                </div>
+    
+                <div class="form-row espaciado">
+                    <div class="col">
+                        <label>NRO. ACTA FINAL:</label>
+                        <input type="text" class="form-control" placeholder="Número de Acta Final">
+                    </div>
+                    <div class="col">
+                        <label>FECHA:</label>
+                        <input type="date" class="form-control">
+                    </div>
+                </div>
+    
+                <div class="form-group espaciado">
+                    <label>FIRMA:</label>
+                    <input type="text" class="form-control" placeholder="Firma">
+                </div>
+                <div class="form-group">
+                    <label>SERVIDOR PÚBLICO:</label>
+                    <input type="text" class="form-control" placeholder="Nombre del Servidor Público">
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+<div class="container">
+    <br>
+    <br>
+    <h1 class="text-center">RESPONSABLES DE FIRMAS</h1>
+
+    <div class="row bordered-section">
+        <div class="col-md-6">
+            <h4 class="blue-text">ACEPTACIÓN Y/O RECEPCIÓN DEL SERVIDOR PÚBLICO</h4>
+            <form>
+                <div class="form-group">
+                    <label>Firma</label>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    ---------------------------------------------- 
+                                </div>
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" placeholder="Ingresa nombre">
+                </div>
+                <div class="form-group">
+                    <label>Fecha</label>
+                    <input type="date" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Hora</label>
+                    <input type="time" class="form-control">
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-6">
+            <h4 class="blue-text">EN CASO DE NEGATIVA DE LA RECEPCIÓN (TESTIGO)</h4>
+            <form>
+                <div class="form-group">
+                    <label>Firma</label>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    ---------------------------------------------- 
+                </div>
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" placeholder="Ingresa nombre">
+                </div>
+                <div class="form-group">
+                    <label>Fecha</label>
+                    <input type="date" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Razón</label>
+                    <textarea class="form-control" rows="4" placeholder="Ingresa razón"></textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 bordered-section">
+            <br>
+            <h5>RESPONSABLE DE ELABORACIÓN</h5>
+            <form>
+                <div class="form-group">
+                    <label>Firma</label>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    ---------------------------------------------- 
+                                </div>
+                                <div class="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text" class="form-control" value="Luis F. Albuja L.">
+                                </div>
+                                <div class="form-group">
+                                    <label>Puesto</label>
+                                    <input type="text" class="form-control" value="Servidor Público de Apoyo 4">
+                                </div>
+                                
+
+            </form>
+        </div>
+
+        <div class="col-md-4 bordered-section">
+            <br>
+            <h5>RESPONSABLE DE REVISIÓN</h5>
+            <form>
+                <div class="form-group">
+                    <label>Firma</label>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    ---------------------------------------------- 
+                </div>
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" value="Luis F. Albuja L.">
+                </div>
+                <div class="form-group">
+                    <label>Puesto</label>
+                    <input type="text" class="form-control" value="Servidor Público de Apoyo 4">
+                </div>
+                
+            </form>
+        </div>
+
+        <div class="col-md-4 bordered-section">
+            <br>
+            <h5>RESPONSABLE DE REGISTRO Y CONTROL</h5>
+            <form>
+                <div class="form-group">
+                    <label>Firma</label>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                
+                    ----------------------------------------------         
+                       </div>
+                       <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" class="form-control" value="Luis F. Albuja L.">
+                    </div>
+                    <div class="form-group">
+                        <label>Puesto</label>
+                        <input type="text" class="form-control" value="Servidor Público de Apoyo 4">
+                    </div>
+                    
+            </form>
+        </div>
+    </div>
+</div>
+<br>    
+<div class="container">
+    <h2 class="titulo">** USO EXCLUSIVO PARA TALENTO HUMANO</h2>
+    <h5 class="titulo">REGISTRO DE NOTIFICACIÓN AL SERVIDOR PÚBLICO DE LA ACCIÓN DE PERSONAL</h5>
+    <p>(primer inciso del art. 22 RGLSEP, art. 101 COA, art. 66 y 126 ERJAFF)</p>
+
+    <form>
+        <div class="form-group">
+            <label>COMUNICACIÓN ELECTRÓNICA:</label>
+            <input type="checkbox">
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <label>FECHA:</label>
+                <input type="date" class="form-control">
+            </div>
+            <div class="col">
+                <label>HORA:</label>
+                <input type="time" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>** MEDIO:</label>
+            <input type="text" class="form-control">
+        </div>
+        <div class="info">
+            <label>FIRMA DEL RESPONSABLE QUE NOTIFICÓ:</label>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            ----------------------------------------------------------
+            <div class="firma"></div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <label>NOMBRE:</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col">
+                <label>PUESTO:</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+        <small>** Si la comunicación fue electrónica se deberá colocar el medio por el cual se notificó al servidor; así como, el número del documento.</small>
+    </form>
+</div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
