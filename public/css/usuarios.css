@@ -1,12 +1,13 @@
 /* Sidebar */
 .sidebar {
   width: 220px;
-  background-color: #1e293b;
+  background-color: #4b5d79;
   color: white;
   position: fixed;
   height: 100vh;
   padding-top: 20px;
   z-index: 50;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar .logo {
@@ -33,14 +34,15 @@
   display: block;
   color: #e2e8f0;
   text-decoration: none;
-  padding: 0.5rem;
+  padding: 0.75rem 1rem; /* Aumentar el área de clic */
   border-radius: 6px;
-  transition: background-color 0.2s ease;
+  transition: color 0.2s ease; /* Solo cambiar el color al hacer hover */
+  background: transparent; /* Quitar el fondo */
 }
 
 .sidebar .menu a:hover,
 .sidebar .dropdown-btn:hover {
-  background-color: #334155;
+  color: #ffffff; /* Cambiar color de texto al hacer hover */
 }
 
 .dropdown-container {
@@ -53,7 +55,7 @@
 
 /* Navbar superior */
 .navbar-superior {
-  background-color: #ffffff;
+  background-color: #b3b0b0;
   border-bottom: 1px solid #e5e7eb;
   padding: 1rem;
   display: flex;
@@ -63,6 +65,7 @@
   top: 0;
   z-index: 40;
   font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-superior .left,
@@ -78,10 +81,11 @@
   font-size: 1.2rem;
   cursor: pointer;
   color: #1e293b;
+  transition: color 0.2s ease;
 }
 
 .navbar-superior button:hover {
-  color: #2563eb;
+  color: #82a7f5;
 }
 
 .dropdown-user {
@@ -92,8 +96,8 @@
   position: absolute;
   top: 100%;
   right: 0;
-  background: white;
-  border: 1px solid #d1d5db;
+  background: rgb(138, 132, 132);
+  border: 1px solid #a4a9af;
   list-style: none;
   padding: 0.5rem;
   border-radius: 0.5rem;
@@ -109,8 +113,70 @@
 .dropdown-user ul li a {
   color: #1e2937;
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .dropdown-user ul li a:hover {
   color: #dc2626;
+}
+
+/* Contenido principal */
+.contenido {
+  margin-left: 240px;
+  padding: 1.5rem;
+  width: calc(100% - 240px);
+  overflow-x: auto;
+  transition: margin-left 0.3s ease, width 0.3s ease;
+}
+
+/* Entradas y botones */
+.input-busqueda {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #bdc3c7;
+  width: 250px;
+  font-size: 14px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-busqueda:focus {
+  border-color: #16a085; /* Cambiar color del borde al enfocar */
+  box-shadow: 0 0 5px rgba(22, 160, 133, 0.5); /* Sombra al enfocar */
+}
+
+/* Botones Generales */
+button {
+  background-color: #16a085;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #1abc9c; /* Hover en botones */
+  transform: scale(1.05);
+}
+
+/* Modal */
+.modal-content {
+  border-radius: 0.8rem; /* Bordes redondeados */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+}
+
+.modal-header {
+  background-color: #16a085;
+  color: white;
+  padding: 1rem;
+  border-radius: 0.8rem 0.8rem 0 0;
+}
+/* Modal Footer (centrar botón) */
+.modal-footer {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;  /* Esto centra el contenido dentro del modal-footer */
+  align-items: center;
 }

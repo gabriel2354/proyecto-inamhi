@@ -1,27 +1,31 @@
 /* Sidebar */
 .sidebar {
   width: 220px;
-  background-color: #1e293b;
+  background-color: #4b5d79;
   color: white;
   position: fixed;
   height: 100vh;
   padding-top: 20px;
   z-index: 50;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .sidebar .logo {
-  display: flex;
-  justify-content: center;
   padding: 1rem;
 }
 
 .sidebar img {
   max-width: 150px;
+  display: block;
 }
 
 .sidebar .menu {
   list-style: none;
-  padding: 0 1rem;
+  padding: 0;
+  width: 100%;
 }
 
 .sidebar .menu li {
@@ -33,14 +37,16 @@
   display: block;
   color: #e2e8f0;
   text-decoration: none;
-  padding: 0.5rem;
+  padding: 0.75rem 1rem;
   border-radius: 6px;
-  transition: background-color 0.2s ease;
+  transition: color 0.2s ease;
+  background: transparent;
+  text-align: center;
 }
 
 .sidebar .menu a:hover,
 .sidebar .dropdown-btn:hover {
-  background-color: #334155;
+  color: #ffffff;
 }
 
 .dropdown-container {
@@ -53,7 +59,7 @@
 
 /* Navbar superior */
 .navbar-superior {
-  background-color: #ffffff;
+  background-color: #b3b0b0;
   border-bottom: 1px solid #e5e7eb;
   padding: 1rem;
   display: flex;
@@ -63,6 +69,7 @@
   top: 0;
   z-index: 40;
   font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-superior .left,
@@ -78,10 +85,11 @@
   font-size: 1.2rem;
   cursor: pointer;
   color: #1e293b;
+  transition: color 0.2s ease;
 }
 
 .navbar-superior button:hover {
-  color: #2563eb;
+  color: #82a7f5;
 }
 
 .dropdown-user {
@@ -92,8 +100,8 @@
   position: absolute;
   top: 100%;
   right: 0;
-  background: white;
-  border: 1px solid #d1d5db;
+  background: rgb(138, 132, 132);
+  border: 1px solid #a4a9af;
   list-style: none;
   padding: 0.5rem;
   border-radius: 0.5rem;
@@ -109,8 +117,146 @@
 .dropdown-user ul li a {
   color: #1e2937;
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .dropdown-user ul li a:hover {
   color: #dc2626;
+}
+/* Contenido principal */
+.content {
+  padding: 1.5rem;
+  background-color: #f8fafc;
+  text-align: justify;
+}
+
+/* Encabezado principal */
+h1 {
+  text-align: center;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+}
+
+/* Card para Crear Rol */
+.card {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.card-header {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 1rem;
+}
+
+.card-body {
+  display: block;
+}
+
+/* Formulario */
+.form-label {
+  color: #4a5568;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+input.form-control {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  transition: border-color 0.2s ease;
+}
+
+input.form-control:focus {
+  border-color: #3674B5;
+  outline: none;
+}
+
+button.btn-success {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  background-color: #3674B5;
+  color: white;
+  border-radius: 0.375rem;
+  border: none;
+  cursor: pointer;
+}
+
+button.btn-success:hover {
+  background-color: #2a527e;
+}
+
+/* Tabla de Roles Existentes */
+.table {
+  width: 100%;
+  font-size: 0.875rem;
+  color: #4a5568;
+  margin-top: 1.5rem;
+}
+
+.table thead {
+  background-color: #edf2f7;
+}
+
+.table th, .table td {
+  padding: 0.5rem 1rem;
+  text-align: left;
+}
+
+.table-striped tbody tr:nth-child(odd) {
+  background-color: #f7fafc;
+}
+
+/* Botones en los modales */
+button.btn-close {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: white;
+}
+
+button.btn-primary {
+  padding: 0.5rem 1rem;
+  background-color: #577BC1;
+  color: white;
+  border-radius: 0.375rem;
+  border: none;
+  cursor: pointer;
+}
+
+button.btn-primary:hover {
+  background-color: #2b6cb0;
+}
+
+/* Modales */
+.modal-content {
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+  background-color: #577BC1;
+  color: white;
+  padding: 1rem;
+}
+
+.modal-footer {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* Centrando el botón */
+.d-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

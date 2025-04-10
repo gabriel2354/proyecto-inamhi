@@ -25,12 +25,13 @@ body::before {
 /* Sidebar */
 .sidebar {
   width: 220px;
-  background-color: #1e293b;
+  background-color: #4b5d79;
   color: white;
   position: fixed;
   height: 100vh;
   padding-top: 20px;
   z-index: 50;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar .logo {
@@ -57,14 +58,15 @@ body::before {
   display: block;
   color: #e2e8f0;
   text-decoration: none;
-  padding: 0.5rem;
+  padding: 0.75rem 1rem; /* Aumentar el área de clic */
   border-radius: 6px;
-  transition: background-color 0.2s ease;
+  transition: color 0.2s ease; /* Solo cambiar el color al hacer hover */
+  background: transparent; /* Quitar el fondo */
 }
 
 .sidebar .menu a:hover,
 .sidebar .dropdown-btn:hover {
-  background-color: #334155;
+  color: #ffffff; /* Cambiar color de texto al hacer hover */
 }
 
 .dropdown-container {
@@ -87,6 +89,7 @@ body::before {
   top: 0;
   z-index: 40;
   font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-superior .left,
@@ -102,6 +105,7 @@ body::before {
   font-size: 1.2rem;
   cursor: pointer;
   color: #1e293b;
+  transition: color 0.2s ease;
 }
 
 .navbar-superior button:hover {
@@ -133,10 +137,33 @@ body::before {
 .dropdown-user ul li a {
   color: #1e2937;
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .dropdown-user ul li a:hover {
   color: #dc2626;
+}
+
+/* Contenido principal */
+.contenido {
+  margin-left: 220px;
+  padding: 1rem;
+  width: calc(100% - 220px);
+  overflow-x: auto; /* clave para scroll si tabla es grande */
+}
+
+/* Entradas y botones */
+.input-busqueda {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  width: 250px;
+  font-size: 13px;
+  transition: border-color 0.2s ease;
+}
+
+.input-busqueda:focus {
+  border-color: #2563eb; /* Cambiar color del borde al enfocar */
 }
 
 /* Contenido principal */
