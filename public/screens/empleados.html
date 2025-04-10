@@ -81,30 +81,56 @@
   <!-- NUEVO contenedor para scroll -->
   <div class="overflow-x-auto w-full">
     <table class="w-full border text-sm min-w-[1200px]">
-      <thead class="bg-gray-200">
-        <tr>
-          <th class="p-2 border">#</th>
-          <th class="p-2 border">Nombres</th>
-          <th class="p-2 border">Número Identificación</th>
-          <th class="p-2 border">Régimen Laboral</th>
-          <th class="p-2 border">Nivel Ocupacional</th>
-          <th class="p-2 border">Denominación Puesto</th>
-          <th class="p-2 border">Unidad Orgánica</th>
-          <th class="p-2 border">Escala Ocupacional</th>
-          <th class="p-2 border">Grado</th>
-          <th class="p-2 border">Estructura Programática</th>
-          <th class="p-2 border">Cantón</th>
-          <th class="p-2 border">RMU Puesto</th>
-          <th class="p-2 border">Estado Puesto</th>
-          <th class="p-2 border">Acciones</th>
-        </tr>
-      </thead>
+      <!-- Encabezado de la tabla -->
+<thead class="bg-gray-200">
+  <tr>
+    <th class="p-2 border">#</th>
+    <th class="p-2 border">Nombres</th>
+    <th class="p-2 border">Apellidos</th> <!-- 🆕 Nueva columna -->
+    <th class="p-2 border">Número Identificación</th>
+    <th class="p-2 border">Régimen Laboral</th>
+    <th class="p-2 border">Nivel Ocupacional</th>
+    <th class="p-2 border">Denominación Puesto</th>
+    <th class="p-2 border">Unidad Orgánica</th>
+    <th class="p-2 border">Escala Ocupacional</th>
+    <th class="p-2 border">Grado</th>
+    <th class="p-2 border">Estructura Programática</th>
+    <th class="p-2 border">Cantón</th>
+    <th class="p-2 border">RMU Puesto</th>
+    <th class="p-2 border">Estado Puesto</th>
+    <th class="p-2 border">Acciones</th>
+  </tr>
+</thead>
+
       <tbody id="tabla-empleados">
         <!-- JS llenará aquí -->
       </tbody>
     </table>
   </div>
 </div>
+<!-- Modal Acción de Personal -->
+<div id="modalAccionPersonal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+  <div class="bg-white p-6 rounded-xl w-[90%] max-w-lg shadow-lg relative">
+    <button onclick="cerrarModal()" class="absolute top-2 right-4 text-gray-500 text-2xl">&times;</button>
+    <h2 class="text-xl font-bold mb-4">Generar Acción de Personal</h2>
+
+    <form id="pdfForm" enctype="multipart/form-data" class="flex flex-col gap-4">
+      <input type="hidden" id="numero_identificacion_pdf" name="cedula">
+      <input type="text" id="nombres_pdf" name="nombre" placeholder="Nombres" required class="input">
+      <input type="text" id="apellidos_pdf" name="apellidos" placeholder="Apellidos" required class="input">
+
+      <select id="tipo_doc" name="tipo" class="input" required>
+        <option value="">Tipo de documento</option>
+        <option value="CÉDULA">Cedula</option>
+        <option value="IDENTIFICACIÓN">Pasaporte</option>
+      </select>
+
+      <input type="file" name="pdf" accept="application/pdf" required class="input">
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Subir y Editar PDF</button>
+    </form>
+  </div>
+</div>
+
 
 
   <!-- Scripts -->

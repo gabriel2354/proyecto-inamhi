@@ -9,6 +9,7 @@ router.get('/listar', async (req, res) => {
       SELECT 
         e.numero_identificacion,
         e.nombres,
+        e.apellidos, -- 🆕 Campo agregado
         e.estado_puesto,
         e.rmu_puesto,
         e.unidad_organica,
@@ -36,6 +37,7 @@ router.get('/buscar', async (req, res) => {
       SELECT 
         e.numero_identificacion,
         e.nombres,
+        e.apellidos, -- 🆕 Campo agregado
         e.estado_puesto,
         e.rmu_puesto,
         e.unidad_organica,

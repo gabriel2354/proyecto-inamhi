@@ -42,23 +42,22 @@ function renderTabla(lista) {
     fila.innerHTML = `
       <td class="p-2 border text-center">${i + 1}</td>
       <td class="p-2 border">${emp.nombres}</td>
+      <td class="p-2 border">${emp.apellidos}</td> <!-- NUEVO -->
       <td class="p-2 border">${emp.numero_identificacion}</td>
-      <td class="p-2 border">${emp.regimen_laboral}</td>
-      <td class="p-2 border">${emp.nivel_ocupacional}</td>
-      <td class="p-2 border">${emp.denominacion_puesto}</td>
-      <td class="p-2 border">${emp.unidad_organica}</td>
-      <td class="p-2 border">${emp.escala_ocupacional}</td>
-      <td class="p-2 border">${emp.grado}</td>
-      <td class="p-2 border">${emp.estructura_programatica}</td>
-      <td class="p-2 border">${emp.canton}</td>
-      <td class="p-2 border">$${parseFloat(emp.rmu_puesto).toFixed(2)}</td>
-      <td class="p-2 border">${emp.estado_puesto}</td>
+      <td class="p-2 border">${emp.regimen_laboral || ''}</td>
+      <td class="p-2 border">${emp.nivel_ocupacional || ''}</td>
+      <td class="p-2 border">${emp.denominacion_puesto || ''}</td>
+      <td class="p-2 border">${emp.unidad_organica || ''}</td>
+      <td class="p-2 border">${emp.escala_ocupacional || ''}</td>
+      <td class="p-2 border">${emp.grado || ''}</td>
+      <td class="p-2 border">${emp.estructura_programatica || ''}</td>
+      <td class="p-2 border">${emp.canton || ''}</td>
+      <td class="p-2 border">$${parseFloat(emp.rmu_puesto || 0).toFixed(2)}</td>
+      <td class="p-2 border">${emp.estado_puesto || ''}</td>
       <td class="p-2 border text-center">
         <button onclick="editarEmpleado('${emp.numero_identificacion}')" class="text-blue-600 hover:underline mr-2">Editar</button>
         <button onclick="eliminarEmpleado('${emp.numero_identificacion}')" class="text-red-600 hover:underline">Eliminar</button>
-        <button onclick="accionPersonal('${emp.numero_identificacion}')" class="text-green-600 hover:underline"
-">Accion Personal</button>
-        
+        <button onclick="accionPersonal('${emp.numero_identificacion}')" class="text-green-600 hover:underline">Acción Personal</button>
       </td>
     `;
     tabla.appendChild(fila);
@@ -82,21 +81,23 @@ function eliminarEmpleado(cedula) {
 
 function abrirFormulario(modo, data = {}) {
   const cedula = prompt("Número de identificación:", data.numero_identificacion || "");
-  const nombres = prompt("Nombres completos:", data.nombres || "");
+  const nombres = prompt("Nombres:", data.nombres || "");
+  const apellidos = prompt("Apellidos:", data.apellidos || ""); // NUEVO
   const estado_puesto = prompt("Estado del puesto:", data.estado_puesto || "");
   const unidad_organica = prompt("Unidad orgánica:", data.unidad_organica || "");
   const canton = prompt("Cantón:", data.canton || "");
   const grado = prompt("Grado:", data.grado || "");
   const rmu_puesto = prompt("RMU del puesto:", data.rmu_puesto || "");
 
-  if (!cedula || !nombres) {
-    alert("Cédula y nombres son obligatorios.");
+  if (!cedula || !nombres || !apellidos) {
+    alert("Cédula, nombres y apellidos son obligatorios.");
     return;
   }
 
   const payload = {
     numero_identificacion: cedula,
     nombres,
+    apellidos, // NUEVO
     estado_puesto,
     unidad_organica,
     canton,
@@ -129,7 +130,8 @@ function editarEmpleado(cedula) {
     .then(data => abrirFormulario('editar', data))
     .catch(() => alert('No se pudo cargar el empleado'));
 }
-// Toggle barra lateral
+
+// --- Interfaz UI y autenticación (sin cambios) ---
 document.querySelectorAll('.dropdown-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     btn.classList.toggle('active');
@@ -138,7 +140,6 @@ document.querySelectorAll('.dropdown-btn').forEach(btn => {
   });
 });
 
-// Dropdown usuario
 const userDropdownBtn = document.getElementById("userDropdownBtn");
 const userDropdownMenu = document.getElementById("userDropdownMenu");
 
@@ -151,49 +152,76 @@ window.addEventListener("click", (e) => {
     userDropdownMenu.classList.add("hidden");
   }
 });
-document.addEventListener("DOMContentLoaded", () => {
-  // Obtener el id del colaborador logueado desde el localStorage
-  const idColaborador = localStorage.getItem("idColaborador");
 
+document.addEventListener("DOMContentLoaded", () => {
+  const idColaborador = localStorage.getItem("idColaborador");
   if (!idColaborador) {
     console.warn("⚠️ No se encontró idColaborador en localStorage. Asegúrate de estar logueado.");
     return;
   }
 
   console.log("✅ idColaborador del usuario logueado:", idColaborador);
-
-  // Asignar el idColaborador a un campo oculto si existe en el formulario
   const idColaboradorField = document.getElementById("idColaborador");
-  if (idColaboradorField) {
-    idColaboradorField.value = idColaborador;
-  }
+  if (idColaboradorField) idColaboradorField.value = idColaborador;
 
-  // Extraer el nombre del usuario del almacenamiento
   const userName = localStorage.getItem("userName") || "Usuario";
   const userNameElement = document.getElementById("userName");
-  if (userNameElement) {
-    userNameElement.textContent = userName;
-  }
+  if (userNameElement) userNameElement.textContent = userName;
 
-  // Configurar los botones dropdown del menú lateral
   const dropdownBtns = document.querySelectorAll('.dropdown-btn');
   dropdownBtns.forEach((btn) => {
     btn.addEventListener('click', function () {
       const container = this.nextElementSibling;
-      if (container) {
-        container.classList.toggle('show');
-      }
+      if (container) container.classList.toggle('show');
     });
   });
-// Acción de cerrar sesión
-const logoutBtn = document.getElementById("cerrarSesionBtn");
-if (logoutBtn) {
-  logoutBtn.addEventListener("click", () => {
-    localStorage.clear();
-    sessionStorage.clear();
-    window.location.href = "index.html";
-  });
+
+  const logoutBtn = document.getElementById("cerrarSesionBtn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = "index.html";
+    });
+  }
+});
+function accionPersonal(cedula) {
+  fetch(`${API_URL}/buscar?cedula=${cedula}`)
+    .then(res => res.json())
+    .then(emp => {
+      document.getElementById('numero_identificacion_pdf').value = emp.numero_identificacion;
+      document.getElementById('nombres_pdf').value = emp.nombres;
+      document.getElementById('apellidos_pdf').value = emp.apellidos;
+      document.getElementById('modalAccionPersonal').classList.remove('hidden');
+    })
+    .catch(() => alert('No se pudo cargar el empleado'));
 }
-  
+
+function cerrarModal() {
+  document.getElementById('modalAccionPersonal').classList.add('hidden');
+}
+
+// Manejo del formulario PDF
+document.getElementById('pdfForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+
+  try {
+    const res = await fetch('http://localhost:3000/subir-pdf/pdf', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!res.ok) throw new Error();
+    const blob = await res.blob();
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'accion-personal.pdf';
+    link.click();
+
+    cerrarModal();
+  } catch (err) {
+    alert('❌ Error al generar el PDF.');
+  }
 });
 

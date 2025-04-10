@@ -1,0 +1,93 @@
+/* General styles for printing on A4 */
+@page {
+    size: A4 portrait;
+    margin: 20mm;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.3;
+    color: #000;
+    margin: 0;
+  }
+  /* Bold labels */
+  strong {
+    font-weight: bold;
+  }
+  /* Underline class for inputs to simulate blank lines */
+  .underline {
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    font-family: inherit;
+    font-size: 12px;
+    vertical-align: middle;
+  }
+  /* Width utilities for inputs */
+  .short { width: 80px; }
+  .medium { width: 150px; }
+  .long { width: 250px; }
+  
+  /* Table for action types (checkbox list) */
+  .action-type td {
+    vertical-align: top;
+    width: 50%;
+    padding: 5px;
+  }
+  /* Personal info table spacing */
+  .info-personal td {
+    padding: 2px 0;
+  }
+  /* Ensure inputs in table do not break layout */
+  .info-personal input {
+    width: 60%;
+  }
+  
+  /* Styles for checkboxes and radio (optional scaling for print) */
+  input[type=checkbox], input[type=radio] {
+    transform: scale(1.1);
+    margin: 0 3px 0 0;
+    vertical-align: middle;
+  }
+  
+  /* Signature boxes */
+  .signatures {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  .signatures th {
+    font-size: 11px;
+    text-align: center;
+    padding: 2px;
+    /* no border on headers (optional): */
+    border: none;
+  }
+  .signature-cell {
+    border: 1px solid #000;
+    height: 60px;
+    position: relative;
+    text-align: left;
+  }
+  .sign-label {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: 10px;
+    font-weight: bold;
+  }
+  .sign-info td {
+    font-size: 11px;
+    padding: 3px;
+  }
+  /* Footer styles */
+  .footer {
+    position: relative;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 10px;
+  }
+  .footer p {
+    margin: 2px 0;
+  }
+  
