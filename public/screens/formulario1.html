@@ -1,31 +1,364 @@
-<form id="pdfForm" enctype="multipart/form-data">
-  <input type="file" name="pdf" accept="application/pdf" required>
-  <input type="text" name="nombre" placeholder="Nombre" required>
-  <input type="text" name="apellidos" placeholder="Apellidos" required>
-  <input type="text" name="cedula" placeholder="Cédula" required>
-  <button type="submit">Subir y Editar PDF</button>
-</form>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encabezado Acción de Personal</title>
+  <link rel="stylesheet" href="../css/formulario1.css"> 
+   <!-- Cargar html2canvas antes que jsPDF -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <div class="container" id="formulario">
+    <table>
+      <tr>
+        <td colspan="2" rowspan="3">
+          <img src="/assets/images/Logo nuevo inamhi.png" alt="Logo" class="logo-img">
+        </td>
+        <td colspan="2" class="bold">ACCIÓN DE PERSONAL</td>
+      </tr>
+      <tr>
+        <td class="bold">Nro.</td>
+        <td><input type="text" value="AP-RH-274-2024"></td>
+      </tr>
+      <tr>
+        <td class="bold">FECHA DE ELABORACI&Oacute;N</td>
+        <td><input type="text" value="11 de diciembre de 2024"></td>
+      </tr>
+      <tr>
+        <td colspan="2"><input type="text" value="ESTRADA LLANOS"></td>
+        <td colspan="2"><input type="text" value="NEREYDA EVELYN"></td>
+      </tr>
+      <tr class="gray">
+        <td colspan="2" class="bold">APELLIDOS</td>
+        <td colspan="2" class="bold">NOMBRES</td>
+      </tr>
+      <tr class="gray">
+        <td class="bold">DOCUMENTO DE IDENTIFICACI&Oacute;N</td>
+        <td class="bold">NRO. DE IDENTIFICACI&Oacute;N</td>
+        <td colspan="2" class="bold">RIGE:</td>
+      </tr>
+      <tr>
+        <td><input type="text" value="C&Eacute;DULA"></td>
+        <td><input type="text" value="202012753"></td>
+        <td><input type="text" value="16 de diciembre de 2024"></td>
+        <td><input type="text" value="31/12/20204"></td>
+      </tr>
+    </table>
 
-<script>
-document.getElementById('pdfForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const formData = new FormData(e.target);
+    <div class="opciones">
+      <p><strong>Escoja una opción:</strong></p>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="radio" name="opcion"> INGRESO</label>
+        <label class="checkbox-item"><input type="radio" name="opcion"> TRASPASO</label>
+        <label class="checkbox-item"><input type="radio" name="opcion"> INCREMENTO RMU</label>
+        <label class="checkbox-item"><input type="radio" name="opcion"> REINGRESO</label>
+        <label class="checkbox-item"><input type="radio" name="opcion"> CAMBIO ADMINISTRATIVO</label>
+        <label class="checkbox-item"><input type="radio" name="opcion"> SUBROGACIÓN</label>
+        <label class="checkbox-item"><input type="radio" name="opcion"> RESTITUCIÓN</label>
+        <label class="checkbox-item"><input type="radio" name="opcion"> INTERCAMBIO VOLUNTARIO</label>
+        <label class="checkbox-item"><input type="radio" name="opcion"> ENCARGO</label>
+        <label class="checkbox-item"><input type="radio" name="opcion"> REINTEGRO</label>
+        <label class="checkbox-item"><input type="radio" name="opcion"> LICENCIA</label>
+        <label class="checkbox-item"><input type="radio" name="opcion"> CESACIÓN DE FUNCIONES</label>
+        <label class="checkbox-item"><input type="radio" name="opcion"> ASCENSO</label>
+        <label class="checkbox-item"><input type="radio" name="opcion"> COMISIÓN DE SERVICIOS</label>
+        <label class="checkbox-item"><input type="radio" name="opcion"> DESTITUCIÓN</label>
+        <label class="checkbox-item"><input type="radio" name="opcion"> TRASLADO</label>
+        <label class="checkbox-item"><input type="radio" name="opcion"> SANCIONES</label>
+        <label class="checkbox-item"><input type="radio" name="opcion" checked> VACACIONES</label>
+        <label class="checkbox-item"><input type="radio" name="opcion"> REVISIÓN CLASI. PUESTO</label>
+        <label class="checkbox-item"><input type="radio" name="opcion"> OTRO (DETALLAR)</label>
+      </div>
+      <div class="detallar">
+        <input type="text" placeholder="EN CASO DE REQUERIR ESPECIFICACIÓN DE LO SELECCIONADO:">
+        <input type="text">
+        <input type="text">
+      </div>
+      <div class="declaracion">
+        <strong>* PRESENTÓ LA DECLARACIÓN JURADA</strong> (número 2 del art. 3 RLOSEP):
+        <label><input type="radio" name="declaracion"> SÍ</label>
+        <label><input type="radio" name="declaracion"> NO APLICA</label>
+      </div>
+    </div>
+    <div class="container">
+      <!-- AQUÍ IRÍA EL CONTENIDO COMPLETO PREVIO (ENCABEZADO, OPCIONES, ETC.) -->
+  
+      <div class="motivacion">
+        <p><strong>MOTIVACIÓN:</strong></p>
+        <input type="text" value="La Mgs. Mercy Ivonne Freire Sanchez, Directora de Administración de Talento Humano, en uso de la delegación conferida, mediante Resolución Nro. DEJ-2023-010, de 19 de abril de 2023, conforme al art. 3, literal c):">
+        <input type="text" value="RESUELVE: De conformidad con lo dispuesto en el artículo 29 de la Ley Orgánica del Servicio Público (LOSEP) y artículo 28 de su Reglamento, otorgar 16,36 días (calendario) de vacaciones a favor de el/la servidor/ra ESTRADA LLANOS NEREYDA EVELYN. Rige del 16 al 31 de diciembre de 2024.">
+        <input type="text" value="REFERENCIA: 1) Solicitud aprobada por el Jefe Inmediato; 2) Kardex de vacaciones emitido por el sistema FULLTIME; 3)">
+      </div>
+  
+      <table class="situacion-table">
+        <tr>
+          <th colspan="2">SITUACIÓN ACTUAL</th>
+          <th colspan="2">SITUACIÓN PROPUESTA</th>
+        </tr>
+        <tr>
+          <td>PROCESO INSTITUCIONAL</td>
+          <td><input type="text" class="left" value="SUSTANTIVO"></td>
+          <td>PROCESO INSTITUCIONAL></td>
+          <td><input type="text" class="left" value="SUSTANTIVO"></td>
+        </tr>
+        <tr>
+          <td>NIVEL DE GESTIÓN></td>
+          <td><input type="text" class="left" value="DIRECCIÓN EJECUTIVA"></td>
+          <td>NIVEL DE GESTIÓN></td>
+          <td><input type="text" class="left" value="DIRECCIÓN EJECUTIVA"></td>
+        </tr>
+        <tr>
+          <td>UNIDAD ADMINISTRATIVA></td>
+          <td><input type="text" class="left" value="DIRECCIÓN DE PLANIFICACIÓN"></td>
+          <td>UNIDAD ADMINISTRATIVA></td>
+          <td><input type="text" class="left" value="DIRECCIÓN DE PLANIFICACIÓN"></td>
+        </tr>
+        <tr>
+          <td>LUGAR DE TRABAJO></td>
+          <td><input type="text" class="left" value="QUITO"></td>
+          <td>LUGAR DE TRABAJO></td>
+          <td><input type="text" class="left" value="QUITO"></td>
+        </tr>
+        <tr>
+          <td>DENOMINACIÓN DEL PUESTO></td>
+          <td><input type="text" class="left" value="OFINISTA"></td>
+          <td>DENOMINACIÓN DEL PUESTO></td>
+          <td><input type="text" class="left" value="OFINISTA"></td>
+        </tr>
+        <tr>
+          <td>GRUPO OCUPACIONAL></td>
+          <td><input type="text" class="left" value="SERVIDOR PÚBLICO DE APOYO 2"></td>
+          <td>GRUPO OCUPACIONAL></td>
+          <td><input type="text" class="left" value="SERVIDOR PÚBLICO DE APOYO 2"></td>
+        </tr>
+        <tr>
+          <td>GRADO></td>
+          <td><input type="text" class="left" value="4"></td>
+          <td>GRADO></td>
+          <td><input type="text" class="left" value="4"></td>
+        </tr>
+        <tr>
+          <td>REMUNERACIÓN MENSUAL></td>
+          <td><input type="text" class="left" value="$622,00"></td>
+          <td>REMUNERACIÓN MENSUAL></td>
+          <td><input type="text" class="left" value="$622,00"></td>
+        </tr>
+        <tr>
+          <td>PARTIDA INDIVIDUAL></td>
+          <td><input type="text" class="left" value="202442200000000010000000100051170000100000000 - 255"></td>
+          <td>PARTIDA INDIVIDUAL></td>
+          <td><input type="text" class="left" value="202442200000000010000000100051170000100000000 - 255"></td>
+        </tr>
+      </table>
 
-  try {
-    const res = await fetch('http://localhost:3000/subir-pdf/pdf', {
-      method: 'POST',
-      body: formData
-    });
+      <table class="situacion-table">
+        <tr>
+          <th colspan="4" class="gray">POSESIÓN DEL PUESTO</th>
+        </tr>
+        <tr>
+          <td colspan="2">
+            YO, <input type="text"> JURO LEALTAD AL ESTADO ECUATORIANO.
+            <br>
+            <strong>LUGAR:</strong> <input type="text"> <strong>FECHA:</strong> <input type="text">
+          </td>
+          <td colspan="2">
+            <strong>CON NRO. DE DOCUMENTO DE IDENTIFICACIÓN:</strong> <input type="text">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <strong>** (EN CASO DE GANADOR DE CONCURSO DE MÉRITOS Y OPOSICIÓN)</strong>
+            <br>
+            <input type="text" placeholder="NRO. ACTA FINAL">
+          </td>
+          <td>
+            <strong>FECHA</strong><br>
+            <input type="text">
+          </td>
+          <td>
+            <strong>FIRMA:</strong> <input type="text">
+            <br>SERVIDOR PÚBLICO
+          </td>
+        </tr>
+        <tr>
+          <th colspan="4" class="gray">RESPONSABLES DE APROBACIÓN</th>
+        </tr>
+        <tr>
+          <th colspan="2" class="gray">DIRECTOR (A) O RESPONSABLE DE TALENTO HUMANO</th>
+          <th colspan="2" class="gray">AUTORIDAD NOMINADORA O SU DELEGADO<br>DEJ-2023-010</th>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <strong>FIRMA:</strong> <input type="text"><br>
+            <strong>NOMBRE:</strong> <input type="text" value="Mgs. Mercy Freire Sánchez"><br>
+            <strong>PUESTO:</strong> <input type="text" value="Directora de Administración de Recursos Humanos">
+          </td>
+          <td colspan="2">
+            <strong>FIRMA:</strong> <input type="text"><br>
+            <strong>NOMBRE:</strong> <input type="text" value="Mgs. Mercy Freire Sánchez"><br>
+            <strong>PUESTO:</strong> <input type="text" value="Delegada del Director Ejecutivo">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4" style="font-weight: bold; text-align: left;">
+            Elaborado por el Ministerio del Trabajo
+            <span style="float: right;">
+              <strong>Fecha de actualización de formato:</strong> 2024-08-23 &nbsp;&nbsp;/&nbsp;&nbsp; Versión: 01.1 &nbsp;&nbsp;/&nbsp;&nbsp; Página 1 de 2
+            </span>
+          </td>
+        </tr>
+      </table>
 
-    if (!res.ok) throw new Error();
+      <table class="situacion-table">
+        <tr>
+          <th colspan="4" class="gray">RESPONSABLES DE FIRMAS</th>
+        </tr>
+        <tr>
+          <th colspan="2" class="gray">ACEPTACIÓN Y/O RECEPCIÓN DEL SERVIDOR PÚBLICO</th>
+          <th colspan="2" class="gray">EN CASO DE NEGATIVA DE LA RECEPCIÓN (TESTIGO)</th>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <strong>FIRMA:</strong><input type="text"><br>
+            <strong>NOMBRE:</strong><input type="text" value="ESTRADA LLANOS NEREYDA EVELYN"><br>
+            <strong>FECHA:</strong><input type="text" value="11 de diciembre de 2024"><br>
+            <strong>HORA:</strong><input type="text">
+          </td>
+          <td colspan="2">
+            <strong>FIRMA:</strong><input type="text"><br>
+            <strong>NOMBRE:</strong><input type="text"><br>
+            <strong>FECHA:</strong><input type="text"><br>
+            <strong>RAZÓN:</strong>
+            <p><em>En presencia del testigo se deja constancia de que la o el servidor público tiene la negativa de recibir la comunicación de registro de esta acción de personal.</em></p>
+          </td>
+        </tr>
+        <tr>
+          <th class="gray">RESPONSABLE DE ELABORACIÓN</th>
+          <th class="gray">RESPONSABLE DE REVISIÓN</th>
+          <th class="gray" colspan="2">RESPONSABLE DE REGISTRO Y CONTROL</th>
+        </tr>
+        <tr>
+          <td>
+            <strong>FIRMA:</strong><input type="text"><br>
+            <strong>NOMBRE:</strong><input type="text" value="Luis F. Albuja L."><br>
+            <strong>PUESTO:</strong><input type="text" value="Servidor Público de Apoyo 4">
+          </td>
+          <td>
+            <strong>FIRMA:</strong><input type="text"><br>
+            <strong>NOMBRE:</strong><input type="text"><br>
+            <strong>PUESTO:</strong><input type="text">
+          </td>
+          <td colspan="2">
+            <strong>FIRMA:</strong><input type="text"><br>
+            <strong>NOMBRE:</strong><input type="text" value="Luis F. Albuja L."><br>
+            <strong>PUESTO:</strong><input type="text" value="Servidor Público de Apoyo 4">
+          </td>
+        </tr>
+      </table>
 
-    const blob = await res.blob();
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'pdf-editado.pdf';
-    link.click();
-  } catch (err) {
-    alert('❌ Error al procesar PDF. Verifica el servidor y la ruta.');
-  }
-});
-</script>
+      <table class="situacion-table">
+        <tr>
+          <th colspan="4" class="gray">RESPONSABLES DE FIRMAS</th>
+        </tr>
+        <tr>
+          <th colspan="2" class="gray">ACEPTACIÓN Y/O RECEPCIÓN DEL SERVIDOR PÚBLICO</th>
+          <th colspan="2" class="gray">EN CASO DE NEGATIVA DE LA RECEPCIÓN (TESTIGO)</th>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <strong>FIRMA:</strong><div class="signature-space"></div>
+            <strong>NOMBRE:</strong><input type="text" value="ESTRADA LLANOS NEREYDA EVELYN"><br>
+            <strong>FECHA:</strong><input type="text" value="11 de diciembre de 2024"><br>
+            <strong>HORA:</strong><input type="text">
+          </td>
+          <td colspan="2">
+            <strong>FIRMA:</strong><div class="signature-space"></div>
+            <strong>NOMBRE:</strong><input type="text"><br>
+            <strong>FECHA:</strong><input type="text"><br>
+            <strong>RAZÓN:</strong>
+            <p><em>En presencia del testigo se deja constancia de que la o el servidor público tiene la negativa de recibir la comunicación de registro de esta acción de personal.</em></p>
+          </td>
+        </tr>
+        <tr>
+          <th class="gray">RESPONSABLE DE ELABORACIÓN</th>
+          <th class="gray">RESPONSABLE DE REVISIÓN</th>
+          <th class="gray" colspan="2">RESPONSABLE DE REGISTRO Y CONTROL</th>
+        </tr>
+        <tr>
+          <td>
+            <strong>FIRMA:</strong><div class="signature-space"></div>
+            <strong>NOMBRE:</strong><input type="text" value="Luis F. Albuja L."><br>
+            <strong>PUESTO:</strong><input type="text" value="Servidor Público de Apoyo 4">
+          </td>
+          <td>
+            <strong>FIRMA:</strong><div class="signature-space"></div>
+            <strong>NOMBRE:</strong><input type="text"><br>
+            <strong>PUESTO:</strong><input type="text">
+          </td>
+          <td colspan="2">
+            <strong>FIRMA:</strong><div class="signature-space"></div>
+            <strong>NOMBRE:</strong><input type="text" value="Luis F. Albuja L."><br>
+            <strong>PUESTO:</strong><input type="text" value="Servidor Público de Apoyo 4">
+          </td>
+        </tr>
+        <tr>
+          <th colspan="4" class="gray">** USO EXCLUSIVO PARA TALENTO HUMANO</th>
+        </tr>
+        <tr>
+          <th colspan="4" class="gray">REGISTRO DE NOTIFICACIÓN AL SERVIDOR PÚBLICO DE LA ACCIÓN DE PERSONAL <span style="font-weight: normal">(primer inciso del art. 22 RGLOSEP, art. 101 COA , art. 66 y 126 ERJAFE)</span></th>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <strong>COMUNICACIÓN ELECTRÓNICA:</strong>
+            <input type="checkbox" checked>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>FECHA:</strong><input type="text" value="11 de diciembre de 2024"></td>
+          <td><strong>HORA:</strong><input type="text"></td>
+          <td colspan="2"><strong>** MEDIO:</strong><br>
+            <input type="text" value="NOTIFICACION REALIZADA"><br>
+            <input type="text" value="FISICAMENTE"><br>
+            <input type="text">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4" class="bold" style="text-align:center">FIRMA DEL RESPONSABLE QUE NOTIFICÓ</td>
+        </tr>
+        <tr>
+          <td colspan="4"><div class="signature-space"></div></td>
+        </tr>
+        <tr>
+          <td colspan="2"><strong>NOMBRE:</strong><input type="text" value="Luis F. Albuja L."></td>
+          <td colspan="2"><strong>PUESTO:</strong><input type="text" value="Servidor Público de Apoyo 4"></td>
+        </tr>
+        <tr>
+          <td colspan="4" style="font-size: 11px;"><strong>**</strong> Si la comunicación fue electrónica se deberá colocar el medio por el cual se notificó al servidor; así como, el número del documento.</td>
+        </tr>
+        <tr>
+          <td colspan="4" style="text-align: center; font-size: 11px;">
+            <strong>Elaborado por el Ministerio del Trabajo</strong>
+            &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+            <strong>Fecha de actualización de formato:</strong> 2024-08-23
+            &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+            <strong>Versión:</strong> 01.1
+            &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+            Página 1 de 2
+          </td>
+        </tr>
+      </table>
+    </div>
+    <section>
+      <button class="btn-exportar" onclick="exportarPDF()">Exportar en PDF</button>
+    </section>
+      <!-- Scripts -->
+      <script src="../js/formularioF.js"></script>
+      </body>
+      
+      </html>
+
+  
+  
+  
