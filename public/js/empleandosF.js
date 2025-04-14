@@ -57,13 +57,16 @@ function renderTabla(lista) {
       <td class="p-2 border text-center">
         <button onclick="editarEmpleado('${emp.numero_identificacion}')" class="text-blue-600 hover:underline mr-2">Editar</button>
         <button onclick="eliminarEmpleado('${emp.numero_identificacion}')" class="text-red-600 hover:underline">Eliminar</button>
-        <button onclick="accionPersonal('${emp.numero_identificacion}')" class="text-green-600 hover:underline">Acción Personal</button>
+       <button onclick="accionPersonal('${emp.numero_identificacion}')" class="text-green-600 hover:underline">Acción Personal</button>
       </td>
     `;
     tabla.appendChild(fila);
   });
 }
-
+function accionPersonal(numeroIdentificacion) {
+  // Redirige a formulario1.html con la cédula en la URL
+  window.location.href = `formulario1.html?cedula=${numeroIdentificacion}`;
+}
 function eliminarEmpleado(cedula) {
   if (confirm('¿Confirma eliminar al empleado?')) {
     fetch(`${API_URL}/eliminar/${cedula}`, { method: 'DELETE' })
@@ -185,21 +188,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-function accionPersonal(cedula) {
-  fetch(`${API_URL}/buscar?cedula=${cedula}`)
-    .then(res => res.json())
-    .then(emp => {
-      document.getElementById('numero_identificacion_pdf').value = emp.numero_identificacion;
-      document.getElementById('nombres_pdf').value = emp.nombres;
-      document.getElementById('apellidos_pdf').value = emp.apellidos;
-      document.getElementById('modalAccionPersonal').classList.remove('hidden');
-    })
-    .catch(() => alert('No se pudo cargar el empleado'));
-}
-
-function cerrarModal() {
-  document.getElementById('modalAccionPersonal').classList.add('hidden');
-}
 
 // Manejo del formulario PDF
 document.getElementById('pdfForm').addEventListener('submit', async (e) => {

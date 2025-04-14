@@ -20,15 +20,18 @@
       </tr>
       <tr>
         <td class="bold">Nro.</td>
-        <td><input type="text" value="AP-RH-274-2024"></td>
-      </tr>
+        <td><input type="text" id="numero_documento" placeholder="Ej: AP-RH-1-2024"></td>
+
+
+     </tr>
       <tr>
         <td class="bold">FECHA DE ELABORACI&Oacute;N</td>
-        <td><input type="text" value="11 de diciembre de 2024"></td>
+        <td><input type="text" id="fecha_elaboracion"></td>
+
       </tr>
       <tr>
-        <td colspan="2"><input type="text" value="ESTRADA LLANOS"></td>
-        <td colspan="2"><input type="text" value="NEREYDA EVELYN"></td>
+        <td colspan="2"><input type="text" id="apellidos" value=""></td>
+        <td colspan="2"><input type="text" id="nombre"></td>
       </tr>
       <tr class="gray">
         <td colspan="2" class="bold">APELLIDOS</td>
@@ -40,10 +43,16 @@
         <td colspan="2" class="bold">RIGE:</td>
       </tr>
       <tr>
-        <td><input type="text" value="C&Eacute;DULA"></td>
-        <td><input type="text" value="202012753"></td>
-        <td><input type="text" value="16 de diciembre de 2024"></td>
-        <td><input type="text" value="31/12/20204"></td>
+        <td>
+          <select id="tipo_documento" class="input">
+            <option value="">Seleccione</option>
+            <option value="CÉDULA">CÉDULA</option>
+            <option value="PASAPORTE">PASAPORTE</option>
+          </select>
+        </td>
+        <td><input type="text" id="numero_identificacion" value=""></td>
+        <td><input type="text" value=""></td>
+        <td><input type="text" value=""></td>
       </tr>
     </table>
 
@@ -72,7 +81,7 @@
         <label class="checkbox-item"><input type="radio" name="opcion"> OTRO (DETALLAR)</label>
       </div>
       <div class="detallar">
-        <input type="text" placeholder="EN CASO DE REQUERIR ESPECIFICACIÓN DE LO SELECCIONADO:">
+        <input type= "text" placeholder="EN CASO DE REQUERIR ESPECIFICACIÓN DE LO SELECCIONADO:">
         <input type="text">
         <input type="text">
       </div>
@@ -101,49 +110,49 @@
           <td>PROCESO INSTITUCIONAL</td>
           <td><input type="text" class="left" value="SUSTANTIVO"></td>
           <td>PROCESO INSTITUCIONAL</td>
-          <td><input type="text" class="left" value="SUSTANTIVO"></td>
+          <td><input type="text" class="left" value=""></td>
         </tr>
         <tr>
           <td>NIVEL DE GESTIÓN</td>
           <td><input type="text" class="left" value="DIRECCIÓN EJECUTIVA"></td>
           <td>NIVEL DE GESTIÓN</td>
-          <td><input type="text" class="left" value="DIRECCIÓN EJECUTIVA"></td>
+          <td><input type="text" class="left" value=""></td>
         </tr>
         <tr>
           <td>UNIDAD ADMINISTRATIVA</td>
           <td><input type="text" class="left" value="DIRECCIÓN DE PLANIFICACIÓN"></td>
           <td>UNIDAD ADMINISTRATIVA</td>
-          <td><input type="text" class="left" value="DIRECCIÓN DE PLANIFICACIÓN"></td>
+          <td><input type="text" class="left" value=""></td>
         </tr>
         <tr>
           <td>LUGAR DE TRABAJO</td>
           <td><input type="text" class="left" value="QUITO"></td>
           <td>LUGAR DE TRABAJO</td>
-          <td><input type="text" class="left" value="QUITO"></td>
+          <td><input type="text" class="left" value=""></td>
         </tr>
         <tr>
           <td>DENOMINACIÓN DEL PUESTO</td>
           <td><input type="text" class="left" value="OFINISTA"></td>
           <td>DENOMINACIÓN DEL PUESTO</td>
-          <td><input type="text" class="left" value="OFINISTA"></td>
+          <td><input type="text" class="left" value=""></td>
         </tr>
         <tr>
           <td>GRUPO OCUPACIONAL</td>
-          <td><input type="text" class="left" value="SERVIDOR PÚBLICO DE APOYO 2"></td>
+          <td><input type="text" class="left" value=""></td>
           <td>GRUPO OCUPACIONAL</td>
-          <td><input type="text" class="left" value="SERVIDOR PÚBLICO DE APOYO 2"></td>
+          <td><input type="text" class="left" value=""></td>
         </tr>
         <tr>
           <td>GRADO</td>
           <td><input type="text" class="left" value="4"></td>
           <td>GRADO</td>
-          <td><input type="text" class="left" value="4"></td>
+          <td><input type="text" class="left" value=""></td>
         </tr>
         <tr>
           <td>REMUNERACIÓN MENSUAL</td>
           <td><input type="text" class="left" value="$622,00"></td>
           <td>REMUNERACIÓN MENSUAL</td>
-          <td><input type="text" class="left" value="$622,00"></td>
+          <td><input type="text" class="left" value=""></td>
         </tr>
         <tr>
           <td colspan="2">
@@ -152,7 +161,7 @@
           </td>
           <td colspan="2">
             <h4>PARTIDA INDIVIDUAL</h4>
-            <input type="text" class="left" value="202442200000000010000000100051170000100000000 - 255" style="width: 100%;">
+            <input type="text" class="left" value="" style="width: 100%;">
           </td>
         </tr>
       </table>
@@ -166,7 +175,8 @@
           <td colspan="2">
             YO, <input type="text"> JURO LEALTAD AL ESTADO ECUATORIANO.
             <br>
-            <strong>LUGAR:</strong> <input type="text"> <strong>FECHA:</strong> <input type="text">
+            <strong>LUGAR:</strong> <input type="text"> <strong>FECHA:</strong> <input type="text" id="fecha_elaboracion">
+            
           </td>
           <td colspan="2">
             <strong>CON NRO. DE DOCUMENTO DE IDENTIFICACIÓN:</strong> <input type="text">
@@ -180,7 +190,7 @@
           </td>
           <td>
             <strong>FECHA</strong><br>
-            <input type="text">
+            <input type="text" id="fecha_elaboracion">
           </td>
           <td>
             <strong>FIRMA:</strong> <input type="text">
@@ -228,13 +238,14 @@
           <td colspan="2">
             <strong>FIRMA:</strong><input type="text"><br>
             <strong>NOMBRE:</strong><input type="text" value="ESTRADA LLANOS NEREYDA EVELYN"><br>
-            <strong>FECHA:</strong><input type="text" value="11 de diciembre de 2024"><br>
-            <strong>HORA:</strong><input type="text">
+            <strong>FECHA:</strong><input  type="text" id="fecha_elaboracion"><br>
+            <strong>HORA:</strong><input type="text" id="hora_actual">
+
           </td>
           <td colspan="2">
             <strong>FIRMA:</strong><input type="text"><br>
             <strong>NOMBRE:</strong><input type="text"><br>
-            <strong>FECHA:</strong><input type="text"><br>
+            <strong>FECHA:</strong><input type="text" id="fecha_elaboracion"><br>
             <strong>RAZÓN:</strong>
             <p><em>En presencia del testigo se deja constancia de que la o el servidor público tiene la negativa de recibir la comunicación de registro de esta acción de personal.</em></p>
           </td>
@@ -275,13 +286,13 @@
           <td colspan="2">
             <strong>FIRMA:</strong><div class="signature-space"></div>
             <strong>NOMBRE:</strong><input type="text" value="ESTRADA LLANOS NEREYDA EVELYN"><br>
-            <strong>FECHA:</strong><input type="text" value="11 de diciembre de 2024"><br>
-            <strong>HORA:</strong><input type="text">
+            <strong>FECHA:</strong><input  type="text" id="fecha_elaboracion"><br>
+            <strong>HORA:</strong><input type="text" id="hora_actual">
           </td>
           <td colspan="2">
             <strong>FIRMA:</strong><div class="signature-space"></div>
             <strong>NOMBRE:</strong><input type="text"><br>
-            <strong>FECHA:</strong><input type="text"><br>
+            <strong>FECHA:</strong><input  type="text" id="fecha_elaboracion"><br>
             <strong>RAZÓN:</strong>
             <p><em>En presencia del testigo se deja constancia de que la o el servidor público tiene la negativa de recibir la comunicación de registro de esta acción de personal.</em></p>
           </td>
@@ -321,8 +332,8 @@
           </td>
         </tr>
         <tr>
-          <td><strong>FECHA:</strong><input type="text" value="11 de diciembre de 2024"></td>
-          <td><strong>HORA:</strong><input type="text"></td>
+          <td><strong>FECHA:</strong><input type="text" id="fecha_elaboracion"></td>
+          <td> <strong>HORA:</strong><input type="text" id="hora_actual"></td>
           <td colspan="2"><strong>** MEDIO:</strong><br>
             <input type="text" value="NOTIFICACION REALIZADA"><br>
             <input type="text" value="FISICAMENTE"><br>
@@ -355,11 +366,19 @@
         </tr>
       </table>
     </div>
+
+
     <section>
       <button id="btnPDF" class="btn-exportar" onclick="exportarPDF()">Exportar en PDF</button>
     </section>
       <!-- Scripts -->
       <script src="../js/formularioF.js"></script>
+
+
+      <script>
+      
+      </script>
+      
       </body>
       
       </html>
