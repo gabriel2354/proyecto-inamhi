@@ -92,7 +92,7 @@
         <input type="text" value="REFERENCIA: 1) Solicitud aprobada por el Jefe Inmediato; 2) Kardex de vacaciones emitido por el sistema FULLTIME; 3)">
       </div>
   
-      <table class="situacion-table">
+      <table class="situacion-table" border="1">
         <tr>
           <th colspan="2">SITUACIÓN ACTUAL</th>
           <th colspan="2">SITUACIÓN PROPUESTA</th>
@@ -100,58 +100,63 @@
         <tr>
           <td>PROCESO INSTITUCIONAL</td>
           <td><input type="text" class="left" value="SUSTANTIVO"></td>
-          <td>PROCESO INSTITUCIONAL></td>
+          <td>PROCESO INSTITUCIONAL</td>
           <td><input type="text" class="left" value="SUSTANTIVO"></td>
         </tr>
         <tr>
-          <td>NIVEL DE GESTIÓN></td>
+          <td>NIVEL DE GESTIÓN</td>
           <td><input type="text" class="left" value="DIRECCIÓN EJECUTIVA"></td>
-          <td>NIVEL DE GESTIÓN></td>
+          <td>NIVEL DE GESTIÓN</td>
           <td><input type="text" class="left" value="DIRECCIÓN EJECUTIVA"></td>
         </tr>
         <tr>
-          <td>UNIDAD ADMINISTRATIVA></td>
+          <td>UNIDAD ADMINISTRATIVA</td>
           <td><input type="text" class="left" value="DIRECCIÓN DE PLANIFICACIÓN"></td>
-          <td>UNIDAD ADMINISTRATIVA></td>
+          <td>UNIDAD ADMINISTRATIVA</td>
           <td><input type="text" class="left" value="DIRECCIÓN DE PLANIFICACIÓN"></td>
         </tr>
         <tr>
-          <td>LUGAR DE TRABAJO></td>
+          <td>LUGAR DE TRABAJO</td>
           <td><input type="text" class="left" value="QUITO"></td>
-          <td>LUGAR DE TRABAJO></td>
+          <td>LUGAR DE TRABAJO</td>
           <td><input type="text" class="left" value="QUITO"></td>
         </tr>
         <tr>
-          <td>DENOMINACIÓN DEL PUESTO></td>
+          <td>DENOMINACIÓN DEL PUESTO</td>
           <td><input type="text" class="left" value="OFINISTA"></td>
-          <td>DENOMINACIÓN DEL PUESTO></td>
+          <td>DENOMINACIÓN DEL PUESTO</td>
           <td><input type="text" class="left" value="OFINISTA"></td>
         </tr>
         <tr>
-          <td>GRUPO OCUPACIONAL></td>
+          <td>GRUPO OCUPACIONAL</td>
           <td><input type="text" class="left" value="SERVIDOR PÚBLICO DE APOYO 2"></td>
-          <td>GRUPO OCUPACIONAL></td>
+          <td>GRUPO OCUPACIONAL</td>
           <td><input type="text" class="left" value="SERVIDOR PÚBLICO DE APOYO 2"></td>
         </tr>
         <tr>
-          <td>GRADO></td>
+          <td>GRADO</td>
           <td><input type="text" class="left" value="4"></td>
-          <td>GRADO></td>
+          <td>GRADO</td>
           <td><input type="text" class="left" value="4"></td>
         </tr>
         <tr>
-          <td>REMUNERACIÓN MENSUAL></td>
+          <td>REMUNERACIÓN MENSUAL</td>
           <td><input type="text" class="left" value="$622,00"></td>
-          <td>REMUNERACIÓN MENSUAL></td>
+          <td>REMUNERACIÓN MENSUAL</td>
           <td><input type="text" class="left" value="$622,00"></td>
         </tr>
         <tr>
-          <td>PARTIDA INDIVIDUAL></td>
-          <td><input type="text" class="left" value="202442200000000010000000100051170000100000000 - 255"></td>
-          <td>PARTIDA INDIVIDUAL></td>
-          <td><input type="text" class="left" value="202442200000000010000000100051170000100000000 - 255"></td>
+          <td colspan="2">
+            <h4>PARTIDA INDIVIDUAL</h4>
+            <input type="text" class="left" value="202442200000000010000000100051170000100000000 - 255" style="width: 100%;">
+          </td>
+          <td colspan="2">
+            <h4>PARTIDA INDIVIDUAL</h4>
+            <input type="text" class="left" value="202442200000000010000000100051170000100000000 - 255" style="width: 100%;">
+          </td>
         </tr>
       </table>
+      
 
       <table class="situacion-table">
         <tr>
@@ -351,7 +356,7 @@
       </table>
     </div>
     <section>
-      <button class="btn-exportar" onclick="exportarPDF()">Exportar en PDF</button>
+      <button id="btnPDF" class="btn-exportar" onclick="exportarPDF()">Exportar en PDF</button>
     </section>
       <!-- Scripts -->
       <script src="../js/formularioF.js"></script>
