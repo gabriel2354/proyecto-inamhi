@@ -24,10 +24,11 @@
         </tr>
         <tr>
           <td class="bold">Nro.</td>
-          <td><input type="text" id="numero_documento" placeholder="Ej: AP-RH-1-2024"></td>
-
-
+          <td><input type="text" id="numero_documento" placeholder="Ej: AP-RH-1-2024" readonly></td>
         </tr>
+        
+
+        
         <tr>
           <td class="bold">FECHA DE ELABORACI&Oacute;N</td>
           <td><input type="text" id="fecha_elaboracion"></td>
@@ -58,19 +59,19 @@
           <td>
             <strong>DESDE:</strong>
             <input type="date" id="fecha_desde" class="oculto"
-                   onchange="mostrarFechaLarga('fecha_desde'); actualizarMotivacion()">
-            <input type="text" id="fecha_desde_larga" class="fecha-larga"
-                   onclick="activarFecha('fecha_desde')" readonly>
+              onchange="mostrarFechaLarga('fecha_desde'); actualizarMotivacion()">
+            <input type="text" id="fecha_desde_larga" class="fecha-larga" onclick="activarFecha('fecha_desde')"
+              readonly>
           </td>
-          
+
           <td>
             <strong>HASTA:</strong>
             <input type="date" id="fecha_hasta" class="oculto"
-                   onchange="mostrarFechaLarga('fecha_hasta'); actualizarMotivacion()">
-            <input type="text" id="fecha_hasta_larga" class="fecha-larga"
-                   onclick="activarFecha('fecha_hasta')" readonly>
+              onchange="mostrarFechaLarga('fecha_hasta'); actualizarMotivacion()">
+            <input type="text" id="fecha_hasta_larga" class="fecha-larga" onclick="activarFecha('fecha_hasta')"
+              readonly>
           </td>
-          
+
 
 
         </tr>
@@ -102,8 +103,8 @@
         </div>
         <div class="detallar">
           <input type="text" placeholder="EN CASO DE REQUERIR ESPECIFICACIÓN DE LO SELECCIONADO:">
-          <input type="text">
-          <input type="text">
+         
+
         </div>
         <div class="declaracion">
           <strong>* PRESENTÓ LA DECLARACIÓN JURADA</strong> (número 2 del art. 3 RLOSEP):
@@ -115,17 +116,16 @@
 
       <div class="motivacion">
         <p><strong>MOTIVACIÓN:</strong></p>
-      
+
         <!-- Campo EDITABLE y dinámico -->
-        <textarea id="motivacion" class="autoajustable-textarea" rows="6"
-          oninput="sincronizarMotivacion()"></textarea>
-      
+        <textarea id="motivacion" class="autoajustable-textarea" rows="6" oninput="sincronizarMotivacion()"></textarea>
+
         <!-- Div solo para PDF (html2canvas lo captura) -->
         <div id="motivacionVista" style="white-space: pre-wrap; display: none;"></div>
       </div>
-      
-      
-      
+
+
+
 
 
       <table class="situacion-table" border="1">
@@ -190,16 +190,17 @@
         </tr>
         <tr>
           <td colspan="2">
-            <h4 style="font-weight: bold;">PARTIDA INDIVIDUAL</h4>
-            <input type="text" class="left" id="estructura_programatica" style="width: 100%;">
+            <h4 style="font-weight: bold; font-size: 13px; margin-bottom: 4px;">ESTRUCTURA PROGRAMÁTICA</h4>
+            <input type="text" class="left" id="estructura_programatica" style="width: 100%; font-size: 12px; padding: 4px;">
           </td>
           <td colspan="2">
-            <h4 style="font-weight: bold;">PARTIDA INDIVIDUAL</h4>
-            <input type="text" class="left" value="" style="width: 100%;">
+            <h4 style="font-weight: bold; font-size: 13px; margin-bottom: 4px;">PARTIDA INDIVIDUAL</h4>
+            <input type="text" class="left" id="partida_individual" style="width: 100%; font-size: 12px; padding: 4px;">
           </td>
         </tr>
+        
       </table>
-   
+
       <table class="situacion-table">
         <tr>
           <th colspan="4" class="gray">POSESIÓN DEL PUESTO</th>
@@ -220,25 +221,21 @@
           <td colspan="2" style="padding: 10px; border: none;">
             <strong>** (EN CASO DE GANADOR DE CONCURSO DE MÉRITOS Y OPOSICIÓN)</strong><br><br>
             <input type="text" placeholder="NRO. ACTA FINAL"
-              style="border: none; border-bottom: 1px solid black; width: 80%; margin-top: 50px;">
+              style="border: none; border-bottom: 1px solid black; width: 80%; margin-top: 5px;">
           </td>
           <td style="padding: 10px; border: none; text-align: center;">
             <strong>FECHA</strong><br><br>
             <input type="text" id="fecha_elaboracion"
-              style="border: none; border-bottom: 1px solid black; width: 80%; margin-top: 50px;">
+              style="border: none; border-bottom: 1px solid black; width: 80%; margin-top: 5px;">
           </td>
           <td style="padding: 10px; border: none; text-align: center;">
             <strong>FIRMA:</strong><br><br>
-            <input type="text" style="border: none; border-bottom: 1px solid black; width: 90%; margin-top: 50px;"><br>
+            <input type="text" style="border: none; border-bottom: 1px solid black; width: 90%; margin-top: 5px;"><br>
             <span style="display: inline-block; font-weight: bold; margin-top: 5px;">SERVIDOR PÚBLICO</span>
           </td>
         </tr>
 
 
-        <!-- TERMINA LA PRIMERA PAGINA PARA PDF-->
-
-
-        <!-- Inicio de la segunda página para RESPONSABLES DE APROBACIÓN -->
 
         <tr>
           <th colspan="4" class="gray">RESPONSABLES DE APROBACIÓN</th>
@@ -250,7 +247,7 @@
         <tr>
           <td colspan="2">
             <strong>FIRMA:</strong> <input type="text"
-              style="border: none; border-bottom: 1px solid black; width: 60%; margin-top: 45px;"><br>
+              style="border: none; border-bottom: 1px solid black; width: 60%; margin-top: 35px;"><br>
             <strong>NOMBRE:</strong> <input type="text" value="Mgs. Mercy Freire Sánchez"
               style="border: none; border-bottom: 1px solid black; width: 60%;"><br>
             <strong>PUESTO:</strong> <input type="text" value="Directora de Administración de Recursos Humanos"
@@ -258,7 +255,7 @@
           </td>
           <td colspan="2">
             <strong>FIRMA:</strong> <input type="text"
-              style="border: none; border-bottom: 1px solid black; width: 60%; margin-top: 45px;"><br>
+              style="border: none; border-bottom: 1px solid black; width: 60%; margin-top: 35px;"><br>
             <strong>NOMBRE:</strong> <input type="text" value="Mgs. Mercy Freire Sánchez"
               style="border: none; border-bottom: 1px solid black; width: 60%;"><br>
             <strong>PUESTO:</strong> <input type="text" value="Delegada del Director Ejecutivo"

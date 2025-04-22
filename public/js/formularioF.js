@@ -14,13 +14,16 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.getElementById('apellidos').value = emp.apellidos || '';
       document.getElementById('tipo_documento').value = 'CÉDULA';
 
-      // Nuevos campos a completar
       document.getElementById('denominacion_puesto').value = emp.denominacion_puesto || '';
       document.getElementById('canton').value = emp.canton || '';
-      document.getElementById('estructura_programatica').value = emp.estructura_programatica || '';
       document.getElementById('grado').value = emp.grado || '';
       document.getElementById('unidad_organica').value = emp.unidad_organica || '';
       document.getElementById('escala_ocupacional').value = emp.escala_ocupacional || '';
+
+      // 🔧 NUEVA LÓGICA: concatenar estructura programática + partida individual
+      const estructura = emp.estructura_programatica || '';
+      const partida = emp.partida_individual || '';
+      document.getElementById('estructura_programatica').value = `${estructura} - ${partida}`;
 
       // 🟢 Formatear y mostrar RMU en formato moneda USD
       const rmu = parseFloat(emp.rmu_puesto || 0);
@@ -81,28 +84,22 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 async function exportarPDF() {
-  // 🔄 Ajustar altura de todos los textareas (por si hay otros también)
   document.querySelectorAll('textarea').forEach(textarea => {
     textarea.style.height = 'auto';
     textarea.style.height = `${textarea.scrollHeight}px`;
   });
 
-  // ✅ Sincronizar el contenido del textarea al div visible para PDF
   const textarea = document.getElementById('motivacion');
   const vista = document.getElementById('motivacionVista');
 
   if (textarea && vista) {
     vista.innerText = textarea.value;
-
-    // Mostrar el div y ocultar el textarea
     textarea.style.display = 'none';
     vista.style.display = 'block';
   }
 
-  // 🔄 Pequeño delay para asegurar que DOM se actualice
   await new Promise(resolve => setTimeout(resolve, 300));
 
-  // 📄 Generar PDF desde todas las páginas visibles
   const paginas = document.querySelectorAll('.pagina');
   const pdf = new jspdf.jsPDF("p", "mm", "a4");
   const pageWidth = pdf.internal.pageSize.getWidth();
@@ -126,25 +123,19 @@ async function exportarPDF() {
 
   pdf.save("accion-personal.pdf");
 
-  // ♻️ Restaurar estado: mostrar el textarea de nuevo
   if (textarea && vista) {
     textarea.style.display = 'block';
     vista.style.display = 'none';
   }
 }
 
-
-
-
-//  FECHA  CON FORMATO  30 DE ENERO DE 2025
 function mostrarFechaLarga(id) {
   const dateInput = document.getElementById(id);
   const displayInput = document.getElementById(id + '_larga');
 
   if (dateInput.value) {
-   // Descomponer manualmente para evitar error de zona horaria
     const partes = dateInput.value.split("-");
-    const fecha = new Date(partes[0], partes[1] - 1, partes[2]); // Año, mes (0 indexado), día
+    const fecha = new Date(partes[0], partes[1] - 1, partes[2]);
 
     const formateada = fecha.toLocaleDateString('es-ES', {
       day: '2-digit',
@@ -181,34 +172,36 @@ function formatearFecha(fecha) {
   });
 }
 
-function sincronizarMotivacion() {
-  const valor = document.getElementById('motivacion').value;
-  document.getElementById('motivacionVista').innerText = valor;
-}
-
-function formatearFecha(fecha) {
-  const partes = fecha.split("-");
-  const fechaObj = new Date(partes[0], partes[1] - 1, partes[2]);
-  return fechaObj.toLocaleDateString('es-ES', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric'
-  });
-}
-
-function calcularDiasCalendario(fechaInicio, fechaFin) {
+// ✅ Calcula los días laborales entre dos fechas (excluye sábados y domingos)
+function calcularDiasLaborales(fechaInicio, fechaFin) {
   const inicio = new Date(fechaInicio);
   const fin = new Date(fechaFin);
-  const diferenciaEnMs = fin - inicio;
-  const dias = diferenciaEnMs / (1000 * 60 * 60 * 24) + 1;
-  return dias.toFixed(2);
+  let diasLaborales = 0;
+  const actual = new Date(inicio);
+
+  while (actual <= fin) {
+    const dia = actual.getDay(); // 0 = domingo, 6 = sábado
+    if (dia >= 1 && dia <= 5) diasLaborales++; // solo lunes a viernes
+    actual.setDate(actual.getDate() + 1);
+  }
+
+  return diasLaborales;
 }
 
+// ✅ Aplica el factor para convertir a días calendario con precisión
+function convertirALaboralesConFactor(diasLaborales) {
+  const FACTOR_CALENDARIO = 1.3636; // 1 día laboral = 1.3636 días calendario
+  const diasCalendario = diasLaborales * FACTOR_CALENDARIO;
+  return diasCalendario.toFixed(2);
+}
+
+// ✅ Genera el texto con los días proporcionales
 function generarTextoMotivacion(nombreCompleto, fechaDesde, fechaHasta, totalDias) {
   return `La Mgs. Mercy Ivonne Freire Sanchez, Directora de Administración de Talento Humano, en uso de la delegación conferida, mediante Resolución Nro. DEJ-2023-010, de 19 de abril de 2023, conforme al art. 3, literal c): RESUELVE: De conformidad con lo dispuesto en el artículo 29 de la Ley Orgánica del Servicio Público (LOSEP) y artículo 28 de su Reglamento, otorgar ${totalDias} días (calendario) de vacaciones a favor de el/la servidor/ra ${nombreCompleto}. Rige del ${fechaDesde} al ${fechaHasta}.
-REFERENCIA: 1) Solicitud aprobada por el Jefe Inmediato; 2) Kardex de vacaciones emitido por el sistema FULLTIME; 3)`;
+REFERENCIA: 1) Solicitud aprobada por el Jefe Inmediato; 2) Kardex de vacaciones emitido por el sistema FULLTIME; 3`;
 }
 
+// ✅ Actualiza la motivación automáticamente
 function actualizarMotivacion() {
   const nombre = document.getElementById('nombre')?.value.trim();
   const apellidos = document.getElementById('apellidos')?.value.trim();
@@ -219,13 +212,18 @@ function actualizarMotivacion() {
     const nombreCompleto = `${apellidos.toUpperCase()} ${nombre.toUpperCase()}`;
     const desdeLarga = formatearFecha(fechaDesde);
     const hastaLarga = formatearFecha(fechaHasta);
-    const dias = calcularDiasCalendario(fechaDesde, fechaHasta);
 
-    const textoMotivacion = generarTextoMotivacion(nombreCompleto, desdeLarga, hastaLarga, dias);
-    
+    const diasLaborales = calcularDiasLaborales(fechaDesde, fechaHasta); // ← debe dar 7
+    const diasCalendario = convertirALaboralesConFactor(diasLaborales);   // ← debe dar 9.55
+
+    const textoMotivacion = generarTextoMotivacion(
+      nombreCompleto,
+      desdeLarga,
+      hastaLarga,
+      diasCalendario
+    );
+
     const motivacion = document.getElementById('motivacion');
-    
-    // Solo sobreescribe si el usuario no ha cambiado nada
     if (!motivacion.dataset.editado) {
       motivacion.value = textoMotivacion;
       sincronizarMotivacion();
@@ -233,8 +231,4 @@ function actualizarMotivacion() {
   }
 }
 
-// Detectar si el usuario ha modificado manualmente el texto
-document.getElementById('motivacion').addEventListener('input', () => {
-  document.getElementById('motivacion').dataset.editado = 'true';
-  sincronizarMotivacion();
-});
+
