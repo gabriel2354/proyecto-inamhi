@@ -57,18 +57,20 @@
           <td><input type="text" id="numero_identificacion" value=""></td>
           <td>
             <strong>DESDE:</strong>
-            <input type="date" id="fecha_desde" class="oculto" onchange="mostrarFechaLarga('fecha_desde')">
-            <input type="text" id="fecha_desde_larga" class="fecha-larga" onclick="activarFecha('fecha_desde')"
-              readonly>
+            <input type="date" id="fecha_desde" class="oculto"
+                   onchange="mostrarFechaLarga('fecha_desde'); actualizarMotivacion()">
+            <input type="text" id="fecha_desde_larga" class="fecha-larga"
+                   onclick="activarFecha('fecha_desde')" readonly>
           </td>
-
+          
           <td>
             <strong>HASTA:</strong>
-            <input type="date" id="fecha_hasta" class="oculto" onchange="mostrarFechaLarga('fecha_hasta')">
-            <input type="text" id="fecha_hasta_larga" class="fecha-larga" onclick="activarFecha('fecha_hasta')"
-              readonly>
+            <input type="date" id="fecha_hasta" class="oculto"
+                   onchange="mostrarFechaLarga('fecha_hasta'); actualizarMotivacion()">
+            <input type="text" id="fecha_hasta_larga" class="fecha-larga"
+                   onclick="activarFecha('fecha_hasta')" readonly>
           </td>
-
+          
 
 
         </tr>
@@ -113,11 +115,17 @@
 
       <div class="motivacion">
         <p><strong>MOTIVACIÓN:</strong></p>
-        <textarea id="motivacion" class="autoajustable-textarea" rows="1">
-      La Mgs. Mercy Ivonne Freire Sanchez, Directora de Administración de Talento Humano, en uso de la delegación conferida, mediante Resolución Nro. DEJ-2023-010, de 19 de abril de 2023, conforme al art. 3, literal c): RESUELVE: De conformidad con lo dispuesto en el artículo 29 de la Ley Orgánica del Servicio Público (LOSEP) y artículo 28 de su Reglamento, otorgar 16,36 días (calendario) de vacaciones a favor de el/la servidor/ra ESTRADA LLANOS NEREYDA EVELYN. Rige del 16 al 31 de diciembre de 2024.
-      REFERENCIA: 1) Solicitud aprobada por el Jefe Inmediato; 2) Kardex de vacaciones emitido por el sistema FULLTIME; 3)
-        </textarea>
+      
+        <!-- Campo EDITABLE y dinámico -->
+        <textarea id="motivacion" class="autoajustable-textarea" rows="6"
+          oninput="sincronizarMotivacion()"></textarea>
+      
+        <!-- Div solo para PDF (html2canvas lo captura) -->
+        <div id="motivacionVista" style="white-space: pre-wrap; display: none;"></div>
       </div>
+      
+      
+      
 
 
       <table class="situacion-table" border="1">

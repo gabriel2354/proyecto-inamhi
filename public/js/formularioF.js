@@ -81,25 +81,28 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 async function exportarPDF() {
-  // 🔁 Asegura que todos los textareas se ajusten antes de exportar
-// Ajustar altura automáticamente al escribir
-document.addEventListener('input', (e) => {
-  if (e.target.tagName.toLowerCase() === 'textarea') {
-    e.target.style.height = 'auto';
-    e.target.style.height = `${e.target.scrollHeight}px`;
-  }
-});
-
-// También ajusta al cargar
-window.addEventListener('DOMContentLoaded', () => {
-  const textarea = document.getElementById('motivacion');
-  if (textarea) {
+  // 🔄 Ajustar altura de todos los textareas (por si hay otros también)
+  document.querySelectorAll('textarea').forEach(textarea => {
     textarea.style.height = 'auto';
     textarea.style.height = `${textarea.scrollHeight}px`;
+  });
+
+  // ✅ Sincronizar el contenido del textarea al div visible para PDF
+  const textarea = document.getElementById('motivacion');
+  const vista = document.getElementById('motivacionVista');
+
+  if (textarea && vista) {
+    vista.innerText = textarea.value;
+
+    // Mostrar el div y ocultar el textarea
+    textarea.style.display = 'none';
+    vista.style.display = 'block';
   }
-});
 
+  // 🔄 Pequeño delay para asegurar que DOM se actualice
+  await new Promise(resolve => setTimeout(resolve, 300));
 
+  // 📄 Generar PDF desde todas las páginas visibles
   const paginas = document.querySelectorAll('.pagina');
   const pdf = new jspdf.jsPDF("p", "mm", "a4");
   const pageWidth = pdf.internal.pageSize.getWidth();
@@ -122,7 +125,14 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   pdf.save("accion-personal.pdf");
+
+  // ♻️ Restaurar estado: mostrar el textarea de nuevo
+  if (textarea && vista) {
+    textarea.style.display = 'block';
+    vista.style.display = 'none';
+  }
 }
+
 
 
 
@@ -156,3 +166,75 @@ function activarFecha(id) {
   displayInput.classList.add('oculto');
 }
 
+function sincronizarMotivacion() {
+  const valor = document.getElementById('motivacion').value;
+  document.getElementById('motivacionVista').innerText = valor;
+}
+
+function formatearFecha(fecha) {
+  const partes = fecha.split("-");
+  const fechaObj = new Date(partes[0], partes[1] - 1, partes[2]);
+  return fechaObj.toLocaleDateString('es-ES', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
+  });
+}
+
+function sincronizarMotivacion() {
+  const valor = document.getElementById('motivacion').value;
+  document.getElementById('motivacionVista').innerText = valor;
+}
+
+function formatearFecha(fecha) {
+  const partes = fecha.split("-");
+  const fechaObj = new Date(partes[0], partes[1] - 1, partes[2]);
+  return fechaObj.toLocaleDateString('es-ES', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
+  });
+}
+
+function calcularDiasCalendario(fechaInicio, fechaFin) {
+  const inicio = new Date(fechaInicio);
+  const fin = new Date(fechaFin);
+  const diferenciaEnMs = fin - inicio;
+  const dias = diferenciaEnMs / (1000 * 60 * 60 * 24) + 1;
+  return dias.toFixed(2);
+}
+
+function generarTextoMotivacion(nombreCompleto, fechaDesde, fechaHasta, totalDias) {
+  return `La Mgs. Mercy Ivonne Freire Sanchez, Directora de Administración de Talento Humano, en uso de la delegación conferida, mediante Resolución Nro. DEJ-2023-010, de 19 de abril de 2023, conforme al art. 3, literal c): RESUELVE: De conformidad con lo dispuesto en el artículo 29 de la Ley Orgánica del Servicio Público (LOSEP) y artículo 28 de su Reglamento, otorgar ${totalDias} días (calendario) de vacaciones a favor de el/la servidor/ra ${nombreCompleto}. Rige del ${fechaDesde} al ${fechaHasta}.
+REFERENCIA: 1) Solicitud aprobada por el Jefe Inmediato; 2) Kardex de vacaciones emitido por el sistema FULLTIME; 3)`;
+}
+
+function actualizarMotivacion() {
+  const nombre = document.getElementById('nombre')?.value.trim();
+  const apellidos = document.getElementById('apellidos')?.value.trim();
+  const fechaDesde = document.getElementById('fecha_desde')?.value;
+  const fechaHasta = document.getElementById('fecha_hasta')?.value;
+
+  if (nombre && apellidos && fechaDesde && fechaHasta) {
+    const nombreCompleto = `${apellidos.toUpperCase()} ${nombre.toUpperCase()}`;
+    const desdeLarga = formatearFecha(fechaDesde);
+    const hastaLarga = formatearFecha(fechaHasta);
+    const dias = calcularDiasCalendario(fechaDesde, fechaHasta);
+
+    const textoMotivacion = generarTextoMotivacion(nombreCompleto, desdeLarga, hastaLarga, dias);
+    
+    const motivacion = document.getElementById('motivacion');
+    
+    // Solo sobreescribe si el usuario no ha cambiado nada
+    if (!motivacion.dataset.editado) {
+      motivacion.value = textoMotivacion;
+      sincronizarMotivacion();
+    }
+  }
+}
+
+// Detectar si el usuario ha modificado manualmente el texto
+document.getElementById('motivacion').addEventListener('input', () => {
+  document.getElementById('motivacion').dataset.editado = 'true';
+  sincronizarMotivacion();
+});
