@@ -64,7 +64,7 @@ nombre varchar(30) not null
 
 /*Contiene la información de los usuarios que pueden iniciar sesión y usar el sistema.
 Cada colaborador está asociado a un rol y a una sede.*/
-sedeCREATE TABLE colaborador (
+CREATE TABLE colaborador (
     idColaborador INT AUTO_INCREMENT PRIMARY KEY,
     idRol INT NOT NULL,
     nombres VARCHAR(200) NOT NULL,

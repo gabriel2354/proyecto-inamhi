@@ -7,6 +7,7 @@ router.get('/listar', async (req, res) => {
   try {
     const [rows] = await db.execute(`
       SELECT 
+       e.id AS id_empleado,
         e.numero_identificacion,
         e.nombres,
         e.apellidos, -- 🆕 Campo agregado
@@ -36,6 +37,7 @@ router.get('/buscar', async (req, res) => {
   try {
     const [rows] = await db.execute(`
       SELECT 
+       e.id AS id_empleado,
         e.numero_identificacion,
         e.nombres,
         e.apellidos, -- 🆕 Campo agregado

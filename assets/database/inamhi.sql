@@ -217,6 +217,27 @@ CREATE TABLE empleados (
   FOREIGN KEY (codigo_enlace) REFERENCES estructura_programatica(codigo_enlace)
 );
 
+-- accion personal pdf 
+
+CREATE TABLE accion_personal_vacaciones_pdf (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  
+  numero_documento VARCHAR(50) NOT NULL,
+  
+  id_empleado INT NOT NULL,
+  id_colaborador INT NOT NULL,
+  
+  fecha_desde DATE NOT NULL,
+  fecha_hasta DATE NOT NULL,
+  dias_tomados INT NOT NULL,
+
+  fecha_generacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+  -- Claves foráneas
+  FOREIGN KEY (id_empleado) REFERENCES empleados(id),
+  FOREIGN KEY (id_colaborador) REFERENCES colaborador(idColaborador)
+);
+
 --Consultas 
 --Empleado 1
 INSERT INTO empleados (

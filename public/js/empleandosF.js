@@ -61,14 +61,19 @@ function renderTabla(lista) {
       <td class="p-2 border text-center">
         <button onclick="editarEmpleado('${emp.numero_identificacion}')" class="text-blue-600 hover:underline mr-2">Editar</button>
         <button onclick="eliminarEmpleado('${emp.numero_identificacion}')" class="text-red-600 hover:underline">Eliminar</button>
-        <button onclick="accionPersonal('${emp.numero_identificacion}')" class="text-green-600 hover:underline">Acción Personal</button>
+       <button onclick="accionPersonal('${emp.numero_identificacion}', ${emp.id_empleado})" class="text-green-600 hover:underline">Acción Personal</button>
+
       </td>
     `;
     tabla.appendChild(fila);
   });
 }
 
-function accionPersonal(numeroIdentificacion) {
+function accionPersonal(numeroIdentificacion, idEmpleado) {
+  // Guardar ID del empleado en localStorage
+  localStorage.setItem("id_empleado", idEmpleado);
+
+  // Redirigir al formulario con la cédula en query
   window.location.href = `formulario1.html?cedula=${numeroIdentificacion}`;
 }
 
@@ -151,3 +156,9 @@ function editarEmpleado(cedula) {
       dropdown.classList.toggle('hidden'); // Tailwind "hidden"
     });
   });
+// Mostrar el nombre del usuario logueado
+const userName = localStorage.getItem("userName") || "Usuario";
+const userNameElement = document.getElementById("userName");
+if (userNameElement) {
+  userNameElement.textContent = userName;
+}
