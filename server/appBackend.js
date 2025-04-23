@@ -7,6 +7,7 @@ const sedesRoutes = require('./routes/sedes');
 const authRoutes = require("./routes/auth");
 const empleadosRoutes = require("./routes/empleadosB"); 
 const pdfRoutes = require('./routes/pdf');
+const formularioRoutes = require('./routes/formularioB')
 
 const app = express();
 
@@ -21,6 +22,8 @@ app.use('/sedes', sedesRoutes);
 app.use('/auth', authRoutes);
 app.use('/empleados', empleadosRoutes); 
 app.use('/subir-pdf', pdfRoutes);
+app.use('/formulario', formularioRoutes);
+
 
 app.options('*', cors());
 

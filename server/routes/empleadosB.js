@@ -7,6 +7,7 @@ router.get('/listar', async (req, res) => {
   try {
     const [rows] = await db.execute(`
       SELECT 
+       e.id AS id_empleado,
         e.numero_identificacion,
         e.nombres,
         e.apellidos, -- 🆕 Campo agregado
@@ -15,6 +16,7 @@ router.get('/listar', async (req, res) => {
         e.unidad_organica,
         e.canton,
         e.grado,
+         e.partida_individual, 
         (SELECT nombre FROM regimen_laboral WHERE codigo_regimen = e.codigo_regimen) AS regimen_laboral,
         (SELECT nombre FROM nivel_ocupacional WHERE codigo_nivel = e.codigo_nivel) AS nivel_ocupacional,
         (SELECT nombre FROM denominacion_puesto WHERE codigo_denom = e.codigo_denom) AS denominacion_puesto,
@@ -35,6 +37,7 @@ router.get('/buscar', async (req, res) => {
   try {
     const [rows] = await db.execute(`
       SELECT 
+       e.id AS id_empleado,
         e.numero_identificacion,
         e.nombres,
         e.apellidos, -- 🆕 Campo agregado
@@ -43,6 +46,7 @@ router.get('/buscar', async (req, res) => {
         e.unidad_organica,
         e.canton,
         e.grado,
+        e.partida_individual, 
         (SELECT nombre FROM regimen_laboral WHERE codigo_regimen = e.codigo_regimen) AS regimen_laboral,
         (SELECT nombre FROM nivel_ocupacional WHERE codigo_nivel = e.codigo_nivel) AS nivel_ocupacional,
         (SELECT nombre FROM denominacion_puesto WHERE codigo_denom = e.codigo_denom) AS denominacion_puesto,

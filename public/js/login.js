@@ -98,5 +98,5 @@ function saveUserSession(data) {
 
   console.log("✅ Token almacenado correctamente:", localStorage.getItem("token"));
   console.log("✅ Vistas almacenadas correctamente:", localStorage.getItem("vistas"));
-  console.log("✅ Sede almacenada correctamente:", localStorage.getItem("sedeFunder"));
+  console.log("✅ Sede almacenada correctamente:", localStorage.getItem("sede"));
 }
