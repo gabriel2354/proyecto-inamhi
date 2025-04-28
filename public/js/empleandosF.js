@@ -21,17 +21,24 @@ function cargarEmpleados() {
     .catch(err => console.error('Error al cargar empleados:', err));
 }
 
-function buscarEmpleado() {
+async function buscarEmpleado() {
   const cedula = document.getElementById('buscarCedula').value.trim();
   if (!cedula) return cargarEmpleados();
 
-  fetch(`${API_URL}/buscar?cedula=${cedula}`)
-    .then(res => res.ok ? res.json() : Promise.reject())
-    .then(data => renderTabla([data]))
-    .catch(() => {
-      alert('Empleado no encontrado');
-      renderTabla([]);
-    });
+  try {
+    const res = await fetch(`${API_URL}/buscar?cedula=${cedula}`);
+    if (!res.ok) throw new Error('Empleado no encontrado');
+    
+    const data = await res.json();
+    renderTabla([data]);
+
+    // 💥 Además consultamos si está de vacaciones
+    await consultarVacaciones(cedula);
+
+  } catch (error) {
+    alert('Empleado no encontrado');
+    renderTabla([]);
+  }
 }
 
 function renderTabla(lista) {
@@ -61,8 +68,7 @@ function renderTabla(lista) {
       <td class="p-2 border text-center">
         <button onclick="editarEmpleado('${emp.numero_identificacion}')" class="text-blue-600 hover:underline mr-2">Editar</button>
         <button onclick="eliminarEmpleado('${emp.numero_identificacion}')" class="text-red-600 hover:underline">Eliminar</button>
-       <button onclick="accionPersonal('${emp.numero_identificacion}', ${emp.id_empleado})" class="text-green-600 hover:underline">Acción Personal</button>
-
+        <button onclick="accionPersonal('${emp.numero_identificacion}', ${emp.id_empleado})" class="text-green-600 hover:underline">Acción Personal</button>
       </td>
     `;
     tabla.appendChild(fila);
@@ -70,10 +76,7 @@ function renderTabla(lista) {
 }
 
 function accionPersonal(numeroIdentificacion, idEmpleado) {
-  // Guardar ID del empleado en localStorage
   localStorage.setItem("id_empleado", idEmpleado);
-
-  // Redirigir al formulario con la cédula en query
   window.location.href = `formulario1.html?cedula=${numeroIdentificacion}`;
 }
 
@@ -148,17 +151,124 @@ function editarEmpleado(cedula) {
     .catch(() => alert('No se pudo cargar el empleado'));
 }
 
-  // Mostrar/ocultar los dropdowns de la barra lateral
-  document.querySelectorAll('.dropdown-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      btn.classList.toggle('active');
-      const dropdown = btn.nextElementSibling;
-      dropdown.classList.toggle('hidden'); // Tailwind "hidden"
-    });
+// Dropdowns barra lateral
+document.querySelectorAll('.dropdown-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('active');
+    const dropdown = btn.nextElementSibling;
+    dropdown.classList.toggle('hidden');
   });
+});
+
 // Mostrar el nombre del usuario logueado
 const userName = localStorage.getItem("userName") || "Usuario";
 const userNameElement = document.getElementById("userName");
 if (userNameElement) {
   userNameElement.textContent = userName;
 }
+
+// 1. Función para mostrar el modal
+function mostrarModal(mensaje, tipo = "info") {
+  const modal = document.getElementById('miModal');
+  const modalContent = document.getElementById('modal-content');
+
+  if (!modal || !modalContent) {
+    console.error("❌ Modal no encontrado en el HTML.");
+    return;
+  }
+
+  const modalBox = modal.querySelector('div');
+
+  if (tipo === "success") {
+    modalBox.style.backgroundColor = "#e6ffed"; // verde
+    modalBox.style.border = "2px solid #2ecc71";
+  } else if (tipo === "info") {
+    modalBox.style.backgroundColor = "#ebf5ff"; // azul
+    modalBox.style.border = "2px solid #3498db";
+  } else if (tipo === "error") {
+    modalBox.style.backgroundColor = "#ffe6e6"; // rojo
+    modalBox.style.border = "2px solid #e74c3c";
+  } else {
+    modalBox.style.backgroundColor = "white";
+    modalBox.style.border = "none";
+  }
+
+  modalContent.innerHTML = mensaje;
+  modal.style.display = "block";
+}
+
+// 2. Función para cerrar el modal
+function cerrarModal() {
+  const modal = document.getElementById('miModal');
+  if (modal) modal.style.display = "none";
+}
+
+// 3. Función para formatear la fecha bonito tipo "28 de abril de 2025"
+function formatearFechaLarga(fechaStr) {
+  const fecha = new Date(fechaStr);
+  const opciones = { day: '2-digit', month: 'long', year: 'numeric' };
+  return fecha.toLocaleDateString('es-ES', opciones);
+}
+
+// 4. Función principal para consultar vacaciones
+async function consultarVacaciones(cedula) {
+  try {
+    const res = await fetch(`http://localhost:3000/formulario/accion-personal/vacaciones/${cedula}`);
+
+    if (!res.ok) {
+      throw new Error("Servidor no respondió correctamente.");
+    }
+
+    const data = await res.json();
+
+    if (!data || !data.enVacaciones) {
+      mostrarModal("🔍 El empleado NO tiene vacaciones registradas.", "info");
+    } else {
+      const hoy = new Date();
+      const desde = new Date(data.fechaDesde);
+      const hasta = new Date(data.fechaHasta);
+
+      let estado = "";
+
+      if (hoy < desde) {
+        estado = "🔜 El empleado tiene vacaciones programadas.";
+      } else if (hoy >= desde && hoy <= hasta) {
+        estado = "🌴 El empleado está actualmente de vacaciones.";
+      } else {
+        estado = "✅ El empleado ya culminó sus vacaciones recientes.";
+      }
+
+      // Construimos la lista de documentos del historial
+      let historialHTML = "";
+      if (data.historial && data.historial.length > 0) {
+        historialHTML = `
+          <br><br>
+          📋 <strong>Historial de documentos generados:</strong><br>
+          <ul style="margin-top:8px; padding-left:20px;">
+            ${data.historial.map(doc => `
+              <li>➔ <strong>${doc.numeroDocumento}</strong> - ${formatearFechaLarga(doc.fechaGeneracion)}</li>
+            `).join("")}
+          </ul>
+        `;
+      }
+
+      // Modal final completo
+      mostrarModal(`
+        ${estado}<br><br>
+        ➔ Documento: <strong>${data.numeroDocumento}</strong><br>
+        ➔ Desde: <strong>${formatearFechaLarga(data.fechaDesde)}</strong><br>
+        ➔ Hasta: <strong>${formatearFechaLarga(data.fechaHasta)}</strong><br>
+        ➔ Días tomados: <strong>${data.diasTomados}</strong> Días calendario.
+        ${historialHTML}
+      `, "success");
+    }
+  } catch (error) {
+    console.error("❌ Error al consultar vacaciones:", error);
+    mostrarModal("❌ No se pudo conectar con el servidor. Intenta más tarde.", "error");
+  }
+}
+
+
+
+
+

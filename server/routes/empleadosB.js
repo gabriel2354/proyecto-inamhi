@@ -84,4 +84,41 @@ router.delete('/eliminar/:cedula', async (req, res) => {
   }
 });
 
+
+//  buscar cedula por vacaciones 
+async function buscarEmpleadoVacaciones() {
+  const cedula = document.getElementById('buscarCedula').value.trim();
+
+  if (!cedula) {
+    alert("⚠️ Debes ingresar una cédula para buscar.");
+    return;
+  }
+
+  try {
+    const res = await fetch(`http://localhost:3000/formulario/accion-personal/vacaciones/${cedula}`);
+    const data = await res.json();
+
+    if (!data.enVacaciones) {
+      mostrarModal("🔍 El empleado NO se encuentra actualmente de vacaciones.");
+    } else {
+      mostrarModal(`
+        🌴 El empleado está de vacaciones.<br><br>
+        ➔ Desde: <strong>${formatearFechaCorta(data.fechaDesde)}</strong><br>
+        ➔ Hasta: <strong>${formatearFechaCorta(data.fechaHasta)}</strong><br>
+        ➔ Días tomados: <strong>${data.diasTomados}</strong> días.
+      `);
+    }
+  } catch (error) {
+    console.error("❌ Error al consultar vacaciones:", error);
+    alert("❌ Error de conexión con el servidor.");
+  }
+}
+
+// Formateador de fecha corto
+function formatearFechaCorta(fecha) {
+  const partes = fecha.split("-");
+  return `${partes[2]}/${partes[1]}/${partes[0]}`; // formato dd/mm/yyyy
+}
+
+
 module.exports = router;
