@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encabezado Acción de Personal</title>
+  <link rel="stylesheet" href="../css/formulario1.css">
+  <!-- Cargar html2canvas antes que jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+  <div class="container" id="formulario">
+
+    <div class="pagina" id="pagina1">
+      <table>
+        <tr>
+          <td colspan="2" rowspan="3">
+            <img src="/assets/images/Logo nuevo inamhi.png" alt="Logo" class="logo-img">
+          </td>
+          <td colspan="2" class="bold">ACCIÓN DE PERSONAL</td>
+        </tr>
+        <tr>
+          <td class="bold">Nro.</td>
+          <td><input type="text" id="numero_documento"  readonly></td>
+        </tr>
+        
+
+        
+        <tr>
+          <td class="bold">FECHA DE ELABORACI&Oacute;N</td>
+          <td><input type="text" id="fecha_elaboracion"></td>
+
+        </tr>
+        <tr>
+          <td colspan="2"><input type="text" id="apellidos" value=""></td>
+          <td colspan="2"><input type="text" id="nombre"></td>
+        </tr>
+        <tr class="gray">
+          <td colspan="2" class="bold">APELLIDOS</td>
+          <td colspan="2" class="bold">NOMBRES</td>
+        </tr>
+        <tr class="gray">
+          <td class="bold">DOCUMENTO DE IDENTIFICACI&Oacute;N</td>
+          <td class="bold">NRO. DE IDENTIFICACI&Oacute;N</td>
+          <td colspan="2" class="bold">RIGE:</td>
+        </tr>
+        <tr>
+          <td>
+            <select id="tipo_documento" class="identificacion">
+              <option value="">Seleccione</option>
+              <option value="CÉDULA">CÉDULA</option>
+              <option value="PASAPORTE">PASAPORTE</option>
+            </select>
+          </td>
+          <td><input type="text" id="numero_identificacion" value=""></td>
+          <td>
+            <strong>DESDE:</strong>
+            <input type="date" id="fecha_desde" class="oculto"
+              onchange="mostrarFechaLarga('fecha_desde'); actualizarMotivacion()">
+            <input type="text" id="fecha_desde_larga" class="fecha-larga" onclick="activarFecha('fecha_desde')"
+              readonly>
+          </td>
+
+          <td>
+            <strong>HASTA:</strong>
+            <input type="date" id="fecha_hasta" class="oculto"
+              onchange="mostrarFechaLarga('fecha_hasta'); actualizarMotivacion()">
+            <input type="text" id="fecha_hasta_larga" class="fecha-larga" onclick="activarFecha('fecha_hasta')"
+              readonly>
+          </td>
+
+
+
+        </tr>
+      </table>
+
+      <div class="opciones">
+        <p><strong>Escoja una opción:</strong></p>
+        <div class="checkbox-grid">
+          <label class="checkbox-item"><input type="radio" name="opcion"> INGRESO</label>
+          <label class="checkbox-item"><input type="radio" name="opcion"> TRASPASO</label>
+          <label class="checkbox-item"><input type="radio" name="opcion"> INCREMENTO RMU</label>
+          <label class="checkbox-item"><input type="radio" name="opcion"> REINGRESO</label>
+          <label class="checkbox-item"><input type="radio" name="opcion"> CAMBIO ADMINISTRATIVO</label>
+          <label class="checkbox-item"><input type="radio" name="opcion"> SUBROGACIÓN</label>
+          <label class="checkbox-item"><input type="radio" name="opcion"> RESTITUCIÓN</label>
+          <label class="checkbox-item"><input type="radio" name="opcion"> INTERCAMBIO VOLUNTARIO</label>
+          <label class="checkbox-item"><input type="radio" name="opcion"> ENCARGO</label>
+          <label class="checkbox-item"><input type="radio" name="opcion"> REINTEGRO</label>
+          <label class="checkbox-item"><input type="radio" name="opcion"> LICENCIA</label>
+          <label class="checkbox-item"><input type="radio" name="opcion"> CESACIÓN DE FUNCIONES</label>
+          <label class="checkbox-item"><input type="radio" name="opcion"> ASCENSO</label>
+          <label class="checkbox-item"><input type="radio" name="opcion"> COMISIÓN DE SERVICIOS</label>
+          <label class="checkbox-item"><input type="radio" name="opcion"> DESTITUCIÓN</label>
+          <label class="checkbox-item"><input type="radio" name="opcion"> TRASLADO</label>
+          <label class="checkbox-item"><input type="radio" name="opcion"> SANCIONES</label>
+          <label class="checkbox-item"><input type="radio" name="opcion" checked> VACACIONES</label>
+          <label class="checkbox-item"><input type="radio" name="opcion"> REVISIÓN CLASI. PUESTO</label>
+          <label class="checkbox-item"><input type="radio" name="opcion"> OTRO (DETALLAR)</label>
+        </div>
+        <div class="detallar">
+          <input type="text" placeholder="EN CASO DE REQUERIR ESPECIFICACIÓN DE LO SELECCIONADO:">
+         
+
+        </div>
+        <div class="declaracion">
+          <strong>* PRESENTÓ LA DECLARACIÓN JURADA</strong> (número 2 del art. 3 RLOSEP):
+          <label><input type="radio" name="declaracion"> SÍ</label>
+          <label><input type="radio" name="declaracion"> NO APLICA</label>
+        </div>
+      </div>
+
+
+      <div class="motivacion">
+        <p><strong>MOTIVACIÓN:</strong></p>
+      
+        <!-- Campo EDITABLE y dinámico -->
+        <textarea id="motivacion" class="autoajustable-textarea" rows="6" oninput="sincronizarMotivacion()"></textarea>
+      
+        <!-- Div solo para PDF (html2canvas lo captura) -->
+        <div id="motivacionVista" style="white-space: pre-wrap; display: none;"></div>
+      </div>
+      
+
+
+
+      <table class="situacion-table" border="1">
+        <tr>
+          <th colspan="2" class="gray">SITUACIÓN ACTUAL</th>
+          <th colspan="2" class="gray">SITUACIÓN PROPUESTA</th>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">PROCESO INSTITUCIONAL</td>
+          <td>
+            <select class="left">
+              <option value="SUSTANTIVO">SUSTANTIVO</option>
+              <option value="ADJETIVO">ADJETIVO</option>
+            </select>
+          </td>
+
+          <td style="font-weight: bold;">PROCESO INSTITUCIONAL</td>
+          <td><input type="text" class="left" value=""></td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">NIVEL DE GESTIÓN</td>
+          <td><input type="text" class="left" value="DIRECCIÓN EJECUTIVA"></td>
+          <td style="font-weight: bold;">NIVEL DE GESTIÓN</td>
+          <td><input type="text" class="left" value=""></td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">UNIDAD ADMINISTRATIVA</td>
+          <td><input type="text" class="left" id="unidad_organica"></td>
+          <td style="font-weight: bold;">UNIDAD ADMINISTRATIVA</td>
+          <td><input type="text" class="left" value=""></td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">LUGAR DE TRABAJO</td>
+          <td><input type="text" class="left" id="canton"></td>
+          <td style="font-weight: bold;">LUGAR DE TRABAJO</td>
+          <td><input type="text" class="left" value=""></td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">DENOMINACIÓN DEL PUESTO</td>
+          <td><input type="text" class="left" id="denominacion_puesto"></td>
+          <td style="font-weight: bold;">DENOMINACIÓN DEL PUESTO</td>
+          <td><input type="text" class="left" value=""></td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">GRUPO OCUPACIONAL</td>
+          <td><input type="text" class="left" id="escala_ocupacional"></td>
+          <td style="font-weight: bold;">GRUPO OCUPACIONAL</td>
+          <td><input type="text" class="left" value=""></td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">GRADO</td>
+          <td><input type="text" class="left" id="grado"></td>
+          <td style="font-weight: bold;">GRADO</td>
+          <td><input type="text" class="left" value=""></td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold;">REMUNERACIÓN MENSUAL</td>
+          <td><input type="text" class="left" id="rmu_puesto"></td>
+
+          <td style="font-weight: bold;">REMUNERACIÓN MENSUAL</td>
+          <td><input type="text" class="left" value=""></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <h4 style="font-weight: bold; font-size: 13px; margin-bottom: 4px;">PARTIDA INDIVIDUAL</h4>
+            <input type="text" class="left" id="estructura_programatica" style="width: 100%; font-size: 12px; padding: 4px;">
+          </td>
+          <td colspan="2">
+            <h4 style="font-weight: bold; font-size: 13px; margin-bottom: 4px;">PARTIDA INDIVIDUAL</h4>
+            <input type="text" class="left" id="partida_individual" style="width: 100%; font-size: 12px; padding: 4px;">
+          </td>
+        </tr>
+        
+      </table>
+
+      <table class="situacion-table">
+        <tr>
+          <th colspan="4" class="gray">POSESIÓN DEL PUESTO</th>
+        </tr>
+        <tr>
+          <td colspan="2">
+            YO, <input type="text"> JURO LEALTAD AL ESTADO ECUATORIANO.
+            <br>
+            <strong>LUGAR:</strong> <input type="text"> <strong>FECHA:</strong> <input type="text"
+              id="fecha_elaboracion">
+
+          </td>
+          <td colspan="2">
+            <strong>CON NRO. DE DOCUMENTO DE IDENTIFICACIÓN:</strong> <input type="text">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" style="padding: 10px; border: none;">
+            <strong>** (EN CASO DE GANADOR DE CONCURSO DE MÉRITOS Y OPOSICIÓN)</strong><br><br>
+            <input type="text" placeholder="NRO. ACTA FINAL"
+              style="border: none; border-bottom: 1px solid black; width: 80%; margin-top: 5px;">
+          </td>
+          <td style="padding: 10px; border: none; text-align: center;">
+            <strong>FECHA</strong><br><br>
+            <input type="text" id="fecha_elaboracion"
+              style="border: none; border-bottom: 1px solid black; width: 80%; margin-top: 5px;">
+          </td>
+          <td style="padding: 10px; border: none; text-align: center;">
+            <strong>FIRMA:</strong><br><br>
+            <input type="text" style="border: none; border-bottom: 1px solid black; width: 90%; margin-top: 5px;"><br>
+            <span style="display: inline-block; font-weight: bold; margin-top: 5px;">SERVIDOR PÚBLICO</span>
+          </td>
+        </tr>
+
+
+
+        <tr>
+          <th colspan="4" class="gray">RESPONSABLES DE APROBACIÓN</th>
+        </tr>
+        <tr>
+          <th colspan="2" class="gray">DIRECTOR (A) O RESPONSABLE DE TALENTO HUMANO</th>
+          <th colspan="2" class="gray">AUTORIDAD NOMINADORA O SU DELEGADO<br>DEJ-2023-010</th>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <strong>FIRMA:</strong> <input type="text"
+              style="border: none; border-bottom: 1px solid black; width: 60%; margin-top: 35px;"><br>
+            <strong>NOMBRE:</strong> <input type="text" value="Mgs. Mercy Freire Sánchez"
+              style="border: none; border-bottom: 1px solid black; width: 60%;"><br>
+            <strong>PUESTO:</strong> <input type="text" value="Directora de Administración de Recursos Humanos"
+              style="border: none; border-bottom: 1px solid black; width: 60%;">
+          </td>
+          <td colspan="2">
+            <strong>FIRMA:</strong> <input type="text"
+              style="border: none; border-bottom: 1px solid black; width: 60%; margin-top: 35px;"><br>
+            <strong>NOMBRE:</strong> <input type="text" value="Mgs. Mercy Freire Sánchez"
+              style="border: none; border-bottom: 1px solid black; width: 60%;"><br>
+            <strong>PUESTO:</strong> <input type="text" value="Delegada del Director Ejecutivo"
+              style="border: none; border-bottom: 1px solid black; width: 60%;">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4" style="font-weight: bold; text-align: left;">
+            Elaborado por el Ministerio del Trabajo
+            <span style="float: right;">
+              <strong>Fecha de actualización de formato:</strong> 2024-08-23 &nbsp;&nbsp;/&nbsp;&nbsp; Versión: 01.1
+              &nbsp;&nbsp;/&nbsp;&nbsp; Página 1 de 2
+            </span>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+    <div class="pagina" id="pagina2">
+
+      <table class="situacion-table" style="table-layout: fixed; width: 100%;">
+        <tr>
+          <th colspan="4" class="gray" style="text-align: center;">RESPONSABLES DE FIRMAS</th>
+        </tr>
+        <tr>
+          <th colspan="2" class="gray" style="width: 50%; text-align: center;">ACEPTACIÓN Y/O RECEPCIÓN DEL SERVIDOR
+            PÚBLICO</th>
+          <th colspan="2" class="gray" style="width: 50%; text-align: center;">EN CASO DE NEGATIVA DE LA RECEPCIÓN
+            (TESTIGO)</th>
+        </tr>
+        <tr>
+          <td colspan="2" style="width: 50%; vertical-align: top; padding: 10px;">
+            <strong>FIRMA:</strong><input type="text"
+              style="border: none; border-bottom: 1px solid black; width: 80%; margin-top: 45px;"><br><br>
+            <strong>NOMBRE:</strong><input type="text" value="ESTRADA LLANOS NEREYDA EVELYN"
+              style="border: none; border-bottom: 1px solid black; width: 80%;"><br><br>
+            <strong>FECHA:</strong><input type="text" id="fecha_elaboracion"
+              style="border: none; border-bottom: 1px solid black; width: 80%;"><br><br>
+            <strong>HORA:</strong><input type="text" id="hora_actual"
+              style="border: none; border-bottom: 1px solid black; width: 80%;">
+          </td>
+          <td colspan="2" style="width: 50%; vertical-align: top; padding: 10px;">
+            <strong>FIRMA:</strong><input type="text"
+              style="border: none; border-bottom: 1px solid black; width: 80%; margin-top: 45px;"><br><br>
+            <strong>NOMBRE:</strong><input type="text"
+              style="border: none; border-bottom: 1px solid black; width: 80%;"><br><br>
+            <strong>FECHA:</strong><input type="text" id="fecha_elaboracion"
+              style="border: none; border-bottom: 1px solid black; width: 80%;"><br><br>
+            <strong>RAZÓN:</strong>
+            <p style="font-style: italic; font-size: 13px; margin-top: 5px;">
+              En presencia del testigo se deja constancia de que la o el servidor público tiene la negativa de recibir
+              la comunicación de registro de esta acción de personal.
+            </p>
+          </td>
+        </tr>
+      </table>
+
+      <table class="situacion-table" style="table-layout: fixed; width: 100%;">
+        <tr>
+          <th class="gray" style="width: 33.33%;">RESPONSABLE DE ELABORACIÓN</th>
+          <th class="gray" style="width: 33.33%;">RESPONSABLE DE REVISIÓN</th>
+          <th class="gray" style="width: 33.33%;">RESPONSABLE DE REGISTRO Y CONTROL</th>
+        </tr>
+        <tr>
+          <td style="padding: 10px;">
+            <strong>FIRMA:</strong><input type="text"
+              style="border: none; border-bottom: 1px solid black; width: 80%; margin-top: 45px;"><br><br>
+            <strong>NOMBRE:</strong><input type="text" value="Luis F. Albuja L."
+              style="border: none; border-bottom: 1px solid black; width: 80%;"><br><br>
+            <strong>PUESTO:</strong><input type="text" value="Servidor Público de Apoyo 4"
+              style="border: none; border-bottom: 1px solid black; width: 80%;">
+          </td>
+          <td style="padding: 10px;">
+            <strong>FIRMA:</strong><input type="text"
+              style="border: none; border-bottom: 1px solid black; width: 80%; margin-top: 45px;"><br><br>
+            <strong>NOMBRE:</strong><input type="text"
+              style="border: none; border-bottom: 1px solid black; width: 80%;"><br><br>
+            <strong>PUESTO:</strong><input type="text"
+              style="border: none; border-bottom: 1px solid black; width: 80%;">
+          </td>
+          <td style="padding: 10px;">
+            <strong>FIRMA:</strong><input type="text"
+              style="border: none; border-bottom: 1px solid black; width: 80%; margin-top: 45px;"><br><br>
+            <strong>NOMBRE:</strong><input type="text" value="Luis F. Albuja L."
+              style="border: none; border-bottom: 1px solid black; width: 80%;"><br><br>
+            <strong>PUESTO:</strong><input type="text" value="Servidor Público de Apoyo 4"
+              style="border: none; border-bottom: 1px solid black; width: 80%;">
+          </td>
+        </tr>
+      </table>
+
+
+      <tr>
+        <th colspan="4" class="gray">** USO EXCLUSIVO PARA TALENTO HUMANO</th>
+      </tr>
+      <tr>
+        <th colspan="4" class="gray">REGISTRO DE NOTIFICACIÓN AL SERVIDOR PÚBLICO DE LA ACCIÓN DE PERSONAL <span
+            style="font-weight: normal">(primer inciso del art. 22 RGLOSEP, art. 101 COA , art. 66 y 126
+            ERJAFE)</span></th>
+      </tr>
+      <tr>
+        <td colspan="4">
+          <br>
+          <br>
+          <br>
+          <strong>COMUNICACIÓN ELECTRÓNICA:</strong>
+          <input type="checkbox" checked>
+        </td>
+      </tr>
+      <tr>
+        <br>
+        <br>
+        <br>
+        <br>
+        <td><strong>FECHA:</strong><input type="text" id="fecha_elaboracion"
+            style="border: none; border-bottom: 1px solid black; width: 30%;"></td>
+        <br>
+        <br>
+        <br>
+        <td> <strong>HORA:</strong><input type="text" id="hora_actual"
+            style="border: none; border-bottom: 1px solid black; width: 30%;"></td>
+        <br>
+        <br>
+        <br>
+        <br>
+        <td> <strong> MEDIO:</strong><input type="text" value="NOTIFICACIÓN REALIZADA FISICAMENTE"
+            style="border: none; border-bottom: 1px solid black; width: 30%;"></td>
+      </tr>
+      <tr>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+      <tr>
+      <tr>
+        <td colspan="4" style="text-align: center; padding-top: 60px; padding-bottom: 20px;">
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <strong style="border: none; border-bottom: 1px solid black; width: 30%; margin-top: 45px;"></strong>
+            <br>
+            <br>
+            <strong style="margin-bottom: 20px; ">FIRMA DEL RESPONSABLE QUE NOTIFICÓ</strong>
+
+
+            <div style="margin-bottom: 15px;">
+
+              <strong>NOMBRE:</strong>
+              <input type="text" value="Luis F. Albuja L." class="linea-centro"
+                style="border: none; border-bottom: 1px solid black; width: 100%;">
+            </div>
+
+            <div>
+              <strong>PUESTO:</strong>
+              <input type="text" value="Servidor Público de Apoyo 4" class="linea-centro"
+                style="border: none; border-bottom: 1px solid black; width: 100%;">
+            </div>
+          </div>
+        </td>
+      </tr>
+
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <tr>
+
+        <td colspan="4" style="font-size: 11px;"><strong>**</strong> Si la comunicación fue electrónica se deberá
+          colocar el medio por el cual se notificó al servidor; así como, el número del documento.</td>
+      </tr>
+      <tr>
+        <td colspan="4" style="text-align: center; font-size: 11px;">
+          <strong>Elaborado por el Ministerio del Trabajo</strong>
+          &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+          <strong>Fecha de actualización de formato:</strong> 2024-08-23
+          &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+          <strong>Versión:</strong> 01.1
+          &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+          Página 1 de 2
+        </td>
+      </tr>
+      </table>
+    </div>
+  </div>
+
+
+  <section>
+    <button id="btnPDF" class="btn-exportar" onclick="exportarPDF()">Exportar en PDF</button>
+  </section>
+  <!-- Scripts -->
+  <script src="../js/formularioVacaciones.js"></script>
+
+
+
+</body>
+
+</html>
