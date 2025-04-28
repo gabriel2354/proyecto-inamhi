@@ -108,14 +108,18 @@ async function exportarPDF() {
   // Esperar para asegurar que DOM se haya actualizado
   await new Promise(resolve => setTimeout(resolve, 300));
 
-  // 👉 GUARDAR EN LA BASE DE DATOS
-  const numeroDocumento = document.getElementById("numero_documento").value;
-  const cedula = document.getElementById("numero_identificacion").value;
-  const fechaDesde = document.getElementById("fecha_desde").value;
-  const fechaHasta = document.getElementById("fecha_hasta").value;
-  const diasTomados = calcularDiasLaborales(fechaDesde, fechaHasta);
+// 👉 GUARDAR EN LA BASE DE DATOS
+const numeroDocumento = document.getElementById("numero_documento").value;
+const cedula = document.getElementById("numero_identificacion").value;
+const fechaDesde = document.getElementById("fecha_desde").value;
+const fechaHasta = document.getElementById("fecha_hasta").value;
+const motivacion = document.getElementById('motivacion').value;
 
-  // 🔍 Extraer IDs del localStorage
+// 🔥 Calcula días laborales y días proporcionales
+const diasLaborales = calcularDiasLaborales(fechaDesde, fechaHasta);
+const diasTomadosProporcionales = parseFloat(convertirALaboralesConFactor(diasLaborales));
+
+// 🔍 Extraer IDs del localStorage
 const idColaborador = localStorage.getItem("idColaborador");
 const id_empleado = localStorage.getItem("id_empleado");
 
@@ -123,39 +127,41 @@ const id_empleado = localStorage.getItem("id_empleado");
 console.log("🆔 ID COLABORADOR:", idColaborador);
 console.log("🆔 ID EMPLEADO:", id_empleado);
 console.log("📄 Documento:", numeroDocumento);
-console.log("📅 Desde:", fechaDesde, "Hasta:", fechaHasta, "Días:", diasTomados);
+console.log("📅 Desde:", fechaDesde, "Hasta:", fechaHasta, "Días proporcionales:", diasTomadosProporcionales);
 
 if (!idColaborador || !id_empleado) {
   alert("❌ Faltan datos del usuario o del empleado. No se guardó la acción.");
-  return; // Asegúrate de cortar el flujo si falta uno
+  return; // 🔥 Corta el flujo si falta alguno
 } else {
-    try {
-      const res = await fetch("http://localhost:3000/formulario/accion-personal", {
+  try {
+    const res = await fetch("http://localhost:3000/formulario/accion-personal", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        numero_documento: numeroDocumento,
+        id_colaborador: parseInt(idColaborador),
+        id_empleado: parseInt(id_empleado),
+        fecha_desde: fechaDesde,
+        fecha_hasta: fechaHasta,
+        dias_tomados: diasTomadosProporcionales,
+        motivacion: motivacion // 👈 🔥 AQUÍ agregas el campo motivación también
+      })
+    });
 
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          numero_documento: numeroDocumento,
-          id_colaborador: parseInt(idColaborador),
-          id_empleado: parseInt(id_empleado),
-          fecha_desde: fechaDesde,
-          fecha_hasta: fechaHasta,
-          dias_tomados: diasTomados
-        })
-      });
-
-      const result = await res.json();
-      if (!result.success) {
-        console.warn("⚠️ No se guardó en la base de datos:", result);
-        alert("⚠️ La acción de personal NO se guardó.");
-      } else {
-        console.log("✅ Acción de personal guardada con ID:", result.insertedId);
-      }
-    } catch (error) {
-      console.error("❌ Error en el guardado:", error);
-      alert("❌ Error de conexión con el servidor.");
+    const result = await res.json();
+    if (!result.success) {
+      console.warn("⚠️ No se guardó en la base de datos:", result);
+      alert("⚠️ La acción de personal NO se guardó.");
+    } else {
+      console.log("✅ Acción de personal guardada con ID:", result.insertedId);
+      alert("✅ Acción de personal guardada correctamente."); // 🎯 Mensaje amigable
     }
+  } catch (error) {
+    console.error("❌ Error en el guardado:", error);
+    alert("❌ Error de conexión con el servidor.");
   }
+}
+
 
   // 👉 GENERAR Y GUARDAR PDF
   const paginas = document.querySelectorAll('.pagina');

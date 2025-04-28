@@ -234,6 +234,11 @@ CREATE TABLE accion_personal_vacaciones_pdf (
 
   fecha_generacion DATETIME DEFAULT CURRENT_TIMESTAMP,
 
+--Agregamos  una nueva columna  motivacion
+
+  ALTER TABLE inamhi.accion_personal_vacaciones_pdf
+ADD COLUMN motivacion TEXT;
+
   -- Claves foráneas
   FOREIGN KEY (id_empleado) REFERENCES empleados(id),
   FOREIGN KEY (id_colaborador) REFERENCES colaborador(idColaborador)
