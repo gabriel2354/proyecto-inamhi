@@ -1855,3 +1855,425 @@ VALUES(
       '4', 'DIRECCION ADMINISTRATIVA FINANCIERA',
    11.45, 9.15, '', 'NOMBRAMIENTO PROVISIONAL', '0', 'SI', 'SI'
 );
+
+
+/*--Empleado 82*/
+
+INSERT INTO empleados (
+  codigo_regimen, codigo_nivel, codigo_modalidad, codigo_escala, codigo_denom, codigo_enlace,
+    fecha_inicio, fecha_fin, partida_individual, estado_puesto, grado,
+    rmu_escala, rmu_puesto, rmu_sobrevalorado,
+    ruc_patronal, codigo_sucursal, tipo_identificacion, numero_identificacion, nombres,apellidos,
+    provincia, canton, codigo_canton,
+    codigo_puesto_adicional, puesto_adicional, codigo_unidad_organica, unidad_organica,
+    aporte_individual, aporte_patronal,
+    comision_servicios, estado_servidor, fondos_reserva, acumulacion_decimo_tercero, acumulacion_decimo_cuarto
+) 
+
+VALUES(
+   '1', '2', '1', 'NO11', 'AC5', '1', '2025-01-01', '2025-12-31', '697', 'OCUPADO', '11', 1212.00 ,1212.00,
+    '0.00','1768045130001', '0001', 'CEDULA', '1712197027', 'RUTH PAULINA', 'LEVOYER RAMIREZ',
+   'PICHINCHA', 'QUITO', '1701', '', 'ANALISTA DE CONTABILIDAD 2',
+      '4', 'DIRECCION ADMINISTRATIVA FINANCIERA',
+   11.45, 9.15, '', 'ACTIVO', '1', 'SI', 'SI'
+);
+
+/*--Empleado 83*/
+
+INSERT INTO empleados (
+  codigo_regimen, codigo_nivel, codigo_modalidad, codigo_escala, codigo_denom, codigo_enlace,
+    fecha_inicio, fecha_fin, partida_individual, estado_puesto, grado,
+    rmu_escala, rmu_puesto, rmu_sobrevalorado,
+    ruc_patronal, codigo_sucursal, tipo_identificacion, numero_identificacion, nombres,apellidos,
+    provincia, canton, codigo_canton,
+    codigo_puesto_adicional, puesto_adicional, codigo_unidad_organica, unidad_organica,
+    aporte_individual, aporte_patronal,
+    comision_servicios, estado_servidor, fondos_reserva, acumulacion_decimo_tercero, acumulacion_decimo_cuarto
+) 
+
+VALUES(
+   '1', '2', '1', 'NO11', 'INAMHI033', '1', '2025-01-01', '2025-12-31', '570', 'OCUPADO', '11', 1212.00 ,1212.00,
+    '0.00','1768045130001', '0001', 'CEDULA', '1723605893', 'PAOLA ALEJANDRA', 'ECHEVERRIA GARCES',
+   'PICHINCHA', 'QUITO', '1701', '', 'ESPECIALISTA EN CLIMATOLOGIA 2',
+      '2.1.4', 'DIRECCION DE ESTUDIOS, INVESTIGACION Y DESARROLLO HIDROMETEOROLOGICO',
+   11.45, 9.15, '', 'NOMBRAMIENTO PROVISIONAL', '1', 'SI', 'SI'
+);
+
+/*--Empleado 84*/
+
+INSERT INTO empleados (
+  codigo_regimen, codigo_nivel, codigo_modalidad, codigo_escala, codigo_denom, codigo_enlace,
+    fecha_inicio, fecha_fin, partida_individual, estado_puesto, grado,
+    rmu_escala, rmu_puesto, rmu_sobrevalorado,
+    ruc_patronal, codigo_sucursal, tipo_identificacion, numero_identificacion, nombres,apellidos,
+    provincia, canton, codigo_canton,
+    codigo_puesto_adicional, puesto_adicional, codigo_unidad_organica, unidad_organica,
+    aporte_individual, aporte_patronal,
+    comision_servicios, estado_servidor, fondos_reserva, acumulacion_decimo_tercero, acumulacion_decimo_cuarto
+) 
+
+VALUES(
+   '1', '2', '1', 'NO11', 'INAMHI025', '1', '2025-01-01', '2025-12-31', '575', 'OCUPADO', '11', 1212.00 ,1212.00,
+    '0.00','1768045130001', '0001', 'CEDULA', '1804572459', 'ADRIANA PATRICIA', 'RODRIGUEZ PEREZ',
+   'PICHINCHA', 'QUITO', '1701', '', 'ESPECIALISTA EN PRONOSTICOS Y ALERTAS HIDROMETEOROLOGICAS 2',
+      '2.1.3', 'DIRECCION DE PRONOSTICOS Y ALERTAS HIDROMETEOROLOGICOS',
+   11.45, 9.15, '', 'NOMBRAMIENTO PROVISIONAL', '0', 'NO', 'NO'
+);
+
+/*--Empleado 85*/
+
+INSERT INTO empleados (
+  codigo_regimen, codigo_nivel, codigo_modalidad, codigo_escala, codigo_denom, codigo_enlace,
+    fecha_inicio, fecha_fin, partida_individual, estado_puesto, grado,
+    rmu_escala, rmu_puesto, rmu_sobrevalorado,
+    ruc_patronal, codigo_sucursal, tipo_identificacion, numero_identificacion, nombres,apellidos,
+    provincia, canton, codigo_canton,
+    codigo_puesto_adicional, puesto_adicional, codigo_unidad_organica, unidad_organica,
+    aporte_individual, aporte_patronal,
+    comision_servicios, estado_servidor, fondos_reserva, acumulacion_decimo_tercero, acumulacion_decimo_cuarto
+) 
+
+VALUES(
+   '1', '2', '1', 'NO11', 'INAMHI033', '1', '2025-01-01', '2025-12-31', '290', 'OCUPADO', '11', 1212.00 ,1212.00,
+    '0.00','1768045130001', '0001', 'CEDULA', '1725606675', 'SANDRA JANETH', 'TORRES PAGUAY',
+   'PICHINCHA', 'QUITO', '1701', '', 'ESPECIALISTA EN CLIMATOLOGIA 2',
+      '2.1.4', 'DIRECCION DE ESTUDIOS, INVESTIGACION Y DESARROLLO HIDROMETEOROLOGICO',
+   11.45, 9.15, '', 'NOMBRAMIENTO PROVISIONAL', '1', 'SI', 'SI'
+);
+
+/*--Empleado 86*/
+
+INSERT INTO empleados (
+  codigo_regimen, codigo_nivel, codigo_modalidad, codigo_escala, codigo_denom, codigo_enlace,
+    fecha_inicio, fecha_fin, partida_individual, estado_puesto, grado,
+    rmu_escala, rmu_puesto, rmu_sobrevalorado,
+    ruc_patronal, codigo_sucursal, tipo_identificacion, numero_identificacion, nombres,apellidos,
+    provincia, canton, codigo_canton,
+    codigo_puesto_adicional, puesto_adicional, codigo_unidad_organica, unidad_organica,
+    aporte_individual, aporte_patronal,
+    comision_servicios, estado_servidor, fondos_reserva, acumulacion_decimo_tercero, acumulacion_decimo_cuarto
+) 
+
+VALUES(
+   '1', '2', '1', 'NO11', 'INAMHI018', '1', '2025-01-01', '2025-12-31', '275', 'OCUPADO', '11', 1212.00 ,1212.00,
+    '0.00','1768045130001', '0001', 'CEDULA', '1714904537', 'TATIANA ELIZABETH', 'MERINO MEDINA',
+   'PICHINCHA', 'QUITO', '1701', '', 'ESPECIALISTA EN GESTION DE LA INFORMACION HIDROMETEOROLOGICA 2',
+      '2.1.4', 'DIRECCION DE ESTUDIOS, INVESTIGACION Y DESARROLLO HIDROMETEOROLOGICO',
+   11.45, 9.15, '', 'ACTIVO', '1', 'NO', 'NO'
+);
+
+/*--Empleado 87 */
+
+INSERT INTO empleados (
+  codigo_regimen, codigo_nivel, codigo_modalidad, codigo_escala, codigo_denom, codigo_enlace,
+    fecha_inicio, fecha_fin, partida_individual, estado_puesto, grado,
+    rmu_escala, rmu_puesto, rmu_sobrevalorado,
+    ruc_patronal, codigo_sucursal, tipo_identificacion, numero_identificacion, nombres,apellidos,
+    provincia, canton, codigo_canton,
+    codigo_puesto_adicional, puesto_adicional, codigo_unidad_organica, unidad_organica,
+    aporte_individual, aporte_patronal,
+    comision_servicios, estado_servidor, fondos_reserva, acumulacion_decimo_tercero, acumulacion_decimo_cuarto
+) 
+
+VALUES(
+   '1', '2', '1', 'NO11', 'INAMHI018', '1', '2025-01-01', '2025-12-31', '705', 'OCUPADO', '11', 1212.00 ,1212.00,
+    '0.00','1768045130001', '0001', 'CEDULA', '0401664651', 'DARWIN ANDRES', 'ROSERO VACA',
+   'PICHINCHA', 'QUITO', '1701', '', 'ESPECIALISTA EN GESTION DE LA INFORMACION HIDROMETEOROLOGICA 2',
+      '2.1.2', 'DIRECCION DE LA INFORMACION HIDROMETEOROLOGICA',
+   11.45, 9.15, '', 'NOMBRAMIENTO PROVISIONAL', '1', 'NO', 'NO'
+);
+
+/*--Empleado 88 */
+
+INSERT INTO empleados (
+  codigo_regimen, codigo_nivel, codigo_modalidad, codigo_escala, codigo_denom, codigo_enlace,
+    fecha_inicio, fecha_fin, partida_individual, estado_puesto, grado,
+    rmu_escala, rmu_puesto, rmu_sobrevalorado,
+    ruc_patronal, codigo_sucursal, tipo_identificacion, numero_identificacion, nombres,apellidos,
+    provincia, canton, codigo_canton,
+    codigo_puesto_adicional, puesto_adicional, codigo_unidad_organica, unidad_organica,
+    aporte_individual, aporte_patronal,
+    comision_servicios, estado_servidor, fondos_reserva, acumulacion_decimo_tercero, acumulacion_decimo_cuarto
+) 
+
+VALUES(
+   '1', '2', '1', 'NO12', 'INAMHI050', '1', '2025-01-01', '2025-12-31', '660', 'OCUPADO', '12', 1412.00 ,1412.00,
+    '0.00','1768045130001', '0001', 'CEDULA', '0924083249', ' JOSE ARMANDO', 'GONZALEZ RUIZ',
+   'GUAYAS', 'GUAYAQUIL', '0901', '', 'ESPECIALISTA REGIONAL HIDROMETEOROLOGICO 3',
+      'DRT5', 'DIRECCION REGIONAL TECNICA HIDROMETEOROLOGICA GUAYAS - GALAPAGOS',
+   11.45, 9.15, '', 'NOMBRAMIENTO PROVISIONAL', '1', 'NO', 'NO'
+);
+
+/*--Empleado 89 */
+
+INSERT INTO empleados (
+  codigo_regimen, codigo_nivel, codigo_modalidad, codigo_escala, codigo_denom, codigo_enlace,
+    fecha_inicio, fecha_fin, partida_individual, estado_puesto, grado,
+    rmu_escala, rmu_puesto, rmu_sobrevalorado,
+    ruc_patronal, codigo_sucursal, tipo_identificacion, numero_identificacion, nombres,apellidos,
+    provincia, canton, codigo_canton,
+    codigo_puesto_adicional, puesto_adicional, codigo_unidad_organica, unidad_organica,
+    aporte_individual, aporte_patronal,
+    comision_servicios, estado_servidor, fondos_reserva, acumulacion_decimo_tercero, acumulacion_decimo_cuarto
+) 
+
+VALUES(
+   '1', '2', '1', 'NO12', 'INAMHI055', '1', '2025-01-01', '2025-12-31', '680', 'VACANTE', '12', 1412.00 ,1412.00,
+    '0.00','1768045130001', '0001', '', '', ' ', '',
+   'LOJA', 'LOJA', '1101', '', 'ESPECIALISTA REGIONAL EN ESTUDIOS Y PRONOSTICOS HIDROMETEOROLOGICOS 3',
+      'DRT7', 'DIRECCION REGIONAL TECNICA HIDROMETEOROLOGICA JUBONES - PUYANGO',
+   11.45, 9.15, '', '', '0', 'NO', 'NO'
+);
+
+
+/*--Empleado 90 */
+
+INSERT INTO empleados (
+  codigo_regimen, codigo_nivel, codigo_modalidad, codigo_escala, codigo_denom, codigo_enlace,
+    fecha_inicio, fecha_fin, partida_individual, estado_puesto, grado,
+    rmu_escala, rmu_puesto, rmu_sobrevalorado,
+    ruc_patronal, codigo_sucursal, tipo_identificacion, numero_identificacion, nombres,apellidos,
+    provincia, canton, codigo_canton,
+    codigo_puesto_adicional, puesto_adicional, codigo_unidad_organica, unidad_organica,
+    aporte_individual, aporte_patronal,
+    comision_servicios, estado_servidor, fondos_reserva, acumulacion_decimo_tercero, acumulacion_decimo_cuarto
+) 
+
+VALUES(
+   '1', '2', '1', 'NO12', 'INAMHI050', '1', '2025-01-01', '2025-12-31', '430', 'OCUPADO', '12', 1412.00 ,1412.00,
+    '0.00','1768045130001', '0001', 'CEDULA', '1724381387', 'RAUL HERNEY', 'PARRA CASTILLO',
+   'LOJA', 'LOJA', '1101', '', 'ESPECIALISTA REGIONAL HIDROMETEOROLOGICO 3',
+      'DRT7', 'DIRECCION REGIONAL TECNICA HIDROMETEOROLOGICA JUBONES - PUYANGO',
+   11.45, 9.15, '', 'NOMBRAMIENTO PROVISIONAL', '1', 'SI', 'SI'
+);
+
+/*--Empleado 91 */
+
+INSERT INTO empleados (
+  codigo_regimen, codigo_nivel, codigo_modalidad, codigo_escala, codigo_denom, codigo_enlace,
+    fecha_inicio, fecha_fin, partida_individual, estado_puesto, grado,
+    rmu_escala, rmu_puesto, rmu_sobrevalorado,
+    ruc_patronal, codigo_sucursal, tipo_identificacion, numero_identificacion, nombres,apellidos,
+    provincia, canton, codigo_canton,
+    codigo_puesto_adicional, puesto_adicional, codigo_unidad_organica, unidad_organica,
+    aporte_individual, aporte_patronal,
+    comision_servicios, estado_servidor, fondos_reserva, acumulacion_decimo_tercero, acumulacion_decimo_cuarto
+) 
+
+VALUES(
+   '1', '2', '1', 'NO12', 'INAMHI050', '1', '2025-01-01', '2025-12-31', '425', 'OCUPADO', '12', 1412.00 ,1412.00,
+    '0.00','1768045130001', '0001', 'CEDULA', '1718165127', 'CARLOS ANIBAL', 'CAICEDO MUÑOZ',
+   'PICHINCHA', 'QUITO', '1701', '', 'ESPECIALISTA REGIONAL HIDROMETEOROLOGICO 3',
+      'DRT2', 'DIRECCION REGIONAL TECNICA HIDROMETEOROLOGICA NAPO',
+   11.45, 9.15, '', 'NOMBRAMIENTO PROVISIONAL', '1', 'NO', 'NO'
+);
+
+/*--Empleado 92 */
+
+INSERT INTO empleados (
+  codigo_regimen, codigo_nivel, codigo_modalidad, codigo_escala, codigo_denom, codigo_enlace,
+    fecha_inicio, fecha_fin, partida_individual, estado_puesto, grado,
+    rmu_escala, rmu_puesto, rmu_sobrevalorado,
+    ruc_patronal, codigo_sucursal, tipo_identificacion, numero_identificacion, nombres,apellidos,
+    provincia, canton, codigo_canton,
+    codigo_puesto_adicional, puesto_adicional, codigo_unidad_organica, unidad_organica,
+    aporte_individual, aporte_patronal,
+    comision_servicios, estado_servidor, fondos_reserva, acumulacion_decimo_tercero, acumulacion_decimo_cuarto
+) 
+
+VALUES(
+   '1', '2', '1', 'NO12', 'HCN8', '1', '2025-01-01', '2025-12-31', '280', 'VACANTE', '12', 1412.00 ,1412.00,
+    '0.00','1768045130001', '0001', '', '', '', '',
+   'PICHINCHA', 'QUITO', '1701', '', 'ESPECIALISTA 1',
+      '2.1.3', 'DIRECCION DE PRONOSTICOS Y ALERTAS HIDROMETEOROLOGICOS',
+   11.45, 9.15, '', '', '0', 'NO', 'NO'
+);
+
+/*--Empleado 93 */
+
+INSERT INTO empleados (
+  codigo_regimen, codigo_nivel, codigo_modalidad, codigo_escala, codigo_denom, codigo_enlace,
+    fecha_inicio, fecha_fin, partida_individual, estado_puesto, grado,
+    rmu_escala, rmu_puesto, rmu_sobrevalorado,
+    ruc_patronal, codigo_sucursal, tipo_identificacion, numero_identificacion, nombres,apellidos,
+    provincia, canton, codigo_canton,
+    codigo_puesto_adicional, puesto_adicional, codigo_unidad_organica, unidad_organica,
+    aporte_individual, aporte_patronal,
+    comision_servicios, estado_servidor, fondos_reserva, acumulacion_decimo_tercero, acumulacion_decimo_cuarto
+) 
+
+VALUES(
+   '1', '2', '1', 'NO13', 'INM002', '1', '2025-01-01', '2025-12-31', '693', 'OCUPADO', '13', 1676.00 ,1676.00
+,'null','1768045130001', '0001', 'CEDULA', '1712050945', 'LIVIA JEANETH', 'CARTAGENA QUIMBIAMBA',
+   'PICHINCHA', 'QUITO', '1701', '', 'ESPECIALISTA EN CALIDAD DE AGUA Y SEDIMENTOS 3',
+      '2.1.5', 'DIRECCION DE LABORATORIO NACIONAL DE CALIDAD DE AGUA Y SEDIMENTOS',
+   11.45, 9.15, '', 'ACTIVO', '2', 'SI', 'SI'
+);
+
+/*--Empleado 94*/
+
+INSERT INTO empleados (
+  codigo_regimen, codigo_nivel, codigo_modalidad, codigo_escala, codigo_denom, codigo_enlace,
+    fecha_inicio, fecha_fin, partida_individual, estado_puesto, grado,
+    rmu_escala, rmu_puesto, rmu_sobrevalorado,
+    ruc_patronal, codigo_sucursal, tipo_identificacion, numero_identificacion, nombres,apellidos,
+    provincia, canton, codigo_canton,
+    codigo_puesto_adicional, puesto_adicional, codigo_unidad_organica, unidad_organica,
+    aporte_individual, aporte_patronal,
+    comision_servicios, estado_servidor, fondos_reserva, acumulacion_decimo_tercero, acumulacion_decimo_cuarto
+) 
+
+VALUES(
+   '1', '2', '1', 'NO13', 'INIAP002', '1', '2025-01-01', '2025-12-31', '320', 'OCUPADO', '13', 1676.00 ,1676.00
+,'0.00','1768045130001', '0001', 'CEDULA', '1717835563', 'WILMER VICTORINO', 'GUACHAMIN ACERO ',
+   'PICHINCHA', 'QUITO', '1701', '', 'INVESTIGADOR AUXILIAR 1',
+      '2.1.4', 'DIRECCION DE ESTUDIOS, INVESTIGACION Y DESARROLLO HIDROMETEOROLOGICO',
+   11.45, 9.15, '', 'NOMBRAMIENTO PROVISIONAL', '2', 'SI', 'SI'
+);
+
+/*--Empleado 95 */
+
+INSERT INTO empleados (
+  codigo_regimen, codigo_nivel, codigo_modalidad, codigo_escala, codigo_denom, codigo_enlace,
+    fecha_inicio, fecha_fin, partida_individual, estado_puesto, grado,
+    rmu_escala, rmu_puesto, rmu_sobrevalorado,
+    ruc_patronal, codigo_sucursal, tipo_identificacion, numero_identificacion, nombres,apellidos,
+    provincia, canton, codigo_canton,
+    codigo_puesto_adicional, puesto_adicional, codigo_unidad_organica, unidad_organica,
+    aporte_individual, aporte_patronal,
+    comision_servicios, estado_servidor, fondos_reserva, acumulacion_decimo_tercero, acumulacion_decimo_cuarto
+) 
+
+VALUES(
+   '1', '2', '1', 'NO16', 'INIAP006', '1', '2025-01-01', '2025-12-31', '325', 'OCUPADO', '16', 2308.00 ,2308.00
+,'NULL','1768045130001', '0001', 'CEDULA', '1802071074', 'BOLIVAR ERNESTO', 'CACERES CORREA',
+   'PICHINCHA', 'QUITO', '1701', '', 'INVESTIGADOR AGREGADO 2',
+      '2.1.5', 'DIRECCION DE ESTUDIOS, INVESTIGACION Y DESARROLLO HIDROMETEOROLOGICO',
+   11.45, 9.15, '', 'ACTIVO', '1', 'SI', 'SI'
+);
+
+/*--Empleado 96*/
+
+INSERT INTO empleados (
+  codigo_regimen, codigo_nivel, codigo_modalidad, codigo_escala, codigo_denom, codigo_enlace,
+    fecha_inicio, fecha_fin, partida_individual, estado_puesto, grado,
+    rmu_escala, rmu_puesto, rmu_sobrevalorado,
+    ruc_patronal, codigo_sucursal, tipo_identificacion, numero_identificacion, nombres,apellidos,
+    provincia, canton, codigo_canton,
+    codigo_puesto_adicional, puesto_adicional, codigo_unidad_organica, unidad_organica,
+    aporte_individual, aporte_patronal,
+    comision_servicios, estado_servidor, fondos_reserva, acumulacion_decimo_tercero, acumulacion_decimo_cuarto
+) 
+
+VALUES(
+   '1', '2', '22', 'CT3', 'CO2036', '1', '2025-01-01', '2025-12-31', '75', 'OCUPADO', '3', 317.94 ,570.00
+,'NULL','1768045130001', '0001', 'CEDULA', '1600380131', 'CARLOS ANDRES', 'NIMA CORDOVA',
+   'PICHINCHA', 'QUITO', '1701', '', 'CHOFER',
+      '4', 'DIRECCION ADMINISTRATIVA FINANCIERA',
+   11.45, 9.15, '', 'ACTIVO', '0', 'SI', 'SI'
+);
+
+/*--Empleado 97 */
+
+INSERT INTO empleados (
+  codigo_regimen, codigo_nivel, codigo_modalidad, codigo_escala, codigo_denom, codigo_enlace,
+    fecha_inicio, fecha_fin, partida_individual, estado_puesto, grado,
+    rmu_escala, rmu_puesto, rmu_sobrevalorado,
+    ruc_patronal, codigo_sucursal, tipo_identificacion, numero_identificacion, nombres,apellidos,
+    provincia, canton, codigo_canton,
+    codigo_puesto_adicional, puesto_adicional, codigo_unidad_organica, unidad_organica,
+    aporte_individual, aporte_patronal,
+    comision_servicios, estado_servidor, fondos_reserva, acumulacion_decimo_tercero, acumulacion_decimo_cuarto
+) 
+
+VALUES(
+   '1', '2', '22', 'CT1', 'CO7', '1', '2025-01-01', '2025-12-31', '76', 'OCUPADO', '1', 300.00 ,561.00
+,'NULL','1768045130001', '0001', 'CEDULA', '1723400949', 'JONATHAN ANDRES', 'GUALLICHICO GUALLICHICO',
+   'PICHINCHA', 'QUITO', '1701', '', 'CONSERJE',
+      '4', 'DIRECCION ADMINISTRATIVA FINANCIERA',
+   11.45, 9.15, '', 'ACTIVO', '0', 'SI', 'SI'
+);
+
+/*--Empleado 98 */
+
+INSERT INTO empleados (
+  codigo_regimen, codigo_nivel, codigo_modalidad, codigo_escala, codigo_denom, codigo_enlace,
+    fecha_inicio, fecha_fin, partida_individual, estado_puesto, grado,
+    rmu_escala, rmu_puesto, rmu_sobrevalorado,
+    ruc_patronal, codigo_sucursal, tipo_identificacion, numero_identificacion, nombres,apellidos,
+    provincia, canton, codigo_canton,
+    codigo_puesto_adicional, puesto_adicional, codigo_unidad_organica, unidad_organica,
+    aporte_individual, aporte_patronal,
+    comision_servicios, estado_servidor, fondos_reserva, acumulacion_decimo_tercero, acumulacion_decimo_cuarto
+) 
+
+VALUES(
+   '1', '2', '22', 'CT3', 'CO2036', '1', '2025-01-01', '2025-12-31', '65', 'OCUPADO', '3', 317.94 ,570.00
+,'NULL','1768045130001', '0001', 'CEDULA', '1714096698', 'JAVIER SANTIAGO', 'VALENCIA CABRERA',
+   'PICHINCHA', 'QUITO', '1701', '', 'CONSERJE',
+      '4', 'DIRECCION ADMINISTRATIVA FINANCIERA',
+   11.45, 9.15, '', 'ACTIVO', '1', 'SI', 'SI'
+);
+
+/*--Empleado 99 */
+
+INSERT INTO empleados (
+  codigo_regimen, codigo_nivel, codigo_modalidad, codigo_escala, codigo_denom, codigo_enlace,
+    fecha_inicio, fecha_fin, partida_individual, estado_puesto, grado,
+    rmu_escala, rmu_puesto, rmu_sobrevalorado,
+    ruc_patronal, codigo_sucursal, tipo_identificacion, numero_identificacion, nombres,apellidos,
+    provincia, canton, codigo_canton,
+    codigo_puesto_adicional, puesto_adicional, codigo_unidad_organica, unidad_organica,
+    aporte_individual, aporte_patronal,
+    comision_servicios, estado_servidor, fondos_reserva, acumulacion_decimo_tercero, acumulacion_decimo_cuarto
+) 
+
+VALUES(
+   '1', '2', '22', 'CT1', 'CO7', '1', '2025-01-01', '2025-12-31', '45', 'OCUPADO', '1', 300.00 ,561.00
+,'NULL','1768045130001', '0001', 'CEDULA', '1709216996', ' JOSE MANUEL', 'CARPIO ACHI',
+   'PICHINCHA', 'QUITO', '1701', '', 'CONSERJE',
+      '4', 'DIRECCION ADMINISTRATIVA FINANCIERA',
+   11.45, 9.15, '', 'ACTIVO', '1', 'SI', 'SI'
+);
+
+/*--Empleado 100 */
+
+INSERT INTO empleados (
+  codigo_regimen, codigo_nivel, codigo_modalidad, codigo_escala, codigo_denom, codigo_enlace,
+    fecha_inicio, fecha_fin, partida_individual, estado_puesto, grado,
+    rmu_escala, rmu_puesto, rmu_sobrevalorado,
+    ruc_patronal, codigo_sucursal, tipo_identificacion, numero_identificacion, nombres,apellidos,
+    provincia, canton, codigo_canton,
+    codigo_puesto_adicional, puesto_adicional, codigo_unidad_organica, unidad_organica,
+    aporte_individual, aporte_patronal,
+    comision_servicios, estado_servidor, fondos_reserva, acumulacion_decimo_tercero, acumulacion_decimo_cuarto
+) 
+
+VALUES(
+   '1', '2', '22', 'CT1', 'CO7', '1', '2025-01-01', '2025-12-31', '67', 'OCUPADO', '3', 317.94 ,570.00
+,'NULL','1768045130001', '0001', 'CEDULA', '1717260994', 'WILLIAM MIGUEL', 'NASIMBA LOYA',
+   'PICHINCHA', 'QUITO', '1701', '', 'CONSERJE',
+      '4', 'DIRECCION ADMINISTRATIVA FINANCIERA',
+   11.45, 9.15, '', 'ACTIVO', '1', 'SI', 'SI'
+);
+
+/*--Empleado 101 */
+
+INSERT INTO empleados (
+  codigo_regimen, codigo_nivel, codigo_modalidad, codigo_escala, codigo_denom, codigo_enlace,
+    fecha_inicio, fecha_fin, partida_individual, estado_puesto, grado,
+    rmu_escala, rmu_puesto, rmu_sobrevalorado,
+    ruc_patronal, codigo_sucursal, tipo_identificacion, numero_identificacion, nombres,apellidos,
+    provincia, canton, codigo_canton,
+    codigo_puesto_adicional, puesto_adicional, codigo_unidad_organica, unidad_organica,
+    aporte_individual, aporte_patronal,
+    comision_servicios, estado_servidor, fondos_reserva, acumulacion_decimo_tercero, acumulacion_decimo_cuarto
+) 
+
+VALUES(
+   '1', '2', '22', 'CT1', 'CO7', '1', '2025-01-01', '2025-12-31', '68', 'OCUPADO', '1', 300.00 ,561.00
+,'NULL','1768045130001', '0001', 'CEDULA', '0401469473', 'LUIS ALBERTO', 'PINEDA CUAICAL',
+   'PICHINCHA', 'QUITO', '1701', '', 'CONSERJE',
+      '4', 'DIRECCION ADMINISTRATIVA FINANCIERA',
+   11.45, 9.15, '', 'ACTIVO', '2', 'NO', 'NO'
+);
