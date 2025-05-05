@@ -286,4 +286,37 @@ function actualizarMotivacion() {
   }
 }
 
+
+ /* Esta función se activa al marcar/desmarcar el checkbox "COMUNICACIÓN ELECTRÓNICA".
+  Si el checkbox está marcado: */
  
+ 
+function toggleNotificacionFisica() {
+  const check = document.getElementById("checkboxElectronica");
+
+  const fechas = document.querySelectorAll("#fecha_elaboracion");
+  const horas = document.querySelectorAll("#hora_actual");
+  const medios = document.querySelectorAll("#campoMedio");
+  const nombres = document.querySelectorAll("#nombreResponsable");
+  const puestos = document.querySelectorAll("#puestoResponsable");
+
+  if (check.checked) {
+    //  Limpiar todos los campos
+    fechas.forEach(f => f.value = "");
+    horas.forEach(h => h.value = "");
+    medios.forEach(m => m.value = "");
+    nombres.forEach(n => n.value = "");
+    puestos.forEach(p => p.value = "");
+  } else {
+    // 🗓 Fecha y hora actual
+    const hoy = new Date();
+    const fechaFormateada = hoy.toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' });
+    const horaFormateada = hoy.toLocaleTimeString('es-EC', { hour: '2-digit', minute: '2-digit' });
+
+    fechas.forEach(f => f.value = fechaFormateada);
+    horas.forEach(h => h.value = horaFormateada);
+    medios.forEach(m => m.value = "NOTIFICACIÓN REALIZADA FISICAMENTE");
+    nombres.forEach(n => n.value = "Luis F. Albuja L.");
+    puestos.forEach(p => p.value = "Servidor Público de Apoyo 4");
+  }
+}

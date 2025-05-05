@@ -266,3 +266,53 @@ select.identificacion {
   text-align: center;
   cursor: pointer;
 }
+.talentoH {
+  font-size: 22px !important;
+  font-weight: bold !important;
+  color: black !important;
+  text-align: center;
+  padding: 12px;
+  background-color: #e4e4e4; /* Gris claro opcional */
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  letter-spacing: 1px;
+  font-family: Arial, sans-serif;
+}
+.textarea-expandible {
+  width: 100%;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 11px;
+  border: none;
+  padding: 1px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: transparent;
+  text-align: left;
+}
+
+
+.fila-partida {
+  height: 35px;
+}
+
+.celda-partida {
+  padding: 4px 6px;
+}
+
+.titulo-partida {
+  font-size: 11px;
+  font-weight: bold;
+  margin: 0 0 2px 0;
+  text-align: center;
+}
+
+.input-partida {
+  font-size: 10px;
+  padding: 2px 4px;
+  width: 100%;
+  border: none;
+  background: transparent;
+  text-align: center;
+  box-sizing: border-box;
+}
