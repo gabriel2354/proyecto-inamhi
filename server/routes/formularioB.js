@@ -1,30 +1,31 @@
-// ✅ Importaciones correctas
 const express = require('express');
 const router = express.Router();
-const db = require('../config/database'); // Asegúrate de que esta ruta esté bien
+const db = require('../config/database');
+const multer = require('multer');
 
-// ✅ Ruta para guardar una acción de personal (vacaciones)
-router.post('/accion-personal', async (req, res) => {
-  const {
-    numero_documento,
-    id_colaborador,
-    id_empleado,
-    fecha_desde,
-    fecha_hasta,
-    dias_tomados,
-    motivacion // 🔥 Aquí ya lo consideramos
-  } = req.body;
+// 📂 Configuración de multer en memoria
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
+// ✅ Guardar PDF y datos
+router.post('/accion-personal/pdf', upload.single('archivo_pdf'), async (req, res) => {
   try {
-    // Validar campos obligatorios
-    if (
-      !numero_documento || !id_colaborador || !id_empleado ||
-      !fecha_desde || !fecha_hasta || dias_tomados == null
-    ) {
-      return res.status(400).json({ message: 'Faltan datos obligatorios.' });
+    const {
+      numero_documento,
+      id_colaborador,
+      id_empleado,
+      fecha_desde,
+      fecha_hasta,
+      dias_tomados,
+      motivacion
+    } = req.body;
+
+    if (!numero_documento || !id_colaborador || !id_empleado || !fecha_desde || !fecha_hasta || dias_tomados == null || !req.file) {
+      return res.status(400).json({ message: 'Faltan datos o archivo PDF.' });
     }
 
-    // ✅ Incluyendo motivación ahora
+    const archivoPDF = req.file.buffer;
+
     const sql = `
       INSERT INTO accion_personal_vacaciones_pdf (
         numero_documento,
@@ -33,34 +34,37 @@ router.post('/accion-personal', async (req, res) => {
         fecha_desde,
         fecha_hasta,
         dias_tomados,
-        motivacion
-      ) VALUES (?, ?, ?, ?, ?, ?, ?)
+        motivacion,
+        archivo_pdf
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
     const valores = [
       numero_documento,
-      id_colaborador,
-      id_empleado,
+      parseInt(id_colaborador),
+      parseInt(id_empleado),
       fecha_desde,
       fecha_hasta,
       dias_tomados,
-      motivacion || null
+      motivacion,
+      archivoPDF
     ];
 
     const [result] = await db.execute(sql, valores);
 
     res.json({
       success: true,
-      message: 'Acción de personal guardada correctamente.',
+      message: '✅ Acción y PDF guardados correctamente.',
       insertedId: result.insertId
     });
+
   } catch (error) {
-    console.error('Error al guardar acción de personal:', error);
-    res.status(500).json({ error: 'Error al guardar la acción de personal.' });
+    console.error("❌ Error al guardar acción y PDF:", error);
+    res.status(500).json({ message: 'Error al guardar acción y PDF.' });
   }
 });
 
-// ✅ Ruta para consultar vacaciones
+// ✅ Consultar historial de vacaciones con nombre del colaborador
 router.get("/accion-personal/vacaciones/:cedula", async (req, res) => {
   const { cedula } = req.params;
 
@@ -72,9 +76,12 @@ router.get("/accion-personal/vacaciones/:cedula", async (req, res) => {
         apv.dias_tomados,
         apv.numero_documento,
         apv.fecha_generacion,
-        apv.motivacion
-      FROM inamhi.accion_personal_vacaciones_pdf apv
-      INNER JOIN inamhi.empleados e ON apv.id_empleado = e.id
+        apv.motivacion,
+        c.nombres AS nombres_colaborador,
+        c.apellidos AS apellidos_colaborador
+      FROM accion_personal_vacaciones_pdf apv
+      INNER JOIN empleados e ON apv.id_empleado = e.id
+      INNER JOIN colaborador c ON apv.id_colaborador = c.idColaborador
       WHERE e.numero_identificacion = ?
       ORDER BY apv.fecha_generacion DESC;
     `, [cedula]);
@@ -91,18 +98,42 @@ router.get("/accion-personal/vacaciones/:cedula", async (req, res) => {
       fechaHasta: ultimaVacacion.fecha_hasta,
       diasTomados: ultimaVacacion.dias_tomados,
       numeroDocumento: ultimaVacacion.numero_documento,
-      motivacion: ultimaVacacion.motivacion, // ✅ Opcional mostrar motivación si quieres
-      historial: vacaciones.map(vacacion => ({
-        numeroDocumento: vacacion.numero_documento,
-        fechaGeneracion: vacacion.fecha_generacion
+      motivacion: ultimaVacacion.motivacion,
+      historial: vacaciones.map(v => ({
+        numeroDocumento: v.numero_documento,
+        fechaGeneracion: v.fecha_generacion,
+        generadoPor: `${v.nombres_colaborador} ${v.apellidos_colaborador}`
       }))
     });
 
   } catch (error) {
-    console.error(error);
+    console.error("❌ Error al consultar vacaciones:", error);
     res.status(500).json({ message: "Error consultando vacaciones." });
   }
 });
 
-// ✅ Exportamos correctamente
+// ✅ Obtener PDF generado
+router.get("/accion-personal/pdf/:numeroDocumento", async (req, res) => {
+  const { numeroDocumento } = req.params;
+
+  try {
+    const [result] = await db.query(`
+      SELECT archivo_pdf 
+      FROM accion_personal_vacaciones_pdf 
+      WHERE numero_documento = ?
+    `, [numeroDocumento]);
+
+    if (result.length === 0 || !result[0].archivo_pdf) {
+      return res.status(404).send("PDF no encontrado.");
+    }
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `inline; filename="${numeroDocumento}.pdf"`);
+    res.send(result[0].archivo_pdf);
+  } catch (error) {
+    console.error("❌ Error al obtener el PDF:", error);
+    res.status(500).send("Error al obtener el PDF.");
+  }
+});
+
 module.exports = router;

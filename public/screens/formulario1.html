@@ -146,16 +146,26 @@
         </tr>
         <tr>
           <td style="font-weight: bold;">NIVEL DE GESTIÓN</td>
-          <td><input type="text" class="left" value="DIRECCIÓN EJECUTIVA"></td>
+          <td>
+            <textarea id="nivel_gestion" class="textarea-expandible left">DIRECCIÓN EJECUTIVA</textarea>
+          </td>
           <td style="font-weight: bold;">NIVEL DE GESTIÓN</td>
-          <td><input type="text" class="left" value=""></td>
+          <td>
+            <textarea class="textarea-expandible left"></textarea>
+          </td>
         </tr>
+        
         <tr>
           <td style="font-weight: bold;">UNIDAD ADMINISTRATIVA</td>
-          <td><input type="text" class="left" id="unidad_organica"></td>
+          <td>
+            <textarea id="unidad_organica" class="textarea-expandible left"></textarea>
+          </td>
           <td style="font-weight: bold;">UNIDAD ADMINISTRATIVA</td>
-          <td><input type="text" class="left" value=""></td>
+          <td>
+            <textarea class="textarea-expandible left"></textarea>
+          </td>
         </tr>
+        
         <tr>
           <td style="font-weight: bold;">LUGAR DE TRABAJO</td>
           <td><input type="text" class="left" id="canton"></td>
@@ -164,16 +174,22 @@
         </tr>
         <tr>
           <td style="font-weight: bold;">DENOMINACIÓN DEL PUESTO</td>
-          <td><input type="text" class="left" id="denominacion_puesto"></td>
+          <td>
+            <textarea id="denominacion_puesto" class="textarea-expandible left"></textarea>
+          </td>
           <td style="font-weight: bold;">DENOMINACIÓN DEL PUESTO</td>
-          <td><input type="text" class="left" value=""></td>
+          <td>
+            <textarea class="textarea-expandible left"></textarea>
+          </td>
         </tr>
+        
         <tr>
           <td style="font-weight: bold;">GRUPO OCUPACIONAL</td>
-          <td><input type="text" class="left" id="escala_ocupacional"></td>
+          <td><textarea id="escala_ocupacional" class="textarea-expandible left"></textarea></td>
           <td style="font-weight: bold;">GRUPO OCUPACIONAL</td>
-          <td><input type="text" class="left" value=""></td>
+          <td><textarea class="textarea-expandible left"></textarea></td>
         </tr>
+        
         <tr>
           <td style="font-weight: bold;">GRADO</td>
           <td><input type="text" class="left" id="grado"></td>
@@ -187,16 +203,19 @@
           <td style="font-weight: bold;">REMUNERACIÓN MENSUAL</td>
           <td><input type="text" class="left" value=""></td>
         </tr>
-        <tr>
-          <td colspan="2">
-            <h4 style="font-weight: bold; font-size: 13px; margin-bottom: 4px;">PARTIDA INDIVIDUAL</h4>
-            <input type="text" class="left" id="estructura_programatica" style="width: 100%; font-size: 12px; padding: 4px;">
+        
+        <tr class="fila-partida">
+          <td colspan="2" class="celda-partida">
+            <h4 class="titulo-partida">PARTIDA INDIVIDUAL</h4>
+            <input type="text" class="input-partida left" id="estructura_programatica">
           </td>
-          <td colspan="2">
-            <h4 style="font-weight: bold; font-size: 13px; margin-bottom: 4px;">PARTIDA INDIVIDUAL</h4>
-            <input type="text" class="left" id="partida_individual" style="width: 100%; font-size: 12px; padding: 4px;">
+          <td colspan="2" class="celda-partida">
+            <h4 class="titulo-partida">PARTIDA INDIVIDUAL</h4>
+            <input type="text" class="input-partida left" id="partida_individual">
           </td>
         </tr>
+        
+          
         
       </table>
 
@@ -346,9 +365,11 @@
         </tr>
       </table>
 
-
+      <br><br><br>
       <tr>
-        <th colspan="4" class="gray">** USO EXCLUSIVO PARA TALENTO HUMANO</th>
+        <th colspan="4" class="talentoH">** USO EXCLUSIVO PARA TALENTO HUMANO **</th>
+        <br><br>
+        <br><br>
       </tr>
       <tr>
         <th colspan="4" class="gray">REGISTRO DE NOTIFICACIÓN AL SERVIDOR PÚBLICO DE LA ACCIÓN DE PERSONAL <span
@@ -360,14 +381,17 @@
           <br>
           <br>
           <br>
-          <strong>COMUNICACIÓN ELECTRÓNICA:</strong>
-          <input type="checkbox" checked>
+          <label>
+            <strong>COMUNICACIÓN ELECTRÓNICA:</strong>
+            <input type="checkbox" id="checkboxElectronica" onclick="toggleNotificacionFisica()">
+          </label>
         </td>
       </tr>
       <tr>
         <br>
         <br>
         <br>
+        <div id="seccionNotificacionFisica">
         <br>
         <td><strong>FECHA:</strong><input type="text" id="fecha_elaboracion"
             style="border: none; border-bottom: 1px solid black; width: 30%;"></td>
@@ -380,7 +404,7 @@
         <br>
         <br>
         <br>
-        <td> <strong> MEDIO:</strong><input type="text" value="NOTIFICACIÓN REALIZADA FISICAMENTE"
+        <td> <strong> MEDIO:</strong><input  id="campoMedio" type="text" value="NOTIFICACIÓN REALIZADA FISICAMENTE"
             style="border: none; border-bottom: 1px solid black; width: 30%;"></td>
       </tr>
       <tr>
@@ -402,14 +426,15 @@
             <div style="margin-bottom: 15px;">
 
               <strong>NOMBRE:</strong>
-              <input type="text" value="Luis F. Albuja L." class="linea-centro"
+              <input type="text" id="nombreResponsable"  value="Luis F. Albuja L." class="linea-centro"
                 style="border: none; border-bottom: 1px solid black; width: 100%;">
             </div>
 
             <div>
               <strong>PUESTO:</strong>
-              <input type="text" value="Servidor Público de Apoyo 4" class="linea-centro"
+              <input type="text" id="puestoResponsable" value="Servidor Público de Apoyo 4" class="linea-centro"
                 style="border: none; border-bottom: 1px solid black; width: 100%;">
+              </div>
             </div>
           </div>
         </td>

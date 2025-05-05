@@ -28,7 +28,7 @@ async function buscarEmpleado() {
   try {
     const res = await fetch(`${API_URL}/buscar?cedula=${cedula}`);
     if (!res.ok) throw new Error('Empleado no encontrado');
-    
+
     const data = await res.json();
     renderTabla([data]);
 
@@ -161,6 +161,7 @@ document.querySelectorAll('.dropdown-btn').forEach(btn => {
 });
 
 // Mostrar el nombre del usuario logueado
+const generadoPor = localStorage.getItem("userName") || "usuario desconocido";
 const userName = localStorage.getItem("userName") || "Usuario";
 const userNameElement = document.getElementById("userName");
 if (userNameElement) {
@@ -197,6 +198,14 @@ function mostrarModal(mensaje, tipo = "info") {
   modal.style.display = "block";
 }
 
+function verFormularioVacaciones(numeroDocumento) {
+  // Guardamos el número de documento en el localStorage
+  localStorage.setItem("numero_documento", numeroDocumento);
+
+  // Redirigimos a la página que quieres
+  window.location.href = "/public/screens/formularioVacaciones.html";
+}
+
 // 2. Función para cerrar el modal
 function cerrarModal() {
   const modal = document.getElementById('miModal');
@@ -210,7 +219,6 @@ function formatearFechaLarga(fechaStr) {
   return fecha.toLocaleDateString('es-ES', opciones);
 }
 
-// 4. Función principal para consultar vacaciones
 async function consultarVacaciones(cedula) {
   try {
     const res = await fetch(`http://localhost:3000/formulario/accion-personal/vacaciones/${cedula}`);
@@ -238,7 +246,7 @@ async function consultarVacaciones(cedula) {
         estado = "✅ El empleado ya culminó sus vacaciones recientes.";
       }
 
-      // Construimos la lista de documentos del historial
+      // 🔥 Modificamos aquí el historial para incluir el botón "Ver Formulario"
       let historialHTML = "";
       if (data.historial && data.historial.length > 0) {
         historialHTML = `
@@ -246,13 +254,19 @@ async function consultarVacaciones(cedula) {
           📋 <strong>Historial de documentos generados:</strong><br>
           <ul style="margin-top:8px; padding-left:20px;">
             ${data.historial.map(doc => `
-              <li>➔ <strong>${doc.numeroDocumento}</strong> - ${formatearFechaLarga(doc.fechaGeneracion)}</li>
+              <li style="margin-bottom:10px;">
+                ➔ <strong>${doc.numeroDocumento}</strong> - ${formatearFechaLarga(doc.fechaGeneracion)}
+                <button onclick="verFormularioVacaciones('${doc.numeroDocumento}')" style="margin-left:10px; background-color:#3498db; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;">
+                  visualizar acción
+                </button>
+                <span style="margin-left:8px; font-style:italic; color:#555;"> Documento generado por: <strong>${doc.generadoPor}</strong></span>
+              </li>
             `).join("")}
           </ul>
         `;
       }
 
-      // Modal final completo
+
       mostrarModal(`
         ${estado}<br><br>
         ➔ Documento: <strong>${data.numeroDocumento}</strong><br>
@@ -260,13 +274,16 @@ async function consultarVacaciones(cedula) {
         ➔ Hasta: <strong>${formatearFechaLarga(data.fechaHasta)}</strong><br>
         ➔ Días tomados: <strong>${data.diasTomados}</strong> Días calendario.
         ${historialHTML}
-      `, "success");
+             `, "success");
     }
   } catch (error) {
     console.error("❌ Error al consultar vacaciones:", error);
     mostrarModal("❌ No se pudo conectar con el servidor. Intenta más tarde.", "error");
   }
 }
+
+ 
+
 
 
 

@@ -238,6 +238,10 @@ CREATE TABLE accion_personal_vacaciones_pdf (
 
   ALTER TABLE inamhi.accion_personal_vacaciones_pdf
 ADD COLUMN motivacion TEXT;
+-- Agregamos una nueva columna donde se guardara el documento en pdf 
+ALTER TABLE accion_personal_vacaciones_pdf
+ADD COLUMN archivo_pdf LONGBLOB;
+
 
   -- Claves foráneas
   FOREIGN KEY (id_empleado) REFERENCES empleados(id),

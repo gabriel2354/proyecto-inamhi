@@ -89,7 +89,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // Exportar a pdf documento Acción de Personal y guardar en BD
 async function exportarPDF() {
-  // Ajustar altura de textareas
   document.querySelectorAll('textarea').forEach(textarea => {
     textarea.style.height = 'auto';
     textarea.style.height = `${textarea.scrollHeight}px`;
@@ -98,72 +97,28 @@ async function exportarPDF() {
   const textarea = document.getElementById('motivacion');
   const vista = document.getElementById('motivacionVista');
 
-  // Reemplazar textarea por vista para exportar
   if (textarea && vista) {
     vista.innerText = textarea.value;
     textarea.style.display = 'none';
     vista.style.display = 'block';
   }
 
-  // Esperar para asegurar que DOM se haya actualizado
   await new Promise(resolve => setTimeout(resolve, 300));
 
-// 👉 GUARDAR EN LA BASE DE DATOS
-const numeroDocumento = document.getElementById("numero_documento").value;
-const cedula = document.getElementById("numero_identificacion").value;
-const fechaDesde = document.getElementById("fecha_desde").value;
-const fechaHasta = document.getElementById("fecha_hasta").value;
-const motivacion = document.getElementById('motivacion').value;
+  const numeroDocumento = document.getElementById("numero_documento").value;
+  const fechaDesde = document.getElementById("fecha_desde").value;
+  const fechaHasta = document.getElementById("fecha_hasta").value;
+  const motivacion = document.getElementById("motivacion").value;
+  const diasLaborales = calcularDiasLaborales(fechaDesde, fechaHasta);
+  const diasTomadosProporcionales = parseFloat(convertirALaboralesConFactor(diasLaborales));
+  const idColaborador = localStorage.getItem("idColaborador");
+  const id_empleado = localStorage.getItem("id_empleado");
 
-// 🔥 Calcula días laborales y días proporcionales
-const diasLaborales = calcularDiasLaborales(fechaDesde, fechaHasta);
-const diasTomadosProporcionales = parseFloat(convertirALaboralesConFactor(diasLaborales));
-
-// 🔍 Extraer IDs del localStorage
-const idColaborador = localStorage.getItem("idColaborador");
-const id_empleado = localStorage.getItem("id_empleado");
-
-// 👉 Mostrar los valores en consola para depuración
-console.log("🆔 ID COLABORADOR:", idColaborador);
-console.log("🆔 ID EMPLEADO:", id_empleado);
-console.log("📄 Documento:", numeroDocumento);
-console.log("📅 Desde:", fechaDesde, "Hasta:", fechaHasta, "Días proporcionales:", diasTomadosProporcionales);
-
-if (!idColaborador || !id_empleado) {
-  alert("❌ Faltan datos del usuario o del empleado. No se guardó la acción.");
-  return; // 🔥 Corta el flujo si falta alguno
-} else {
-  try {
-    const res = await fetch("http://localhost:3000/formulario/accion-personal", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        numero_documento: numeroDocumento,
-        id_colaborador: parseInt(idColaborador),
-        id_empleado: parseInt(id_empleado),
-        fecha_desde: fechaDesde,
-        fecha_hasta: fechaHasta,
-        dias_tomados: diasTomadosProporcionales,
-        motivacion: motivacion // 👈 🔥 AQUÍ agregas el campo motivación también
-      })
-    });
-
-    const result = await res.json();
-    if (!result.success) {
-      console.warn("⚠️ No se guardó en la base de datos:", result);
-      alert("⚠️ La acción de personal NO se guardó.");
-    } else {
-      console.log("✅ Acción de personal guardada con ID:", result.insertedId);
-      alert("✅ Acción de personal guardada correctamente."); // 🎯 Mensaje amigable
-    }
-  } catch (error) {
-    console.error("❌ Error en el guardado:", error);
-    alert("❌ Error de conexión con el servidor.");
+  if (!idColaborador || !id_empleado) {
+    alert("❌ Faltan datos del usuario o del empleado.");
+    return;
   }
-}
 
-
-  // 👉 GENERAR Y GUARDAR PDF
   const paginas = document.querySelectorAll('.pagina');
   const pdf = new jspdf.jsPDF("p", "mm", "a4");
   const pageWidth = pdf.internal.pageSize.getWidth();
@@ -171,13 +126,7 @@ if (!idColaborador || !id_empleado) {
   const usableWidth = pageWidth - margin * 2;
 
   for (let i = 0; i < paginas.length; i++) {
-    const pagina = paginas[i];
-
-    const canvas = await html2canvas(pagina, {
-      scale: 3,
-      useCORS: true
-    });
-
+    const canvas = await html2canvas(paginas[i], { scale: 3, useCORS: true });
     const imgData = canvas.toDataURL("image/png");
     const imgHeight = (canvas.height * usableWidth) / canvas.width;
 
@@ -185,14 +134,44 @@ if (!idColaborador || !id_empleado) {
     pdf.addImage(imgData, "PNG", margin, margin, usableWidth, imgHeight);
   }
 
-  pdf.save("accion-personal.pdf");
+  const pdfBlob = pdf.output("blob");
+  const formData = new FormData();
+  formData.append("numero_documento", numeroDocumento);
+  formData.append("id_colaborador", parseInt(idColaborador));
+  formData.append("id_empleado", parseInt(id_empleado));
+  formData.append("fecha_desde", fechaDesde);
+  formData.append("fecha_hasta", fechaHasta);
+  formData.append("dias_tomados", diasTomadosProporcionales);
+  formData.append("motivacion", motivacion);
 
-  // Restaurar textarea si es necesario
+  formData.append("archivo_pdf", pdfBlob, "accion-personal.pdf"); // ✅ CORRECTO
+
+  try {
+    const res = await fetch("http://localhost:3000/formulario/accion-personal/pdf", {
+      method: "POST",
+      body: formData
+    });
+
+    const result = await res.json();
+    if (result.success) {
+      pdf.save("accion-personal.pdf");
+      alert("✅ Acción guardada y PDF almacenado.");
+        // 🔁 Redirigir a empleados.html después del guardado
+  window.location.href = "/public/screens/empleados.html";
+    } else {
+      alert("⚠️ La acción se guardó pero no el PDF.");
+    }
+  } catch (err) {
+    console.error("❌ Error al guardar el PDF:", err);
+    alert("❌ Error de red al enviar PDF.");
+  }
+
   if (textarea && vista) {
     textarea.style.display = 'block';
     vista.style.display = 'none';
   }
 }
+
 
 
 // Convierte la fecha seleccionada en formato largo y oculta el input original
@@ -307,4 +286,37 @@ function actualizarMotivacion() {
   }
 }
 
+
+ /* Esta función se activa al marcar/desmarcar el checkbox "COMUNICACIÓN ELECTRÓNICA".
+  Si el checkbox está marcado: */
  
+ 
+function toggleNotificacionFisica() {
+  const check = document.getElementById("checkboxElectronica");
+
+  const fechas = document.querySelectorAll("#fecha_elaboracion");
+  const horas = document.querySelectorAll("#hora_actual");
+  const medios = document.querySelectorAll("#campoMedio");
+  const nombres = document.querySelectorAll("#nombreResponsable");
+  const puestos = document.querySelectorAll("#puestoResponsable");
+
+  if (check.checked) {
+    //  Limpiar todos los campos
+    fechas.forEach(f => f.value = "");
+    horas.forEach(h => h.value = "");
+    medios.forEach(m => m.value = "");
+    nombres.forEach(n => n.value = "");
+    puestos.forEach(p => p.value = "");
+  } else {
+    // 🗓 Fecha y hora actual
+    const hoy = new Date();
+    const fechaFormateada = hoy.toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' });
+    const horaFormateada = hoy.toLocaleTimeString('es-EC', { hour: '2-digit', minute: '2-digit' });
+
+    fechas.forEach(f => f.value = fechaFormateada);
+    horas.forEach(h => h.value = horaFormateada);
+    medios.forEach(m => m.value = "NOTIFICACIÓN REALIZADA FISICAMENTE");
+    nombres.forEach(n => n.value = "Luis F. Albuja L.");
+    puestos.forEach(p => p.value = "Servidor Público de Apoyo 4");
+  }
+}
