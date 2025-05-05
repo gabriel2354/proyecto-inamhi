@@ -7,29 +7,51 @@ router.get('/listar', async (req, res) => {
   try {
     const [rows] = await db.execute(`
       SELECT 
-       e.id AS id_empleado,
+        e.id AS id_empleado,
         e.numero_identificacion,
         e.nombres,
-        e.apellidos, -- 🆕 Campo agregado
+        e.apellidos,
         e.estado_puesto,
         e.rmu_puesto,
         e.unidad_organica,
         e.canton,
         e.grado,
-         e.partida_individual, 
-        (SELECT nombre FROM regimen_laboral WHERE codigo_regimen = e.codigo_regimen) AS regimen_laboral,
-        (SELECT nombre FROM nivel_ocupacional WHERE codigo_nivel = e.codigo_nivel) AS nivel_ocupacional,
-        (SELECT nombre FROM denominacion_puesto WHERE codigo_denom = e.codigo_denom) AS denominacion_puesto,
-        (SELECT nombre FROM escala_ocupacional WHERE codigo_escala = e.codigo_escala) AS escala_ocupacional,
-        (SELECT nombre FROM estructura_programatica WHERE codigo_enlace = e.codigo_enlace) AS estructura_programatica
+        e.partida_individual,
+        (
+          SELECT rl.nombre 
+          FROM regimen_laboral rl 
+          WHERE rl.codigo_regimen = e.codigo_regimen
+        ) AS regimen_laboral,
+        (
+          SELECT no.nombre 
+          FROM nivel_ocupacional no 
+          WHERE no.codigo_nivel = e.codigo_nivel
+        ) AS nivel_ocupacional,
+        (
+          SELECT dp.nombre 
+          FROM denominacion_puesto dp 
+          WHERE dp.codigo_denom = e.codigo_denom
+        ) AS denominacion_puesto,
+        (
+          SELECT eo.nombre 
+          FROM escala_ocupacional eo 
+          WHERE eo.codigo_escala = e.codigo_escala
+        ) AS escala_ocupacional,
+        (
+          SELECT ep.nombre 
+          FROM estructura_programatica ep 
+          WHERE ep.codigo_enlace = e.codigo_enlace
+        ) AS estructura_programatica
       FROM empleados e
     `);
+
     res.json(rows);
   } catch (error) {
-    console.error('Error al obtener empleados:', error);
+    console.error('❌ Error al obtener empleados:', error.message);
     res.status(500).json({ error: 'Error interno del servidor' });
   }
 });
+
 
 // Buscar por cédula
 router.get('/buscar', async (req, res) => {

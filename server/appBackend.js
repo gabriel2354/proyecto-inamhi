@@ -30,6 +30,7 @@ app.use('/formulario-vacaciones', formularioVacacionesRoutes);
 
 
 
+
 app.options('*', cors());
 
 const PORT = 3000;
