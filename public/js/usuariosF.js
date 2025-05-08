@@ -194,3 +194,21 @@ if (userNameElement) {
 
 window.editColaborador = editColaborador;
 window.deleteColaborador = deleteColaborador;
+// Acción de cerrar sesión
+const logoutBtn = document.getElementById("cerrarSesionBtn");
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.href = "index.html";
+  });
+}
+
+    // Mostrar/ocultar los dropdowns de la barra lateral
+    document.querySelectorAll('.dropdown-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('active');
+        const dropdown = btn.nextElementSibling;
+        dropdown.classList.toggle('hidden'); // Tailwind "hidden"
+      });
+    });
