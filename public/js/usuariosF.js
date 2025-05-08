@@ -1,53 +1,63 @@
+// 📌 Configuración de URLs
 const API_BASE_URL = 'http://localhost:3000';
-const API_ROLES = "http://localhost:3000/roles/roles";
-const API_USUARIOS = `${API_BASE_URL}/usuarios`;
+const API_ROLES = `${API_BASE_URL}/roles/roles`;
 const API_SEDES = `${API_BASE_URL}/sedes`;
- 
+const API_USUARIOS = `${API_BASE_URL}/usuarios`;
+
+// 🔹 Cargar datos al cargar la página
 document.addEventListener('DOMContentLoaded', async () => {
     console.log("📌 Documento cargado. Iniciando carga de datos...");
     await loadRoles();
     await loadSedes();
     await loadColaboradores();
- 
-    document.getElementById("create-user-form").addEventListener("submit", createColaborador);
+
+    document.getElementById("create-user-form").addEventListener("submit", saveColaborador);
 });
- 
+
 // 🔹 Cargar Roles
 async function loadRoles() {
     try {
+        // Realiza la solicitud al backend para obtener los roles
         const response = await fetch(API_ROLES);
-        if (!response.ok) throw new Error(`Error en la solicitud: ${response.statusText}`);
- 
+        if (!response.ok) throw new Error(`Error al cargar roles: ${response.statusText}`);
+
+        // Convierte la respuesta en JSON
         const roles = await response.json();
         console.log("✅ Roles obtenidos:", roles);
        
+        // Verifica que el elemento select exista
         const selectElement = document.getElementById('idRol');
-        if (!selectElement) throw new Error("Elemento select idRol no encontrado");
-       
+        if (!selectElement) {
+            console.error("❌ Elemento select con id 'idRol' no encontrado.");
+            return;
+        }
+
+        // Limpia las opciones anteriores
         selectElement.innerHTML = '<option value="">Seleccione un rol</option>';
+
+        // Rellena el select con los roles
         roles.forEach(role => {
             const option = document.createElement("option");
             option.value = role.idRol;
-            option.textContent = role.rol;
+            option.textContent = role.nombre;
             selectElement.appendChild(option);
         });
     } catch (error) {
         console.error("❌ Error al cargar roles:", error);
     }
 }
- 
+
+
 // 🔹 Cargar Sedes
 async function loadSedes() {
     try {
         const response = await fetch(API_SEDES);
-        if (!response.ok) throw new Error(`Error en la solicitud: ${response.statusText}`);
- 
+        if (!response.ok) throw new Error("Error al cargar sedes.");
+
         const sedes = await response.json();
         console.log("✅ Sedes obtenidas:", sedes);
- 
+
         const selectElement = document.getElementById('idSede');
-        if (!selectElement) throw new Error("Elemento select idSede no encontrado");
-       
         selectElement.innerHTML = '<option value="">Seleccione una sede</option>';
         sedes.forEach(sede => {
             const option = document.createElement("option");
@@ -59,31 +69,30 @@ async function loadSedes() {
         console.error("❌ Error al cargar sedes:", error);
     }
 }
- 
+
 // 🔹 Cargar Colaboradores
 async function loadColaboradores() {
     try {
         const response = await fetch(`${API_USUARIOS}/colaboradores`);
-        if (!response.ok) throw new Error("Error al obtener colaboradores");
- 
+        if (!response.ok) throw new Error("Error al cargar colaboradores.");
+
         const colaboradores = await response.json();
-        console.log("🔹 Colaboradores obtenidos:", colaboradores);
- 
+        console.log("✅ Colaboradores obtenidos:", colaboradores);
+
         const tableBody = document.getElementById("colaboradores-table-body");
-        if (!tableBody) throw new Error("Elemento 'colaboradores-table-body' no encontrado");
- 
         tableBody.innerHTML = colaboradores.map(colaborador => `
             <tr id="row-${colaborador.idColaborador}">
-                <td ondblclick="editCell(${colaborador.idColaborador}, 'nombres', '${colaborador.nombres}')">${colaborador.nombres} <i class="bi bi-pencil edit-icon" onclick="editCell(${colaborador.idColaborador}, 'nombres', '${colaborador.nombres}')"></i></td>
-                <td ondblclick="editCell(${colaborador.idColaborador}, 'apellidos', '${colaborador.apellidos}')">${colaborador.apellidos} <i class="bi bi-pencil edit-icon" onclick="editCell(${colaborador.idColaborador}, 'apellidos', '${colaborador.apellidos}')"></i></td>
+                <td>${colaborador.nombres}</td>
+                <td>${colaborador.apellidos}</td>
                 <td>${colaborador.identificacion}</td>
-                <td ondblclick="editCell(${colaborador.idColaborador}, 'email', '${colaborador.email}')">${colaborador.email} <i class="bi bi-pencil edit-icon" onclick="editCell(${colaborador.idColaborador}, 'email', '${colaborador.email}')"></i></td>
-                <td ondblclick="editCell(${colaborador.idColaborador}, 'usuario', '${colaborador.usuario}')">${colaborador.usuario} <i class="bi bi-pencil edit-icon" onclick="editCell(${colaborador.idColaborador}, 'usuario', '${colaborador.usuario}')"></i></td>
-                <td ondblclick="editCell(${colaborador.idColaborador}, 'cargo', '${colaborador.cargo}')">${colaborador.cargo} <i class="bi bi-pencil edit-icon" onclick="editCell(${colaborador.idColaborador}, 'cargo', '${colaborador.cargo}')"></i></td>
-                <td ondblclick="editDropdown(${colaborador.idColaborador}, 'idRol', '${colaborador.idRol}', 'roles')">${colaborador.rol} <i class="bi bi-pencil edit-icon" onclick="editDropdown(${colaborador.idColaborador}, 'idRol', '${colaborador.idRol}', 'roles')"></i></td>
-                <td ondblclick="editDropdown(${colaborador.idColaborador}, 'idSede', '${colaborador.idSede}', 'sedes')">${colaborador.sede} <i class="bi bi-pencil edit-icon" onclick="editDropdown(${colaborador.idColaborador}, 'idSede', '${colaborador.idSede}', 'sedes')"></i></td>
+                <td>${colaborador.email}</td>
+                <td>${colaborador.usuario}</td>
+                <td>${colaborador.cargo}</td>
+                <td>${colaborador.rol}</td>
+                <td>${colaborador.sede}</td>
                 <td>
-                    <button class="btn btn-danger btn-sm" onclick="deleteColaborador(${colaborador.idColaborador})">Eliminar</button>
+                    <button onclick="editColaborador(${colaborador.idColaborador})">✏️ Editar</button>
+                    <button onclick="deleteColaborador(${colaborador.idColaborador})">🗑️ Eliminar</button>
                 </td>
             </tr>
         `).join('');
@@ -91,56 +100,58 @@ async function loadColaboradores() {
         console.error("❌ Error al cargar colaboradores:", error);
     }
 }
- 
-// 🔹 Crear Colaborador
-async function createColaborador(event) {
+
+// 🔹 Crear o Editar Colaborador
+async function saveColaborador(event) {
     event.preventDefault();
- 
-    const data = {
-        nombres: document.getElementById("nombres").value,
-        apellidos: document.getElementById("apellidos").value,
-        identificacion: document.getElementById("identificacion").value,
-        email: document.getElementById("email").value,
-        usuario: document.getElementById("usuario").value,
-        idRol: document.getElementById("idRol").value,
-        idSede: document.getElementById("idSede").value,
-        cargo: document.getElementById("cargo").value,
-        password: document.getElementById("password").value
-    };
- 
-    console.log("🔍 Datos enviados al backend:", data);
- 
+
+    const form = document.getElementById("create-user-form");
+    const id = form.getAttribute("data-editing-id");
+    const nombres = document.getElementById("nombres").value;
+    const apellidos = document.getElementById("apellidos").value;
+    const identificacion = document.getElementById("identificacion").value;
+    const email = document.getElementById("email").value;
+    const usuario = document.getElementById("usuario").value;
+    const cargo = document.getElementById("cargo").value;
+    const idRol = document.getElementById("idRol").value;
+    const idSede = document.getElementById("idSede").value;
+    const password = document.getElementById("password").value;
+
     try {
-        const response = await fetch(`${API_USUARIOS}/createColaborador`, {
-            method: "POST",
+        const method = id ? "PUT" : "POST";
+        const endpoint = id ? `${API_USUARIOS}/colaborador/${id}` : `${API_USUARIOS}/createColaborador`;
+        
+        const data = { nombres, apellidos, identificacion, email, usuario, cargo, idRol, idSede };
+        if (!id) data.password = password;
+
+        const response = await fetch(endpoint, {
+            method,
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
+            body: JSON.stringify(data)
         });
- 
+
         const result = await response.json();
-        console.log("✅ Respuesta del backend:", result);
- 
         if (!response.ok) throw new Error(result.message || "Error desconocido");
- 
-        alert("✅ Colaborador creado exitosamente.");
+
+        alert(id ? "✅ Colaborador actualizado correctamente." : "✅ Colaborador creado correctamente.");
+        form.reset();
+        form.removeAttribute("data-editing-id");
         await loadColaboradores();
     } catch (error) {
-        console.error("❌ Error al crear colaborador:", error);
+        console.error("❌ Error al guardar colaborador:", error);
         alert(`❌ ${error.message}`);
     }
 }
- 
+
 // 🔹 Editar Colaborador
 async function editColaborador(id) {
-    console.log(`✏️ Editando colaborador con ID: ${id}`);
- 
     try {
         const response = await fetch(`${API_USUARIOS}/colaborador/${id}`);
-        if (!response.ok) throw new Error("Error al obtener datos del colaborador");
- 
+        if (!response.ok) throw new Error("Error al obtener datos del colaborador.");
+
         const colaborador = await response.json();
         console.log("📝 Datos del colaborador a editar:", colaborador);
- 
+
         document.getElementById("nombres").value = colaborador.nombres;
         document.getElementById("apellidos").value = colaborador.apellidos;
         document.getElementById("identificacion").value = colaborador.identificacion;
@@ -149,38 +160,37 @@ async function editColaborador(id) {
         document.getElementById("cargo").value = colaborador.cargo;
         document.getElementById("idRol").value = colaborador.idRol;
         document.getElementById("idSede").value = colaborador.idSede;
- 
+
         document.getElementById("create-user-form").setAttribute("data-editing-id", id);
     } catch (error) {
         console.error("❌ Error al obtener datos del colaborador:", error);
         alert("Error al obtener datos del colaborador.");
     }
 }
- 
+
+// 🔹 Eliminar Colaborador
+async function deleteColaborador(id) {
+    try {
+        const confirmDelete = confirm("¿Estás seguro de que deseas eliminar este colaborador?");
+        if (!confirmDelete) return;
+
+        const response = await fetch(`${API_USUARIOS}/colaborador/${id}`, { method: "DELETE" });
+        if (!response.ok) throw new Error("Error al eliminar colaborador.");
+
+        alert("✅ Colaborador eliminado correctamente.");
+        await loadColaboradores();
+    } catch (error) {
+        console.error("❌ Error al eliminar colaborador:", error);
+        alert("Error al eliminar colaborador.");
+    }
+}
+// Mostrar el nombre del usuario logueado
+const generadoPor = localStorage.getItem("userName") || "usuario desconocido";
+const userName = localStorage.getItem("userName") || "Usuario";
+const userNameElement = document.getElementById("userName");
+if (userNameElement) {
+  userNameElement.textContent = userName;
+}
+
 window.editColaborador = editColaborador;
- 
- // Obtener el id del colaborador logueado desde el localStorage
-document.addEventListener("DOMContentLoaded", () => {
-    const idColaborador = localStorage.getItem("idColaborador");
-   
-    if (!idColaborador) {
-        console.warn("⚠️ No se encontró idColaborador en localStorage. Asegúrate de estar logueado.");
-        return;
-    }
-   
-    console.log("✅ idColaborador del usuario logueado:", idColaborador);
-   
-    // Asignar el idColaborador a un campo oculto si existe en el formulario
-    const idColaboradorField = document.getElementById("idColaborador");
-    if (idColaboradorField) {
-        idColaboradorField.value = idColaborador;
-    }
-  });
-  // Mostrar/ocultar los dropdowns de la barra lateral
-  document.querySelectorAll('.dropdown-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      btn.classList.toggle('active');
-      const dropdown = btn.nextElementSibling;
-      dropdown.classList.toggle('hidden'); // Tailwind "hidden"
-    });
-  });
+window.deleteColaborador = deleteColaborador;
