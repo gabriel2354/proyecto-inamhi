@@ -194,15 +194,16 @@ if (userNameElement) {
 
 window.editColaborador = editColaborador;
 window.deleteColaborador = deleteColaborador;
+
 // Acción de cerrar sesión
-const logoutBtn = document.getElementById("cerrarSesionBtn");
-if (logoutBtn) {
-  logoutBtn.addEventListener("click", () => {
-    localStorage.clear();
-    sessionStorage.clear();
-    window.location.href = "index.html";
-  });
-}
+  const logoutBtn = document.getElementById("cerrarSesionBtn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = "index.html";
+    });
+  }
 
     // Mostrar/ocultar los dropdowns de la barra lateral
     document.querySelectorAll('.dropdown-btn').forEach(btn => {

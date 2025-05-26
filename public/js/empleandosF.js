@@ -282,7 +282,15 @@ async function consultarVacaciones(cedula) {
   }
 }
 
- 
+ // Acción de cerrar sesión
+  const logoutBtn = document.getElementById("cerrarSesionBtn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = "index.html";
+    });
+  }
 
 
 

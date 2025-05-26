@@ -219,29 +219,21 @@ CREATE TABLE empleados (
 );
 
 -- accion personal pdf 
-
-CREATE TABLE accion_personal_vacaciones_pdf (
+CREATE TABLE  accion_personal_vacaciones_pdf (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  
   numero_documento VARCHAR(50) NOT NULL,
-  
   id_empleado INT NOT NULL,
   id_colaborador INT NOT NULL,
-  
   fecha_desde DATE NOT NULL,
   fecha_hasta DATE NOT NULL,
   dias_tomados INT NOT NULL,
-
   fecha_generacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+  motivacion TEXT,
+  archivo_pdf LONGBLOB
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---Agregamos  una nueva columna  motivacion
-
-  ALTER TABLE inamhi.accion_personal_vacaciones_pdf
-ADD COLUMN motivacion TEXT;
--- Agregamos una nueva columna donde se guardara el documento en pdf 
-ALTER TABLE accion_personal_vacaciones_pdf
-ADD COLUMN archivo_pdf LONGBLOB;
-
+-- Ajusta el tamaño máximo del paquete para archivos grandes
+SET GLOBAL max_allowed_packet = 209715200;
 
   -- Claves foráneas
   FOREIGN KEY (id_empleado) REFERENCES empleados(id),

@@ -3,8 +3,11 @@ const API_URL = 'http://localhost:3000/roles';
 document.addEventListener('DOMContentLoaded', () => {
   loadCategoriesCheckboxes();
   loadRoles();
+
+  
 });
- 
+
+
 // ─── CARGA DE CATEGORÍAS COMO BOTONES ─────────────────
 async function loadCategoriesCheckboxes() {
   try {
@@ -536,3 +539,12 @@ document.querySelectorAll('.dropdown-btn').forEach(btn => {
     dropdown.classList.toggle('hidden'); // Tailwind "hidden"
   });
 });
+// Acción de cerrar sesión
+  const logoutBtn = document.getElementById("cerrarSesionBtn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = "index.html";
+    });
+  }

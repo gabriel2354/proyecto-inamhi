@@ -13,12 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const rutasConPermisos = {
       "/public/screens/restablecerPassword.html": ["Restablecer Contraseña"],
       "/public/screens/home.html": ["Home"],
-      "/public/screens/fichaTecnica.html": ["Ficha Técnica"],
-      "/public/screens/gestionComercial.html": ["Gestión Comercial"],
-      "/public/screens/gestionFinanciera.html": ["Gestión Financiera"],
-      "/public/screens/gestionOrganizacional.html": ["Gestión Organizacional"],
-      "/public/screens/gestionProductiva.html": ["Gestión Productiva"],
-      "/public/screens/dashboard.html": ["Dashboard"],
+      
       "/public/screens/Usuarios.html": ["Usuarios"],  // Permiso para la vista de Usuarios
       "/public/screens/roles.html": ["Roles"]  // Permiso para la vista de Roles
     };
